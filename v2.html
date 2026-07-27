@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แก่นนคร การช่าง — งานต่อเติมซ่อมแซมบ้าน ระดับวิศวกรรม</title>
+<meta name="description" content="แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซม สร้างใหม่ ทุกงานบ้านและอาคาร ทีมช่างมืออาชีพ วางแผนแม่นยำ รับประกันงานทุกโครงการ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+:root{
+  --background:#0D0F12;
+  --card:#14171C;
+  --bg-accent:#10151D;
+  --foreground:#E9ECEF;
+  --muted:#8A929E;
+  --border:#2A3038;
+  --primary:#1E6FFF;
+  --secondary:#262C35;
+  --accent:#FF5A1F;
+  --font-heading:'Kanit', sans-serif;
+  --font-body:'IBM Plex Sans Thai', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--background);
+  color:var(--foreground);
+  font-family:var(--font-body);
+  line-height:1.8;
+  word-break:break-word;
+  overflow-wrap:break-word;
+  overflow-x:hidden;
+  font-size:16px;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-heading);
+  line-height:1.5;
+  font-weight:700;
+  padding-top:.15em;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px;}
+.mono-label{
+  font-family:var(--font-heading);
+  font-weight:500;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--primary);
+}
+.mono-label.alt{color:var(--accent);}
+.eng-tick{font-family:var(--font-heading);letter-spacing:.1em;}
+
+/* grid backdrop */
+.blueprint-bg{
+  background-image:
+    linear-gradient(rgba(30,111,255,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,111,255,.09) 1px, transparent 1px);
+  background-size:34px 34px;
+}
+
+/* corner ticks utility */
+.corners{position:relative;}
+.corners::before,.corners::after,
+.corners .tick-tl,.corners .tick-br{content:'';position:absolute;width:14px;height:14px;pointer-events:none;}
+.corners::before{top:-1px;left:-1px;border-top:2px solid var(--primary);border-left:2px solid var(--primary);}
+.corners::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--primary);border-right:2px solid var(--primary);}
+
+/* ===== NAV ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(13,15,18,.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  transition:background .4s ease, padding .3s ease;
+}
+header.scrolled{background:rgba(13,15,18,.96);}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;max-width:1200px;margin:0 auto;transition:padding .3s ease;}
+header.scrolled .nav-wrap{padding:10px 20px;}
+.logo{display:flex;flex-direction:column;line-height:1.15;}
+.logo-th{font-family:var(--font-heading);font-weight:800;font-size:1.15rem;color:var(--foreground);}
+.logo-sub{font-family:var(--font-heading);font-size:.6rem;letter-spacing:.2em;color:var(--primary);text-transform:uppercase;}
+nav.desk-nav{display:none;}
+nav.desk-nav ul{display:flex;gap:28px;list-style:none;align-items:center;}
+nav.desk-nav a{font-size:.85rem;color:var(--muted);transition:color .25s ease;position:relative;padding:6px 0;}
+nav.desk-nav a:hover{color:var(--foreground);}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.lang-sw{display:flex;align-items:center;gap:5px;font-size:.78em;color:var(--muted);border:1px solid var(--border);padding:6px 10px;border-radius:3px;transition:border-color .3s,color .3s;}
+.lang-sw:hover{border-color:var(--primary);color:var(--foreground);}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;background:none;border:none;cursor:pointer;}
+.hamburger span{display:block;width:100%;height:2px;background:var(--foreground);transition:.3s;}
+.mobile-menu{
+  position:fixed;top:0;right:0;height:100vh;width:78%;max-width:320px;
+  background:var(--card);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .35s ease;
+  z-index:1100;padding:90px 28px 28px;
+}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.mobile-menu a{display:block;padding:14px 4px;font-size:1.05rem;border-bottom:1px solid var(--border);color:var(--foreground);}
+.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s;z-index:1050;}
+.menu-overlay.open{opacity:1;visibility:visible;}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;padding:130px 0 70px;
+  overflow:visible;
+}
+.hero-grid{display:grid;gap:36px;align-items:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:6px 12px;border-radius:2px;margin-bottom:22px;}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-size:2.3rem;font-weight:800;color:var(--foreground);margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--primary);}
+.hero p.lead{color:var(--muted);font-size:1.02rem;max-width:520px;margin-bottom:30px;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:0.9em 1.7em;border-radius:3px;font-family:var(--font-heading);font-weight:600;font-size:.92rem;
+  border:1px solid transparent;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  min-height:44px;
+}
+.btn-primary{background:var(--primary);color:#06101F;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(30,111,255,.6);}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--foreground);}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px);}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:480px;}
+.hstat{border-top:1px solid var(--border);padding-top:10px;}
+.hstat b{display:block;font-family:var(--font-heading);font-size:1.7rem;font-weight:800;color:var(--foreground);font-variant-numeric:tabular-nums;}
+.hstat b span{color:var(--primary);}
+.hstat small{color:var(--muted);font-size:.72rem;letter-spacing:.05em;}
+.hero-media{position:relative;}
+.hero-frame{position:relative;border:1px solid var(--border);padding:10px;border-radius:4px;background:var(--card);}
+.hero-frame img{border-radius:2px;width:100%;height:340px;object-fit:cover;filter:saturate(.9) contrast(1.05);}
+.hero-frame .tag-float{
+  position:absolute;background:rgba(13,15,18,.88);border:1px solid var(--primary);
+  padding:8px 12px;border-radius:2px;font-family:var(--font-heading);font-size:.7rem;letter-spacing:.08em;
+  color:var(--foreground);backdrop-filter:blur(6px);
+}
+.tag-float.t1{top:26px;left:26px;}
+.tag-float.t2{bottom:26px;right:26px;}
+.tag-float b{color:var(--primary);}
+
+/* section header */
+.sec-head{margin-bottom:44px;}
+.sec-head .mono-label{display:block;margin-bottom:12px;}
+.sec-head h2{font-size:1.9rem;color:var(--foreground);}
+.sec-head p{color:var(--muted);max-width:560px;margin-top:12px;}
+
+section{padding:78px 0;position:relative;}
+.sec-alt{background:var(--bg-accent);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+
+/* reveal anim */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ===== SERVICES - blueprint schematic cards ===== */
+.svc-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+.svc-card{
+  position:relative;background:var(--card);border:1px solid var(--border);padding:26px 22px;border-radius:4px;
+  transition:border-color .3s ease, transform .3s ease, background .3s ease;
+}
+.svc-card::before,.svc-card::after{content:'';position:absolute;width:12px;height:12px;}
+.svc-card::before{top:6px;left:6px;border-top:1.5px solid var(--primary);border-left:1.5px solid var(--primary);}
+.svc-card::after{bottom:6px;right:6px;border-bottom:1.5px solid var(--primary);border-right:1.5px solid var(--primary);}
+.svc-card:hover{transform:translateY(-4px);border-color:var(--primary);background:#171B21;}
+.svc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.svc-num{font-family:var(--font-heading);font-weight:800;font-size:2rem;color:var(--border);transition:color .3s;}
+.svc-card:hover .svc-num{color:var(--primary);}
+.svc-icon{width:44px;height:44px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;}
+.svc-card h3{font-size:1.12rem;margin-bottom:10px;color:var(--foreground);}
+.svc-card p{color:var(--muted);font-size:.92rem;}
+.svc-foot{margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);display:flex;justify-content:space-between;font-family:var(--font-heading);font-size:.66rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+
+/* ===== PROCESS timeline ===== */
+.proc-wrap{position:relative;}
+.proc-line{position:absolute;left:19px;top:6px;bottom:6px;width:1px;background:var(--border);}
+.proc-item{position:relative;padding:0 0 40px 58px;}
+.proc-item:last-child{padding-bottom:0;}
+.proc-dot{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--primary);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:700;color:var(--primary);font-size:.9rem;}
+.proc-item h3{font-size:1.05rem;color:var(--foreground);margin-bottom:6px;}
+.proc-item p{color:var(--muted);font-size:.92rem;max-width:520px;}
+
+/* ===== gallery ===== */
+.gal-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
+.gal-scroll::-webkit-scrollbar{height:6px;}
+.gal-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.gal-card{flex:0 0 78%;scroll-snap-align:start;position:relative;border:1px solid var(--border);border-radius:4px;overflow:visible;background:var(--card);}
+.gal-img-wrap{position:relative;overflow:hidden;border-radius:3px 3px 0 0;}
+.gal-img-wrap img{width:100%;height:220px;object-fit:cover;transition:transform .5s ease;}
+.gal-card:hover .gal-img-wrap img{transform:scale(1.06);}
+.gal-badge{position:absolute;top:10px;left:10px;background:rgba(13,15,18,.85);border:1px solid var(--primary);color:var(--foreground);font-family:var(--font-heading);font-size:.65rem;letter-spacing:.08em;padding:5px 9px;border-radius:2px;}
+.gal-body{padding:14px 16px;}
+.gal-body h4{font-size:.95rem;color:var(--foreground);margin-bottom:4px;font-family:var(--font-heading);}
+.gal-body span{color:var(--muted);font-size:.8rem;}
+
+/* ===== dashboard stats ===== */
+.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.dash-card{border:1px solid var(--border);background:var(--card);padding:22px 18px;border-radius:4px;text-align:left;position:relative;}
+.dash-card .mono-label{margin-bottom:10px;display:block;}
+.dash-card i{color:var(--primary);margin-bottom:10px;}
+.dash-card b{display:block;font-family:var(--font-heading);font-size:1.9rem;font-weight:800;color:var(--foreground);font-variant-numeric:tabular-nums;}
+.dash-card p{color:var(--muted);font-size:.85rem;margin-top:4px;}
+
+/* ===== testimonials ===== */
+.test-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+.test-card{border:1px solid var(--border);background:var(--card);padding:24px;border-radius:4px;position:relative;}
+.test-card .quote-mark{font-family:var(--font-heading);font-size:2.4rem;color:var(--primary);line-height:1;opacity:.5;margin-bottom:8px;}
+.test-card p.txt{color:var(--foreground);font-size:.96rem;margin-bottom:18px;}
+.test-who{display:flex;align-items:center;gap:12px;}
+.test-who img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1px solid var(--border);}
+.test-who b{display:block;font-size:.9rem;color:var(--foreground);}
+.test-who span{color:var(--muted);font-size:.78rem;}
+
+/* ===== pricing spec table ===== */
+.spec-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+.spec-table th{text-align:left;padding:12px 10px;font-family:var(--font-heading);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);border-bottom:1px solid var(--border);}
+.spec-table td{padding:16px 10px;border-bottom:1px solid var(--border);color:var(--muted);}
+.spec-table td.item{color:var(--foreground);font-weight:500;}
+.spec-table td.price{font-family:var(--font-heading);font-weight:700;color:var(--foreground);font-size:1.05rem;font-variant-numeric:tabular-nums;}
+.spec-table td.price span{color:var(--primary);font-size:.72rem;font-weight:400;margin-left:4px;}
+.spec-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:4px;padding:6px 12px;background:var(--card);}
+.spec-note{margin-top:16px;color:var(--muted);font-size:.82rem;display:flex;gap:8px;align-items:flex-start;}
+.spec-note i{color:var(--accent);flex-shrink:0;margin-top:3px;}
+
+/* ===== contact ===== */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:26px;}
+.contact-panel{border:1px solid var(--border);background:var(--card);border-radius:6px;padding:30px 26px;position:relative;}
+.contact-panel .mono-label{display:block;margin-bottom:8px;}
+.coord{font-family:var(--font-heading);color:var(--muted);font-size:.68rem;letter-spacing:.08em;margin-top:6px;}
+.contact-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:16px;}
+.contact-list li{display:flex;gap:14px;align-items:flex-start;}
+.contact-list i{color:var(--primary);flex-shrink:0;margin-top:2px;}
+.contact-list b{display:block;color:var(--foreground);font-size:.95rem;}
+.contact-list span{color:var(--muted);font-size:.85rem;}
+.form-grid{display:flex;flex-direction:column;gap:14px;}
+.form-grid input, .form-grid textarea{
+  width:100%;background:var(--background);border:1px solid var(--border);color:var(--foreground);
+  padding:0.9em 1em;border-radius:3px;font-family:var(--font-body);font-size:.95rem;transition:border-color .25s;
+}
+.form-grid input:focus, .form-grid textarea:focus{outline:none;border-color:var(--primary);}
+.form-grid label{font-family:var(--font-heading);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block;}
+
+footer{border-top:1px solid var(--border);padding:50px 0 26px;background:var(--bg-accent);}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:34px;margin-bottom:40px;}
+.foot-brand p{color:var(--muted);font-size:.88rem;margin-top:12px;max-width:340px;}
+.foot-col h4{font-family:var(--font-heading);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.foot-col a{color:var(--muted);font-size:.88rem;transition:color .25s;}
+.foot-col a:hover{color:var(--foreground);}
+.foot-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;flex-direction:column;gap:12px;color:var(--muted);font-size:.8rem;}
+.foot-social{display:flex;gap:10px;}
+.foot-social a{width:38px;height:38px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.25s;}
+.foot-social a:hover{border-color:var(--primary);color:var(--primary);}
+
+/* desktop */
+@media (min-width:768px){
+  .container{padding:0 40px;}
+  nav.desk-nav{display:block;}
+  .hamburger,.mobile-menu,.menu-overlay{display:none;}
+  .hero{padding:170px 0 100px;}
+  .hero-grid{grid-template-columns:1.05fr .95fr;gap:60px;}
+  .hero h1{font-size:3.4rem;}
+  .hero-frame img{height:460px;}
+  .sec-head h2{font-size:2.5rem;}
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
+  .dash-grid{grid-template-columns:repeat(4,1fr);}
+  .test-grid{grid-template-columns:repeat(3,1fr);}
+  .gal-card{flex:0 0 33%;}
+  .contact-grid{grid-template-columns:1fr 1.2fr;}
+  .foot-grid{grid-template-columns:1.4fr 1fr 1fr 1fr;}
+  .foot-bottom{flex-direction:row;justify-content:space-between;}
+  .proc-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:0 60px;}
+}
+@media (min-width:1024px){
+  .hero h1{font-size:3.8rem;}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav-wrap">
+    <a href="#top" class="logo">
+      <span class="logo-th">แก่นนคร การช่าง</span>
+      <span class="logo-sub eng-tick">KAENNAKHON WORKS CO.</span>
+    </a>
+    <nav class="desk-nav">
+      <ul>
+        <li><a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a></li>
+        <li><a href="#process" data-lang-th="ขั้นตอนงาน" data-lang-en="Process">ขั้นตอนงาน</a></li>
+        <li><a href="#work" data-lang-th="ผลงาน" data-lang-en="Projects">ผลงาน</a></li>
+        <li><a href="#pricing" data-lang-th="ราคา" data-lang-en="Pricing">ราคา</a></li>
+        <li><a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-sw"><i data-lucide="globe" width="14" height="14"></i><span class="lang-sw__label">TH</span></div>
+      <a href="#contact" class="btn btn-primary" style="display:none" id="deskCta" data-lang-th="ขอใบเสนอราคา" data-lang-en="Get a Quote">ขอใบเสนอราคา</a>
+      <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a></li>
+    <li><a href="#process" data-lang-th="ขั้นตอนงาน" data-lang-en="Process">ขั้นตอนงาน</a></li>
+    <li><a href="#work" data-lang-th="ผลงาน" data-lang-en="Projects">ผลงาน</a></li>
+    <li><a href="#pricing" data-lang-th="ราคา" data-lang-en="Pricing">ราคา</a></li>
+    <li><a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-primary" style="width:100%;margin-top:24px;" data-lang-th="ขอใบเสนอราคา" data-lang-en="Get a Quote">ขอใบเสนอราคา</a>
+</div>
+
+<main id="top">
+
+<section class="hero blueprint-bg">
+  <div class="container hero-grid">
+    <div class="reveal in">
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span class="mono-label eng-tick" data-lang-th="ระบบงานพร้อมทำงาน" data-lang-en="SYSTEM READY">ระบบงานพร้อมทำงาน</span>
+      </div>
+      <h1 data-lang-th="ต่อเติม ซ่อมแซม สร้างใหม่<br>ด้วยความแม่นยำแบบ<em>วิศวกร</em>" data-lang-en="Renovate. Repair. Build.<br>With <em>Engineering</em> Precision">ต่อเติม ซ่อมแซม สร้างใหม่<br>ด้วยความแม่นยำแบบ<em>วิศวกร</em></h1>
+      <p class="lead" data-lang-th="ทีมช่างมืออาชีพ วางแผนงานเหมือนอ่านแบบ วัดจริง ทำจริง รับประกันทุกโครงการ ตั้งแต่ต่อเติมบ้าน ซ่อมหลังคา ไปจนถึงงานระบบไฟฟ้า-ประปาเต็มระบบ" data-lang-en="A professional crew that plans every job like reading a blueprint — measured, executed, and warrantied. From home extensions to roofing and full electrical-plumbing systems.">ทีมช่างมืออาชีพ วางแผนงานเหมือนอ่านแบบ วัดจริง ทำจริง รับประกันทุกโครงการ ตั้งแต่ต่อเติมบ้าน ซ่อมหลังคา ไปจนถึงงานระบบไฟฟ้า-ประปาเต็มระบบ</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary"><i data-lucide="clipboard-list" width="17" height="17"></i><span data-lang-th="ขอใบเสนอราคา" data-lang-en="Get a Quote">ขอใบเสนอราคา</span></a>
+        <a href="#work" class="btn btn-outline"><i data-lucide="layout-grid" width="17" height="17"></i><span data-lang-th="ดูผลงาน" data-lang-en="View Projects">ดูผลงาน</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b><span>15</span>+</b><small data-lang-th="ปีประสบการณ์" data-lang-en="Years Exp.">ปีประสบการณ์</small></div>
+        <div class="hstat"><b><span>420</span>+</b><small data-lang-th="โครงการสำเร็จ" data-lang-en="Projects Done">โครงการสำเร็จ</small></div>
+        <div class="hstat"><b><span>98</span>%</b><small data-lang-th="ลูกค้าพอใจ" data-lang-en="Client Satisf.">ลูกค้าพอใจ</small></div>
+      </div>
+    </div>
+    <div class="hero-media reveal">
+      <div class="hero-frame corners">
+        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=920&fit=crop" alt="ช่างสวมหมวกนิรภัยกำลังตรวจสอบงานติดตั้งไฟฟ้า">
+        <div class="tag-float t1 eng-tick">FIG.01<br><b>ON-SITE / ตรวจงาน</b></div>
+        <div class="tag-float t2 eng-tick">STATUS: <b style="color:var(--primary)">ACTIVE</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label eng-tick">SEC. 01 — SERVICES</span>
+      <h2 data-lang-th="บริการงานช่างครบวงจร" data-lang-en="Full-Scope Construction Services">บริการงานช่างครบวงจร</h2>
+      <p data-lang-th="ทุกงานถูกวางแผนเหมือนแบบก่อสร้าง มีสเปควัสดุ กำหนดเวลา และมาตรฐานงานชัดเจนตั้งแต่ต้น" data-lang-en="Every job is planned like a construction drawing — clear material specs, timelines, and quality standards from day one.">ทุกงานถูกวางแผนเหมือนแบบก่อสร้าง มีสเปควัสดุ กำหนดเวลา และมาตรฐานงานชัดเจนตั้งแต่ต้น</p>
+    </div>
+    <div class="svc-grid">
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">01</span>
+          <div class="svc-icon"><i data-lucide="home" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="ต่อเติมบ้าน" data-lang-en="Home Extension">ต่อเติมบ้าน</h3>
+        <p data-lang-th="ต่อเติมห้องครัว ห้องนั่งเล่น โรงรถ พร้อมคำนวณโครงสร้างและระบายน้ำอย่างถูกหลัก" data-lang-en="Extend your kitchen, living room, or garage with proper structural and drainage calculations.">ต่อเติมห้องครัว ห้องนั่งเล่น โรงรถ พร้อมคำนวณโครงสร้างและระบายน้ำอย่างถูกหลัก</p>
+        <div class="svc-foot"><span>MOD-EXT</span><span data-lang-th="รับประกัน 2 ปี" data-lang-en="2Y Warranty">รับประกัน 2 ปี</span></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">02</span>
+          <div class="svc-icon"><i data-lucide="wrench" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="ซ่อมแซมโครงสร้าง" data-lang-en="Structural Repair">ซ่อมแซมโครงสร้าง</h3>
+        <p data-lang-th="แก้ปัญหารอยร้าว ผนังทรุด คานแตก ตรวจวินิจฉัยก่อนซ่อมทุกครั้ง" data-lang-en="Fix cracks, sinking walls, and beam damage — always diagnosed before repair.">แก้ปัญหารอยร้าว ผนังทรุด คานแตก ตรวจวินิจฉัยก่อนซ่อมทุกครั้ง</p>
+        <div class="svc-foot"><span>MOD-STR</span><span data-lang-th="รับประกัน 3 ปี" data-lang-en="3Y Warranty">รับประกัน 3 ปี</span></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">03</span>
+          <div class="svc-icon"><i data-lucide="hammer" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="หลังคา &amp; รั่วซึม" data-lang-en="Roofing & Leaks">หลังคา &amp; รั่วซึม</h3>
+        <p data-lang-th="เปลี่ยนกระเบื้อง แก้จุดรั่ว เคลือบกันซึม ตรวจสอบด้วยกล้องความร้อน" data-lang-en="Tile replacement, leak fixes, waterproof coating — inspected with thermal camera.">เปลี่ยนกระเบื้อง แก้จุดรั่ว เคลือบกันซึม ตรวจสอบด้วยกล้องความร้อน</p>
+        <div class="svc-foot"><span>MOD-ROF</span><span data-lang-th="รับประกัน 5 ปี" data-lang-en="5Y Warranty">รับประกัน 5 ปี</span></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">04</span>
+          <div class="svc-icon"><i data-lucide="zap" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="ระบบไฟฟ้า" data-lang-en="Electrical Systems">ระบบไฟฟ้า</h3>
+        <p data-lang-th="เดินสายใหม่ ตู้เบรกเกอร์ จุดชาร์จ EV ตรวจสอบด้วยมิเตอร์มาตรฐาน" data-lang-en="Rewiring, breaker panels, EV charge points — verified with certified meters.">เดินสายใหม่ ตู้เบรกเกอร์ จุดชาร์จ EV ตรวจสอบด้วยมิเตอร์มาตรฐาน</p>
+        <div class="svc-foot"><span>MOD-ELE</span><span data-lang-th="รับประกัน 3 ปี" data-lang-en="3Y Warranty">รับประกัน 3 ปี</span></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">05</span>
+          <div class="svc-icon"><i data-lucide="droplets" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="งานประปา" data-lang-en="Plumbing">งานประปา</h3>
+        <p data-lang-th="ท่อรั่ว ปั๊มน้ำ ห้องน้ำทั้งระบบ ติดตั้งตามมาตรฐานการระบาย" data-lang-en="Pipe leaks, water pumps, full bathroom systems installed to drainage code.">ท่อรั่ว ปั๊มน้ำ ห้องน้ำทั้งระบบ ติดตั้งตามมาตรฐานการระบาย</p>
+        <div class="svc-foot"><span>MOD-PLM</span><span data-lang-th="รับประกัน 2 ปี" data-lang-en="2Y Warranty">รับประกัน 2 ปี</span></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top">
+          <span class="svc-num">06</span>
+          <div class="svc-icon"><i data-lucide="paint-roller" width="20" height="20"></i></div>
+        </div>
+        <h3 data-lang-th="ทาสี &amp; ตกแต่ง" data-lang-en="Paint & Finish">ทาสี &amp; ตกแต่ง</h3>
+        <p data-lang-th="ทาสีภายใน-นอก เก็บงานฝ้า-ผนัง เลือกวัสดุตามสภาพอากาศจริง" data-lang-en="Interior/exterior painting, ceiling and wall finishing matched to local climate.">ทาสีภายใน-นอก เก็บงานฝ้า-ผนัง เลือกวัสดุตามสภาพอากาศจริง</p>
+        <div class="svc-foot"><span>MOD-FIN</span><span data-lang-th="รับประกัน 1 ปี" data-lang-en="1Y Warranty">รับประกัน 1 ปี</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="process" class="sec-alt blueprint-bg">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label alt eng-tick">SEC. 02 — WORKFLOW</span>
+      <h2 data-lang-th="ขั้นตอนการทำงาน" data-lang-en="How We Work">ขั้นตอนการทำงาน</h2>
+      <p data-lang-th="กระบวนการที่ชัดเจนทุกขั้น เหมือนเดินตามแบบก่อสร้าง ไม่มีขั้นตอนที่ข้ามได้" data-lang-en="A clear, sequential process — like following a build drawing. No step gets skipped.">กระบวนการที่ชัดเจนทุกขั้น เหมือนเดินตามแบบก่อสร้าง ไม่มีขั้นตอนที่ข้ามได้</p>
+    </div>
+    <div class="proc-wrap">
+      <div class="proc-line" style="display:none"></div>
+      <div class="proc-item reveal">
+        <div class="proc-dot">01</div>
+        <h3 data-lang-th="สำรวจหน้างานจริง" data-lang-en="On-site Survey">สำรวจหน้างานจริง</h3>
+        <p data-lang-th="ทีมช่างเข้าตรวจวัดพื้นที่ ถ่ายภาพ วิเคราะห์ปัญหาโครงสร้างก่อนเสนอแนวทาง" data-lang-en="Our crew visits, measures, photographs, and diagnoses structural issues before proposing a plan.">ทีมช่างเข้าตรวจวัดพื้นที่ ถ่ายภาพ วิเคราะห์ปัญหาโครงสร้างก่อนเสนอแนวทาง</p>
+      </div>
+      <div class="proc-item reveal">
+        <div class="proc-dot">02</div>
+        <h3 data-lang-th="ออกแบบ &amp; ประเมินราคา" data-lang-en="Design & Quote">ออกแบบ &amp; ประเมินราคา</h3>
+        <p data-lang-th="สรุปแบบงาน วัสดุ และใบเสนอราคาแบบละเอียด ไม่มีค่าใช้จ่ายแอบแฝง" data-lang-en="A detailed drawing, materials list, and itemized quote — no hidden costs.">สรุปแบบงาน วัสดุ และใบเสนอราคาแบบละเอียด ไม่มีค่าใช้จ่ายแอบแฝง</p>
+      </div>
+      <div class="proc-item reveal">
+        <div class="proc-dot">03</div>
+        <h3 data-lang-th="ลงมือก่อสร้าง" data-lang-en="Construction Phase">ลงมือก่อสร้าง</h3>
+        <p data-lang-th="ทำงานตามแผนที่วางไว้ อัปเดตความคืบหน้าให้ลูกค้าทราบทุกสัปดาห์" data-lang-en="Work executed to plan, with weekly progress updates sent to the client.">ทำงานตามแผนที่วางไว้ อัปเดตความคืบหน้าให้ลูกค้าทราบทุกสัปดาห์</p>
+      </div>
+      <div class="proc-item reveal">
+        <div class="proc-dot">04</div>
+        <h3 data-lang-th="ตรวจรับ &amp; รับประกัน" data-lang-en="Inspect & Warranty">ตรวจรับ &amp; รับประกัน</h3>
+        <p data-lang-th="ตรวจสอบร่วมกับลูกค้า ส่งมอบใบรับประกันงานทุกโครงการ" data-lang-en="Joint final inspection with the client and a warranty certificate for every project.">ตรวจสอบร่วมกับลูกค้า ส่งมอบใบรับประกันงานทุกโครงการ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label eng-tick">SEC. 03 — CASE FILES</span>
+      <h2 data-lang-th="ผลงานที่ผ่านมา" data-lang-en="Recent Projects">ผลงานที่ผ่านมา</h2>
+      <p data-lang-th="ตัวอย่างงานจริงจากลูกค้าทั่วภาคอีสานและกรุงเทพฯ เลื่อนดูเพิ่มเติมได้" data-lang-en="Real completed work from clients across Isaan and Bangkok — swipe to see more.">ตัวอย่างงานจริงจากลูกค้าทั่วภาคอีสานและกรุงเทพฯ เลื่อนดูเพิ่มเติมได้</p>
+    </div>
+    <div class="gal-scroll reveal">
+      <div class="gal-card">
+        <div class="gal-img-wrap"><img src="https://images.unsplash.com/photo-1612935089040-89195ef54677?w=640&h=440&fit=crop" alt="บ้านต่อเติมหลังคาใหม่"><div class="gal-badge eng-tick">CASE-114</div></div>
+        <div class="gal-body"><h4 data-lang-th="ต่อเติมหลังคาโรงรถ" data-lang-en="Garage Roof Extension">ต่อเติมหลังคาโรงรถ</h4><span data-lang-th="ขอนแก่น · 12 วัน" data-lang-en="Khon Kaen · 12 days">ขอนแก่น · 12 วัน</span></div>
+      </div>
+      <div class="gal-card">
+        <div class="gal-img-wrap"><img src="https://images.unsplash.com/photo-1633759593085-1eaeb724fc88?w=640&h=440&fit=crop" alt="ช่างซ่อมหลังคาบ้าน"><div class="gal-badge eng-tick">CASE-108</div></div>
+        <div class="gal-body"><h4 data-lang-th="ซ่อมหลังคารั่ว" data-lang-en="Roof Leak Repair">ซ่อมหลังคารั่ว</h4><span data-lang-th="อุดรธานี · 4 วัน" data-lang-en="Udon Thani · 4 days">อุดรธานี · 4 วัน</span></div>
+      </div>
+      <div class="gal-card">
+        <div class="gal-img-wrap"><img src="https://images.unsplash.com/photo-1758101755915-462eddc23f57?w=640&h=440&fit=crop" alt="ช่างไฟฟ้าตรวจตู้ควบคุม"><div class="gal-badge eng-tick">CASE-121</div></div>
+        <div class="gal-body"><h4 data-lang-th="เดินระบบไฟฟ้าใหม่ทั้งบ้าน" data-lang-en="Full Home Rewiring">เดินระบบไฟฟ้าใหม่ทั้งบ้าน</h4><span data-lang-th="ขอนแก่น · 18 วัน" data-lang-en="Khon Kaen · 18 days">ขอนแก่น · 18 วัน</span></div>
+      </div>
+      <div class="gal-card">
+        <div class="gal-img-wrap"><img src="https://images.unsplash.com/photo-1567507145544-da3fe1b4f8f9?w=640&h=440&fit=crop" alt="ช่างเจาะผนังต่อเติม"><div class="gal-badge eng-tick">CASE-131</div></div>
+        <div class="gal-body"><h4 data-lang-th="ทุบผนังต่อครัว" data-lang-en="Wall Removal for Kitchen">ทุบผนังต่อครัว</h4><span data-lang-th="กาฬสินธุ์ · 21 วัน" data-lang-en="Kalasin · 21 days">กาฬสินธุ์ · 21 วัน</span></div>
+      </div>
+      <div class="gal-card">
+        <div class="gal-img-wrap"><img src="https://images.unsplash.com/photo-1702777526211-275242233c72?w=640&h=440&fit=crop" alt="บ้านหลังการต่อเติมยามค่ำคืน"><div class="gal-badge eng-tick">CASE-140</div></div>
+        <div class="gal-body"><h4 data-lang-th="รีโนเวทหน้าบ้านทั้งหลัง" data-lang-en="Full Facade Renovation">รีโนเวทหน้าบ้านทั้งหลัง</h4><span data-lang-th="ขอนแก่น · 30 วัน" data-lang-en="Khon Kaen · 30 days">ขอนแก่น · 30 วัน</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-alt">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label alt eng-tick">SEC. 04 — DASHBOARD</span>
+      <h2 data-lang-th="เหตุผลที่ลูกค้าเลือกเรา" data-lang-en="Why Clients Choose Us">เหตุผลที่ลูกค้าเลือกเรา</h2>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-card reveal">
+        <i data-lucide="shield-check" width="26" height="26"></i>
+        <span class="mono-label eng-tick">QA-01</span>
+        <b>2-5 <span style="font-size:.9rem;color:var(--muted);">YR</span></b>
+        <p data-lang-th="รับประกันงานเป็นลายลักษณ์อักษร" data-lang-en="Written warranty on every job">รับประกันงานเป็นลายลักษณ์อักษร</p>
+      </div>
+      <div class="dash-card reveal">
+        <i data-lucide="users" width="26" height="26"></i>
+        <span class="mono-label eng-tick">QA-02</span>
+        <b>32+</b>
+        <p data-lang-th="ทีมช่างประจำ ไม่ใช่ช่างเหมาย่อย" data-lang-en="Full-time crew, no sub-contracting">ทีมช่างประจำ ไม่ใช่ช่างเหมาย่อย</p>
+      </div>
+      <div class="dash-card reveal">
+        <i data-lucide="clock" width="26" height="26"></i>
+        <span class="mono-label eng-tick">QA-03</span>
+        <b>96%</b>
+        <p data-lang-th="ส่งมอบงานตรงตามกำหนดเวลา" data-lang-en="Projects delivered on schedule">ส่งมอบงานตรงตามกำหนดเวลา</p>
+      </div>
+      <div class="dash-card reveal">
+        <i data-lucide="ruler" width="26" height="26"></i>
+        <span class="mono-label eng-tick">QA-04</span>
+        <b>100%</b>
+        <p data-lang-th="วัดหน้างานจริงก่อนเสนอราคาทุกครั้ง" data-lang-en="On-site measurement before every quote">วัดหน้างานจริงก่อนเสนอราคาทุกครั้ง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testi">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label eng-tick">SEC. 05 — FEEDBACK LOG</span>
+      <h2 data-lang-th="เสียงจากลูกค้า" data-lang-en="Client Feedback">เสียงจากลูกค้า</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="quote-mark">"</div>
+        <p class="txt" data-lang-th="ทีมช่างมาตรงเวลา วัดแบบละเอียดเหมือนวิศวกรจริงๆ งานเสร็จไม่มีปัญหาตามหลัง" data-lang-en="The crew arrived on time and measured like real engineers. No issues after the job was done.">ทีมช่างมาตรงเวลา วัดแบบละเอียดเหมือนวิศวกรจริงๆ งานเสร็จไม่มีปัญหาตามหลัง</p>
+        <div class="test-who">
+          <img src="https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?w=100&h=100&fit=crop" alt="ลูกค้า คุณสมชาย">
+          <div><b>สมชาย ต. </b><span data-lang-th="ต่อเติมโรงรถ" data-lang-en="Garage Extension">ต่อเติมโรงรถ</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="quote-mark">"</div>
+        <p class="txt" data-lang-th="ใบเสนอราคาละเอียดมาก ไม่มีบวกเพิ่มระหว่างงาน ประทับใจเรื่องความโปร่งใส" data-lang-en="The quote was extremely detailed with no surprise costs mid-project. Very transparent.">ใบเสนอราคาละเอียดมาก ไม่มีบวกเพิ่มระหว่างงาน ประทับใจเรื่องความโปร่งใส</p>
+        <div class="test-who">
+          <img src="https://images.unsplash.com/photo-1618090584176-7132b9911657?w=100&h=100&fit=crop" alt="ลูกค้า คุณนภา">
+          <div><b>นภา ว.</b><span data-lang-th="ซ่อมหลังคา" data-lang-en="Roof Repair">ซ่อมหลังคา</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="quote-mark">"</div>
+        <p class="txt" data-lang-th="งานระบบไฟฟ้าทำได้เนี้ยบ มีใบตรวจสอบให้ดูทุกจุด อุ่นใจเรื่องความปลอดภัย" data-lang-en="Electrical work was flawless, with an inspection sheet for every point. Real peace of mind.">งานระบบไฟฟ้าทำได้เนี้ยบ มีใบตรวจสอบให้ดูทุกจุด อุ่นใจเรื่องความปลอดภัย</p>
+        <div class="test-who">
+          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=100&h=100&fit=crop" alt="ลูกค้า คุณวิชัย">
+          <div><b>วิชัย ป.</b><span data-lang-th="เดินระบบไฟฟ้า" data-lang-en="Rewiring">เดินระบบไฟฟ้า</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="sec-alt">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label alt eng-tick">SEC. 06 — RATE SHEET</span>
+      <h2 data-lang-th="ราคาเริ่มต้น" data-lang-en="Starting Rates">ราคาเริ่มต้น</h2>
+      <p data-lang-th="ราคาจริงขึ้นกับขนาดงานและวัสดุที่เลือก ประเมินหน้างานฟรีก่อนเริ่มทุกโครงการ" data-lang-en="Actual pricing depends on scope and material grade. Free on-site assessment before every project.">ราคาจริงขึ้นกับขนาดงานและวัสดุที่เลือก ประเมินหน้างานฟรีก่อนเริ่มทุกโครงการ</p>
+    </div>
+    <div class="spec-wrap reveal">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th data-lang-th="รายการงาน" data-lang-en="Service Item">รายการงาน</th>
+            <th data-lang-th="หน่วย" data-lang-en="Unit">หน่วย</th>
+            <th data-lang-th="ราคาเริ่มต้น" data-lang-en="Starting Price">ราคาเริ่มต้น</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item" data-lang-th="ต่อเติมพื้นที่ใช้สอย" data-lang-en="Room / space extension">ต่อเติมพื้นที่ใช้สอย</td>
+            <td data-lang-th="ต่อตร.ม." data-lang-en="per sqm">ต่อตร.ม.</td>
+            <td class="price">7,500<span>บาท</span></td>
+          </tr>
+          <tr>
+            <td class="item" data-lang-th="เปลี่ยน/ซ่อมหลังคา" data-lang-en="Roof repair / replace">เปลี่ยน/ซ่อมหลังคา</td>
+            <td data-lang-th="ต่อตร.ม." data-lang-en="per sqm">ต่อตร.ม.</td>
+            <td class="price">950<span>บาท</span></td>
+          </tr>
+          <tr>
+            <td class="item" data-lang-th="เดินระบบไฟฟ้าใหม่" data-lang-en="Full rewiring">เดินระบบไฟฟ้าใหม่</td>
+            <td data-lang-th="ต่อจุด" data-lang-en="per point">ต่อจุด</td>
+            <td class="price">650<span>บาท</span></td>
+          </tr>
+          <tr>
+            <td class="item" data-lang-th="งานประปา/สุขาภิบาล" data-lang-en="Plumbing / sanitation">งานประปา/สุขาภิบาล</td>
+            <td data-lang-th="ต่อจุด" data-lang-en="per point">ต่อจุด</td>
+            <td class="price">850<span>บาท</span></td>
+          </tr>
+          <tr>
+            <td class="item" data-lang-th="ทาสีภายใน-นอก" data-lang-en="Interior / exterior paint">ทาสีภายใน-นอก</td>
+            <td data-lang-th="ต่อตร.ม." data-lang-en="per sqm">ต่อตร.ม.</td>
+            <td class="price">120<span>บาท</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="spec-note reveal">
+      <i data-lucide="info" width="16" height="16"></i>
+      <span data-lang-th="ราคาดังกล่าวเป็นราคาเริ่มต้นสำหรับวัสดุมาตรฐาน ยังไม่รวมค่าขนส่งและค่าดำเนินการหน้างานที่ห่างไกล" data-lang-en="Rates shown are starting prices for standard-grade materials, excluding transport and remote-site charges.">ราคาดังกล่าวเป็นราคาเริ่มต้นสำหรับวัสดุมาตรฐาน ยังไม่รวมค่าขนส่งและค่าดำเนินการหน้างานที่ห่างไกล</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="blueprint-bg">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="mono-label eng-tick">SEC. 07 — WORK ORDER</span>
+      <h2 data-lang-th="เปิดใบสั่งงาน" data-lang-en="Open a Work Order">เปิดใบสั่งงาน</h2>
+      <p data-lang-th="ทิ้งรายละเอียดงานไว้ ทีมงานจะติดต่อกลับเพื่อนัดวันเข้าสำรวจหน้างานภายใน 24 ชั่วโมง" data-lang-en="Leave your job details — our team will call to schedule an on-site survey within 24 hours.">ทิ้งรายละเอียดงานไว้ ทีมงานจะติดต่อกลับเพื่อนัดวันเข้าสำรวจหน้างานภายใน 24 ชั่วโมง</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-panel reveal corners">
+        <span class="mono-label eng-tick">LOC / CONTACT</span>
+        <div class="coord">LAT 16.4419° N — LON 102.8360° E</div>
+        <ul class="contact-list">
+          <li><i data-lucide="map-pin" width="19" height="19"></i><div><b data-lang-th="สำนักงานใหญ่" data-lang-en="Head Office">สำนักงานใหญ่</b><span data-lang-th="123 ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น 40000" data-lang-en="123 Mittraphap Rd, Nai Mueang, Khon Kaen 40000">123 ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น 40000</span></div></li>
+          <li><i data-lucide="phone" width="19" height="19"></i><div><b>095-XXX-4471</b><span data-lang-th="โทรทุกวัน 08:00-19:00" data-lang-en="Daily 08:00-19:00">โทรทุกวัน 08:00-19:00</span></div></li>
+          <li><i data-lucide="mail" width="19" height="19"></i><div><b>contact@kaennakhonworks.co.th</b><span data-lang-th="ตอบกลับภายใน 24 ชม." data-lang-en="Reply within 24 hrs">ตอบกลับภายใน 24 ชม.</span></div></li>
+          <li><i data-lucide="message-circle" width="19" height="19"></i><div><b>LINE: @kaennakhon</b><span data-lang-th="แชทสะดวก รวดเร็ว" data-lang-en="Fast, convenient chat">แชทสะดวก รวดเร็ว</span></div></li>
+        </ul>
+      </div>
+      <div class="contact-panel reveal corners">
+        <span class="mono-label eng-tick">JOB REQUEST FORM</span>
+        <form class="form-grid" onsubmit="event.preventDefault();this.querySelector('.sent-msg')?.remove();var m=document.createElement('div');m.className='sent-msg';m.style.color='var(--primary)';m.style.fontSize='.85rem';m.style.marginTop='6px';m.textContent=document.documentElement.lang==='th'?'ส่งข้อมูลเรียบร้อย ทีมงานจะติดต่อกลับเร็วๆนี้':'Submitted. Our team will contact you soon.';this.appendChild(m);">
+          <div>
+            <label data-lang-th="ชื่อ-นามสกุล" data-lang-en="Full Name">ชื่อ-นามสกุล</label>
+            <input type="text" placeholder="กรอกชื่อของคุณ" required>
+          </div>
+          <div>
+            <label data-lang-th="เบอร์โทรศัพท์" data-lang-en="Phone Number">เบอร์โทรศัพท์</label>
+            <input type="tel" placeholder="08X-XXX-XXXX" required>
+          </div>
+          <div>
+            <label data-lang-th="รายละเอียดงาน" data-lang-en="Job Details">รายละเอียดงาน</label>
+            <textarea rows="4" placeholder="อธิบายงานที่ต้องการ เช่น ต่อเติมครัวขนาด 4x5 ม."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;"><i data-lucide="send" width="17" height="17"></i><span data-lang-th="ส่งใบสั่งงาน" data-lang-en="Submit Request">ส่งใบสั่งงาน</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo-th" style="font-size:1.3rem;">แก่นนคร การช่าง</span>
+        <p data-lang-th="ผู้ให้บริการงานต่อเติม ซ่อมแซม และก่อสร้างครบวงจร ด้วยทีมช่างมืออาชีพและมาตรฐานงานแบบวิศวกรรม" data-lang-en="Full-scope renovation, repair, and construction services delivered with engineering-grade standards.">ผู้ให้บริการงานต่อเติม ซ่อมแซม และก่อสร้างครบวงจร ด้วยทีมช่างมืออาชีพและมาตรฐานงานแบบวิศวกรรม</p>
+        <div class="foot-social" style="margin-top:18px;">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook" width="17" height="17"></i></a>
+          <a href="#" aria-label="Line"><i data-lucide="message-circle" width="17" height="17"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram" width="17" height="17"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4 data-lang-th="บริการ" data-lang-en="Services">บริการ</h4>
+        <ul>
+          <li><a href="#services" data-lang-th="ต่อเติมบ้าน" data-lang-en="Extensions">ต่อเติมบ้าน</a></li>
+          <li><a href="#services" data-lang-th="ซ่อมแซมโครงสร้าง" data-lang-en="Structural Repair">ซ่อมแซมโครงสร้าง</a></li>
+          <li><a href="#services" data-lang-th="หลังคา" data-lang-en="Roofing">หลังคา</a></li>
+          <li><a href="#services" data-lang-th="ไฟฟ้า-ประปา" data-lang-en="Electrical-Plumbing">ไฟฟ้า-ประปา</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4 data-lang-th="บริษัท" data-lang-en="Company">บริษัท</h4>
+        <ul>
+          <li><a href="#process" data-lang-th="ขั้นตอนงาน" data-lang-en="Our Process">ขั้นตอนงาน</a></li>
+          <li><a href="#work" data-lang-th="ผลงาน" data-lang-en="Projects">ผลงาน</a></li>
+          <li><a href="#pricing" data-lang-th="ราคา" data-lang-en="Pricing">ราคา</a></li>
+          <li><a href="#testi" data-lang-th="รีวิวลูกค้า" data-lang-en="Reviews">รีวิวลูกค้า</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4 data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</h4>
+        <ul>
+          <li><a href="tel:095XXX4471">095-XXX-4471</a></li>
+          <li><a href="mailto:contact@kaennakhonworks.co.th">contact@kaennakhonworks.co.th</a></li>
+          <li><a href="#contact" data-lang-th="ขอนแก่น, ไทย" data-lang-en="Khon Kaen, Thailand">ขอนแก่น, ไทย</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-lang-th="© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์" data-lang-en="© 2026 Kaennakhon Works. All rights reserved.">© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์</span>
+      <span class="eng-tick" style="color:var(--muted);">DOC REV. 2026-07 / KNK-WORKS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// header scroll shrink
+var header = document.getElementById('siteHeader');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 40){ header.classList.add('scrolled'); }
+  else{ header.classList.remove('scrolled'); }
+});
+
+// desktop CTA visibility
+function updateDeskCta(){
+  document.getElementById('deskCta').style.display = window.innerWidth >= 768 ? 'inline-flex' : 'none';
+}
+updateDeskCta();
+window.addEventListener('resize', updateDeskCta);
+
+// mobile menu
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+var overlay = document.getElementById('menuOverlay');
+function closeMenu(){ mobileMenu.classList.remove('open'); overlay.classList.remove('open'); }
+hamburger.addEventListener('click', function(){
+  mobileMenu.classList.toggle('open');
+  overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-menu a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+// scroll reveal
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
+lucide.createIcons();
+</script>
+
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){if(/[<&]/.test(t)){e.innerHTML=t}else{e.textContent=t}}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+
+</body>
+</html>

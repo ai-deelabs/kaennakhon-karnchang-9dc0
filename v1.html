@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แก่นนคร การช่าง | รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด</title>
+<meta name="description" content="แก่นนคร การช่าง ทีมช่างมืออาชีพ รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด งานโครงสร้าง หลังคา ไฟฟ้า ประปา ทาสี พร้อมลงมือทันที">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+:root{
+  --background:#141210;
+  --card:#201d1a;
+  --bg-accent:#2b2b2b;
+  --foreground:#f3efe8;
+  --muted:#a39d92;
+  --border:#3a352f;
+  --primary:#e84c1e;
+  --secondary:#3f3b36;
+  --accent:#ff7a3d;
+
+  --font-heading:'Kanit', 'Sarabun', sans-serif;
+  --font-body:'Sarabun', 'Sukhumvit Set', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--background);
+  color:var(--foreground);
+  font-family:var(--font-body);
+  line-height:1.8;
+  word-break:break-word;
+  overflow-wrap:break-word;
+  overflow-x:hidden;
+  font-size:16px;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{
+  font-family:var(--font-heading);
+  font-weight:800;
+  line-height:1.5;
+  text-transform:uppercase;
+  padding-top:.15em;
+}
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 1.25rem;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-heading);
+  font-weight:700;font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--primary);
+}
+.eyebrow::before{content:'';width:22px;height:3px;background:var(--primary);display:inline-block;}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.1rem 0;
+  transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+}
+.nav.scrolled{
+  background:rgba(20,18,16,.94);
+  backdrop-filter:blur(8px);
+  padding:.7rem 0;
+  box-shadow:0 6px 24px rgba(0,0,0,.4);
+  border-bottom:1px solid var(--border);
+}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;}
+.logo{
+  font-family:var(--font-heading);
+  font-weight:800;
+  font-size:1.25rem;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  line-height:1.1;
+  color:var(--foreground);
+  display:flex;flex-direction:column;
+}
+.logo span{color:var(--primary);}
+.logo small{
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:.6rem;
+  letter-spacing:.18em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.nav__links{
+  display:none;
+  align-items:center;
+  gap:1.9rem;
+}
+.nav__links a{
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:.92rem;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  padding:.6rem 0;
+  position:relative;
+  color:var(--foreground);
+}
+.nav__links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--primary);
+  transition:width .3s ease;
+}
+.nav__links a:hover::after{width:100%;}
+.nav__right{display:flex;align-items:center;gap:1.1rem;}
+.nav__cta{
+  display:none;
+  font-family:var(--font-heading);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:.85rem;
+  background:var(--primary);
+  color:var(--background);
+  padding:.7em 1.3em;
+  border-radius:3px;
+  clip-path:polygon(0 0,100% 0,94% 100%,0% 100%);
+}
+.lang-sw{
+  display:flex;align-items:center;gap:.3rem;
+  font-size:.8em;font-weight:600;color:var(--muted);
+  border:1px solid var(--border);
+  padding:.4em .65em;
+  border-radius:20px;
+  min-height:32px;
+}
+.lang-sw:hover{color:var(--primary);border-color:var(--primary);}
+.hamburger{
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;
+  border:none;background:transparent;cursor:pointer;
+  padding:0;
+}
+.hamburger span{display:block;width:24px;height:2px;background:var(--foreground);transition:all .3s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;top:0;right:0;bottom:0;
+  width:78%;max-width:320px;
+  background:var(--card);
+  border-left:1px solid var(--border);
+  z-index:99;
+  transform:translateX(100%);
+  transition:transform .4s ease;
+  padding:6rem 2rem 2rem;
+  display:flex;flex-direction:column;gap:1.6rem;
+  box-shadow:-10px 0 40px rgba(0,0,0,.5);
+}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{
+  font-family:var(--font-heading);
+  font-weight:700;font-size:1.2rem;text-transform:uppercase;
+  padding:.5rem 0;border-bottom:1px solid var(--border);
+  min-height:44px;display:flex;align-items:center;
+}
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;
+  opacity:0;visibility:hidden;transition:opacity .35s ease;
+}
+.overlay.open{opacity:1;visibility:visible;}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding-top:0;}
+.hero__media{
+  position:relative;height:88vh;min-height:520px;max-height:820px;
+  overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 84%,0 100%);
+}
+.hero__media img{
+  width:100%;height:100%;object-fit:cover;object-position:center 30%;
+  filter:grayscale(.15) contrast(1.12) brightness(.9);
+  animation:slowzoom 18s ease-in-out infinite alternate;
+}
+@keyframes slowzoom{from{transform:scale(1);}to{transform:scale(1.12);}}
+.hero__media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(20,18,16,.15) 0%, rgba(20,18,16,.35) 45%, rgba(20,18,16,.92) 100%),
+             linear-gradient(100deg, rgba(232,76,30,.28), transparent 55%);
+}
+.hero__tag{
+  position:absolute;left:1.25rem;top:6.5rem;z-index:2;
+  color:#fff;font-family:var(--font-heading);
+  background:rgba(20,18,16,.55);
+  border:1px solid rgba(255,255,255,.25);
+  padding:.5em 1em;border-radius:2px;
+  font-size:.72rem;letter-spacing:.14em;font-weight:700;text-transform:uppercase;
+  backdrop-filter:blur(4px);
+}
+.hero__band{
+  position:relative;margin-top:-9vh;z-index:2;
+  background:var(--primary);
+  clip-path:polygon(0 9%,100% 0,100% 100%,0 100%);
+  padding:3.2rem 1.25rem 3.4rem;
+}
+.hero__band-inner{max-width:1180px;margin:0 auto;}
+.hero__headline{
+  color:var(--background);
+  font-size:clamp(2.4rem, 9vw, 5.4rem);
+  font-weight:900;
+  letter-spacing:0;
+  line-height:1.42;
+}
+.hero__sub{
+  color:var(--background);
+  opacity:.88;
+  max-width:640px;
+  margin-top:1.1rem;
+  font-size:1.02rem;
+  font-weight:500;
+}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.8rem;}
+.btn{
+  font-family:var(--font-heading);font-weight:700;text-transform:uppercase;
+  font-size:.95rem;letter-spacing:.02em;
+  padding:.95em 1.7em;
+  border-radius:3px;
+  display:inline-flex;align-items:center;gap:.55rem;
+  min-height:44px;
+  border:2px solid transparent;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  cursor:pointer;
+}
+.btn:hover{transform:translateY(-3px);}
+.btn-dark{background:var(--background);color:var(--foreground);}
+.btn-dark:hover{box-shadow:0 10px 26px rgba(0,0,0,.5);}
+.btn-outline{background:transparent;border-color:var(--background);color:var(--background);}
+.btn-outline:hover{background:rgba(20,18,16,.12);}
+.btn-primary{background:var(--primary);color:var(--background);}
+.btn-primary:hover{box-shadow:0 10px 26px rgba(232,76,30,.4);}
+.btn-ghost{background:var(--secondary);color:var(--foreground);}
+.btn-ghost:hover{box-shadow:0 10px 26px rgba(0,0,0,.5);}
+
+/* ---------- MARQUEE ---------- */
+.marquee{
+  background:var(--background);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  overflow:hidden;padding:1rem 0;
+  transform:skewY(-1.2deg);
+  margin:-1px 0;
+}
+.marquee__track{
+  display:flex;width:max-content;
+  animation:scrollx 26s linear infinite;
+  gap:2.6rem;
+}
+.marquee__track span{
+  font-family:var(--font-heading);font-weight:700;text-transform:uppercase;
+  font-size:1.05rem;letter-spacing:.04em;color:var(--muted);white-space:nowrap;
+  display:flex;align-items:center;gap:.7rem;
+}
+.marquee__track span::before{content:'';width:8px;height:8px;background:var(--primary);border-radius:50%;flex-shrink:0;}
+@keyframes scrollx{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ---------- SECTION GENERIC ---------- */
+section{padding:4.5rem 0;}
+.section-head{margin-bottom:2.4rem;}
+.section-head h2{font-size:clamp(1.9rem,5vw,2.9rem);color:var(--foreground);margin-top:.5rem;}
+.section-head p{color:var(--muted);max-width:560px;margin-top:.9rem;font-size:1.02rem;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---------- SERVICES ACCORDION ---------- */
+.services{background:var(--bg-accent);position:relative;}
+.acc-list{border-top:1px solid var(--border);}
+.acc-item{border-bottom:1px solid var(--border);}
+.acc-item summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;gap:1.2rem;
+  padding:1.4rem .25rem;
+  min-height:44px;
+}
+.acc-item summary::-webkit-details-marker{display:none;}
+.acc-num{
+  font-family:var(--font-heading);font-weight:800;font-size:1.6rem;color:var(--primary);
+  min-width:2.6rem;
+}
+.acc-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:50%;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;color:var(--primary);
+}
+.acc-title{
+  font-family:var(--font-heading);font-weight:700;font-size:1.15rem;text-transform:uppercase;
+  flex:1;color:var(--foreground);
+}
+.acc-plus{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .3s ease, background .3s ease;
+}
+.acc-item[open] .acc-plus{transform:rotate(45deg);background:var(--primary);border-color:var(--primary);}
+.acc-body{padding:0 .25rem 1.6rem 5.7rem;color:var(--muted);max-width:640px;font-size:.98rem;}
+
+/* ---------- STATS ---------- */
+.stats{
+  background:var(--card);
+  position:relative;
+  clip-path:polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+  padding:4.5rem 0;
+}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem 1.2rem;}
+.stat-num{
+  font-family:var(--font-heading);font-weight:900;font-size:clamp(2.4rem,6vw,3.6rem);
+  color:var(--primary);line-height:1;
+}
+.stat-label{color:var(--muted);font-size:.9rem;margin-top:.5rem;max-width:220px;}
+
+/* ---------- GALLERY ---------- */
+.gallery{background:var(--background);}
+.gallery-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+.g-item{
+  position:relative;border-radius:6px;overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+.g-item img{width:100%;height:280px;object-fit:cover;transition:transform .5s ease, filter .5s ease;filter:grayscale(.2);}
+.g-item:hover img{transform:scale(1.08);filter:grayscale(0);}
+.g-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:1rem 1.1rem 1.1rem;
+  background:linear-gradient(180deg, transparent, rgba(20,18,16,.92));
+  font-family:var(--font-heading);font-weight:700;text-transform:uppercase;font-size:.95rem;
+}
+.g-item.tall img{height:400px;}
+
+/* ---------- PROCESS TIMELINE ---------- */
+.process{background:var(--bg-accent);position:relative;}
+.timeline{position:relative;padding-left:1.6rem;border-left:3px solid var(--border);}
+.tl-step{position:relative;padding:0 0 2.6rem 1.6rem;}
+.tl-step:last-child{padding-bottom:0;}
+.tl-step::before{
+  content:'';position:absolute;left:-1.7rem;top:.15rem;
+  width:16px;height:16px;border-radius:50%;background:var(--primary);
+  box-shadow:0 0 0 4px var(--bg-accent), 0 0 0 5px var(--border);
+}
+.tl-step .tl-num{font-family:var(--font-heading);font-weight:900;color:var(--primary);font-size:.85rem;letter-spacing:.1em;}
+.tl-step h3{font-size:1.35rem;margin-top:.35rem;color:var(--foreground);}
+.tl-step p{color:var(--muted);margin-top:.5rem;max-width:520px;font-size:.98rem;}
+
+/* ---------- TESTIMONIALS ---------- */
+.testi{background:var(--background);}
+.testi-row{display:flex;gap:1.2rem;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory;}
+.testi-row::-webkit-scrollbar{height:6px;}
+.testi-row::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.t-card{
+  flex:0 0 82%;scroll-snap-align:start;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:1.8rem 1.6rem;
+  position:relative;
+}
+.t-card::before{
+  content:'"';position:absolute;top:-.4rem;left:1rem;
+  font-family:var(--font-heading);font-size:3.5rem;color:var(--primary);opacity:.5;
+}
+.t-quote{font-size:1rem;color:var(--foreground);margin-top:1rem;}
+.t-name{margin-top:1.2rem;font-family:var(--font-heading);font-weight:700;color:var(--primary);text-transform:uppercase;font-size:.9rem;}
+.t-role{color:var(--muted);font-size:.85rem;}
+
+/* ---------- CONTACT ---------- */
+.contact{
+  position:relative;background:var(--primary);
+  clip-path:polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+  padding:5rem 0 4rem;
+  color:var(--background);
+}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:2.4rem;}
+.contact h2{color:var(--background);font-size:clamp(2rem,6vw,3rem);}
+.contact p.lead{color:var(--background);opacity:.85;margin-top:.8rem;max-width:480px;}
+.contact-phone{
+  font-family:var(--font-heading);font-weight:900;font-size:clamp(2rem,7vw,3.2rem);
+  color:var(--background);margin-top:1.6rem;display:flex;align-items:center;gap:.7rem;
+}
+.contact-info{display:grid;gap:1rem;}
+.c-card{
+  background:rgba(20,18,16,.12);
+  border:1px solid rgba(20,18,16,.25);
+  border-radius:8px;padding:1.2rem 1.3rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.c-card .ic{
+  width:42px;height:42px;border-radius:50%;background:var(--background);
+  color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.c-card h4{color:var(--background);font-size:1rem;text-transform:uppercase;}
+.c-card p{color:var(--background);opacity:.85;font-size:.92rem;margin-top:.3rem;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--background);border-top:1px solid var(--border);padding:3rem 0 2rem;}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem;}
+.footer-logo{font-family:var(--font-heading);font-weight:800;font-size:1.4rem;text-transform:uppercase;}
+.footer-logo span{color:var(--primary);}
+.footer-desc{color:var(--muted);margin-top:.8rem;max-width:340px;font-size:.92rem;}
+.footer-links{display:flex;flex-direction:column;gap:.7rem;}
+.footer-links a{color:var(--muted);font-size:.95rem;min-height:32px;display:flex;align-items:center;}
+.footer-links a:hover{color:var(--primary);}
+.footer-links h4{color:var(--foreground);text-transform:uppercase;font-size:.85rem;letter-spacing:.08em;margin-bottom:.5rem;font-family:var(--font-heading);}
+.social-row{display:flex;gap:.8rem;margin-top:1.2rem;}
+.social-row a{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+}
+.social-row a:hover{color:var(--primary);border-color:var(--primary);}
+.footer-bottom{
+  margin-top:2.5rem;padding-top:1.6rem;border-top:1px solid var(--border);
+  display:flex;flex-direction:column;gap:.6rem;color:var(--muted);font-size:.82rem;
+}
+
+/* ---------- DESKTOP ---------- */
+@media (min-width:768px){
+  .nav__links{display:flex;}
+  .nav__cta{display:inline-flex;}
+  .hamburger{display:none;}
+  .hero__band{padding:4rem 2rem 4.5rem;}
+  .hero__tag{left:auto;right:3rem;}
+  .hero__ctas{margin-top:2.2rem;}
+  .stats-grid{grid-template-columns:repeat(4,1fr);}
+  .gallery-grid{grid-template-columns:repeat(3,1fr);}
+  .g-item:nth-child(1){grid-column:span 2;}
+  .contact-grid{grid-template-columns:1.1fr .9fr;align-items:center;}
+  .footer-grid{grid-template-columns:1.3fr .8fr .8fr .8fr;}
+  .t-card{flex:0 0 32%;}
+  .acc-body{padding-left:5.7rem;}
+}
+@media (min-width:1024px){
+  .hero__headline{font-size:clamp(3.4rem,7vw,6.2rem);}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#top" class="logo">แก่นนคร<span>การช่าง</span><small>KAEN NAKHON KARNCHANG</small></a>
+    <div class="nav__links">
+      <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+      <a href="#process" data-lang-th="ขั้นตอนทำงาน" data-lang-en="Process">ขั้นตอนทำงาน</a>
+      <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Work">ผลงาน</a>
+      <a href="#reviews" data-lang-th="รีวิว" data-lang-en="Reviews">รีวิว</a>
+      <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+    </div>
+    <div class="nav__right">
+      <div class="lang-sw"><i data-lucide="globe" width="14" height="14"></i><span class="lang-sw__label">TH</span></div>
+      <a href="tel:0812345678" class="nav__cta" data-lang-th="โทรเลย" data-lang-en="Call Now">โทรเลย</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+  <a href="#process" data-lang-th="ขั้นตอนทำงาน" data-lang-en="Process">ขั้นตอนทำงาน</a>
+  <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Work">ผลงาน</a>
+  <a href="#reviews" data-lang-th="รีวิว" data-lang-en="Reviews">รีวิว</a>
+  <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+  <a href="tel:0812345678" data-lang-th="โทร 081-234-5678" data-lang-en="Call 081-234-5678">โทร 081-234-5678</a>
+</div>
+
+<div id="top"></div>
+
+<section class="hero">
+  <div class="hero__media">
+    <img src="https://images.unsplash.com/photo-1530639834082-05bafb67fbbe?w=1400&h=1400&fit=crop" alt="ช่างสวมหมวกนิรภัยสีแดงกำลังทำงานหน้าไซต์ก่อสร้าง">
+    <span class="hero__tag">SITE-READY • 24/7 CALL-OUT</span>
+  </div>
+  <div class="hero__band">
+    <div class="hero__band-inner">
+      <span class="eyebrow" data-lang-th="ทีมช่างมืออาชีพ ประจำขอนแก่นและใกล้เคียง" data-lang-en="Professional Crew — Khon Kaen & Nearby">ทีมช่างมืออาชีพ ประจำขอนแก่นและใกล้เคียง</span>
+      <h1 class="hero__headline" data-lang-th="ซ่อมแซม<br>ต่อเติม<br>บ้านคุณ" data-lang-en="REPAIR<br>EXTEND<br>YOUR HOME">ซ่อมแซม<br>ต่อเติม<br>บ้านคุณ</h1>
+      <p class="hero__sub" data-lang-th="แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด งานไม้ งานปูน งานไฟ งานประปา ทีมช่างจริง อุปกรณ์พร้อม ลงมือทันที" data-lang-en="Kaen Nakhon Karnchang handles renovation and repair for every type of home — carpentry, masonry, electrical, plumbing. Real tradesmen, full gear, ready to start now.">แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด งานไม้ งานปูน งานไฟ งานประปา ทีมช่างจริง อุปกรณ์พร้อม ลงมือทันที</p>
+      <div class="hero__ctas">
+        <a href="tel:0812345678" class="btn btn-dark"><i data-lucide="phone"></i><span data-lang-th="โทร 081-234-5678" data-lang-en="Call 081-234-5678">โทร 081-234-5678</span></a>
+        <a href="#services" class="btn btn-outline"><i data-lucide="hammer"></i><span data-lang-th="ดูบริการทั้งหมด" data-lang-en="See All Services">ดูบริการทั้งหมด</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee__track" id="marqueeTrack">
+    <span data-lang-th="ต่อเติมบ้าน" data-lang-en="Home Extensions">ต่อเติมบ้าน</span>
+    <span data-lang-th="ซ่อมหลังคา" data-lang-en="Roof Repair">ซ่อมหลังคา</span>
+    <span data-lang-th="งานสีทั้งระบบ" data-lang-en="Full Painting">งานสีทั้งระบบ</span>
+    <span data-lang-th="ไฟฟ้า-ประปา" data-lang-en="Electrical & Plumbing">ไฟฟ้า-ประปา</span>
+    <span data-lang-th="ผนัง-ฝ้าเพดาน" data-lang-en="Walls & Ceilings">ผนัง-ฝ้าเพดาน</span>
+    <span data-lang-th="รั้ว-โรงจอดรถ" data-lang-en="Fences & Carports">รั้ว-โรงจอดรถ</span>
+    <span data-lang-th="ระบบระบายน้ำ" data-lang-en="Drainage Systems">ระบบระบายน้ำ</span>
+    <span data-lang-th="ต่อเติมบ้าน" data-lang-en="Home Extensions">ต่อเติมบ้าน</span>
+    <span data-lang-th="ซ่อมหลังคา" data-lang-en="Roof Repair">ซ่อมหลังคา</span>
+    <span data-lang-th="งานสีทั้งระบบ" data-lang-en="Full Painting">งานสีทั้งระบบ</span>
+    <span data-lang-th="ไฟฟ้า-ประปา" data-lang-en="Electrical & Plumbing">ไฟฟ้า-ประปา</span>
+    <span data-lang-th="ผนัง-ฝ้าเพดาน" data-lang-en="Walls & Ceilings">ผนัง-ฝ้าเพดาน</span>
+    <span data-lang-th="รั้ว-โรงจอดรถ" data-lang-en="Fences & Carports">รั้ว-โรงจอดรถ</span>
+    <span data-lang-th="ระบบระบายน้ำ" data-lang-en="Drainage Systems">ระบบระบายน้ำ</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-lang-th="บริการของเรา" data-lang-en="Our Services">บริการของเรา</span>
+      <h2 data-lang-th="งานช่างที่เราซ่อมได้ทุกซอกทุกมุม" data-lang-en="Every Trade Under One Crew">งานช่างที่เราซ่อมได้ทุกซอกทุกมุม</h2>
+      <p data-lang-th="แตะที่หัวข้อเพื่อดูรายละเอียดงาน เราครอบคลุมตั้งแต่โครงสร้างไปจนถึงงานตกแต่งขั้นสุดท้าย" data-lang-en="Tap a heading to expand the details. We cover everything from structural work to final finishing touches.">แตะที่หัวข้อเพื่อดูรายละเอียดงาน เราครอบคลุมตั้งแต่โครงสร้างไปจนถึงงานตกแต่งขั้นสุดท้าย</p>
+    </div>
+
+    <div class="acc-list reveal">
+      <details class="acc-item" open>
+        <summary>
+          <span class="acc-num">01</span>
+          <span class="acc-icon"><i data-lucide="home"></i></span>
+          <span class="acc-title" data-lang-th="ต่อเติมบ้าน" data-lang-en="Home Extensions">ต่อเติมบ้าน</span>
+          <span class="acc-plus"><i data-lucide="plus" width="16" height="16"></i></span>
+        </summary>
+        <div class="acc-body" data-lang-th="ต่อเติมห้อง ครัว โรงรถ หลังคากันสาด ออกแบบตามพื้นที่จริง คำนวณโครงสร้างให้แข็งแรงได้มาตรฐาน ไม่ทรุดไม่ร้าวในระยะยาว" data-lang-en="Room, kitchen, garage, and canopy extensions designed around your real space — structurally calculated to stay strong and crack-free for years.">ต่อเติมห้อง ครัว โรงรถ หลังคากันสาด ออกแบบตามพื้นที่จริง คำนวณโครงสร้างให้แข็งแรงได้มาตรฐาน ไม่ทรุดไม่ร้าวในระยะยาว</div>
+      </details>
+      <details class="acc-item">
+        <summary>
+          <span class="acc-num">02</span>
+          <span class="acc-icon"><i data-lucide="construction"></i></span>
+          <span class="acc-title" data-lang-th="ซ่อมแซมโครงสร้าง" data-lang-en="Structural Repair">ซ่อมแซมโครงสร้าง</span>
+          <span class="acc-plus"><i data-lucide="plus" width="16" height="16"></i></span>
+        </summary>
+        <div class="acc-body" data-lang-th="แก้บ้านทรุด รอยร้าวคาน เสา พื้น ซ่อมจากรากฐานจริง ไม่ใช่แค่ปิดผิวให้สวยชั่วคราว การันตีความแข็งแรงระยะยาว" data-lang-en="We fix subsidence, cracked beams, columns, and floors from the root cause — not just a cosmetic patch. Long-term structural integrity guaranteed.">แก้บ้านทรุด รอยร้าวคาน เสา พื้น ซ่อมจากรากฐานจริง ไม่ใช่แค่ปิดผิวให้สวยชั่วคราว การันตีความแข็งแรงระยะยาว</div>
+      </details>
+      <details class="acc-item">
+        <summary>
+          <span class="acc-num">03</span>
+          <span class="acc-icon"><i data-lucide="cloud-rain-wind"></i></span>
+          <span class="acc-title" data-lang-th="หลังคา-กันรั่ว" data-lang-en="Roofing & Leak Fix">หลังคา-กันรั่ว</span>
+          <span class="acc-plus"><i data-lucide="plus" width="16" height="16"></i></span>
+        </summary>
+        <div class="acc-body" data-lang-th="เปลี่ยนและซ่อมหลังคาทุกชนิด แก้ปัญหารั่วซึมแบบถาวร เช็ครอยรั่วทุกจุดก่อนปิดงาน พร้อมใบรับประกันงานหลังคา" data-lang-en="Full roof replacement and repair for every roof type, permanent leak fixes, every seam inspected before close-out, with a roofing warranty.">เปลี่ยนและซ่อมหลังคาทุกชนิด แก้ปัญหารั่วซึมแบบถาวร เช็ครอยรั่วทุกจุดก่อนปิดงาน พร้อมใบรับประกันงานหลังคา</div>
+      </details>
+      <details class="acc-item">
+        <summary>
+          <span class="acc-num">04</span>
+          <span class="acc-icon"><i data-lucide="plug-zap"></i></span>
+          <span class="acc-title" data-lang-th="ไฟฟ้า-ประปา" data-lang-en="Electrical & Plumbing">ไฟฟ้า-ประปา</span>
+          <span class="acc-plus"><i data-lucide="plus" width="16" height="16"></i></span>
+        </summary>
+        <div class="acc-body" data-lang-th="เดินระบบไฟใหม่ แก้ท่อตัน ท่อแตก เปลี่ยนปั๊มน้ำ ครบวงจรโดยช่างมีประสบการณ์ ปลอดภัยได้มาตรฐานทุกจุด" data-lang-en="New wiring runs, clearing blocked or burst pipes, pump replacement — a full electrical and plumbing service from experienced, safety-certified crews.">เดินระบบไฟใหม่ แก้ท่อตัน ท่อแตก เปลี่ยนปั๊มน้ำ ครบวงจรโดยช่างมีประสบการณ์ ปลอดภัยได้มาตรฐานทุกจุด</div>
+      </details>
+      <details class="acc-item">
+        <summary>
+          <span class="acc-num">05</span>
+          <span class="acc-icon"><i data-lucide="paintbrush"></i></span>
+          <span class="acc-title" data-lang-th="ทาสี-ตกแต่ง" data-lang-en="Paint & Finishing">ทาสี-ตกแต่ง</span>
+          <span class="acc-plus"><i data-lucide="plus" width="16" height="16"></i></span>
+        </summary>
+        <div class="acc-body" data-lang-th="ทาสีภายใน-ภายนอก งานฝ้า งานปูนขัดมัน เก็บงานละเอียดทุกมุมจนกว่าเจ้าของบ้านพอใจ" data-lang-en="Interior and exterior painting, ceiling work, polished plaster finishing — every corner detailed until the homeowner is satisfied.">ทาสีภายใน-ภายนอก งานฝ้า งานปูนขัดมัน เก็บงานละเอียดทุกมุมจนกว่าเจ้าของบ้านพอใจ</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label" data-lang-th="ปีที่คร่ำหวอดในสายงานช่าง" data-lang-en="Years in the trade">ปีที่คร่ำหวอดในสายงานช่าง</div>
+      </div>
+      <div>
+        <div class="stat-num">620+</div>
+        <div class="stat-label" data-lang-th="โปรเจกต์ที่ส่งมอบแล้ว" data-lang-en="Projects delivered">โปรเจกต์ที่ส่งมอบแล้ว</div>
+      </div>
+      <div>
+        <div class="stat-num">24</div>
+        <div class="stat-label" data-lang-th="ชม. พร้อมออกงานฉุกเฉิน" data-lang-en="Hrs emergency response">ชม. พร้อมออกงานฉุกเฉิน</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label" data-lang-th="ความพึงพอใจจากลูกค้า" data-lang-en="Customer satisfaction">ความพึงพอใจจากลูกค้า</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-lang-th="ผลงานหน้าไซต์จริง" data-lang-en="Real Jobsite Work">ผลงานหน้าไซต์จริง</span>
+      <h2 data-lang-th="ทุกภาพคือหน้างานจริง ไม่ใช่ภาพตัวอย่าง" data-lang-en="Every Shot Is a Real Job, Not a Stock Sample">ทุกภาพคือหน้างานจริง ไม่ใช่ภาพตัวอย่าง</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="g-item tall">
+        <img src="https://images.unsplash.com/photo-1618832515490-e181c4794a45?w=900&h=700&fit=crop" alt="งานต่อเติมบ้านพร้อมหน้าต่างใหม่">
+        <div class="g-cap" data-lang-th="งานต่อเติมหลังบ้าน" data-lang-en="Rear extension build">งานต่อเติมหลังบ้าน</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1783587616880-7e081f735a87?w=700&h=560&fit=crop" alt="วัสดุก่อสร้างจัดเรียงพร้อมหน้างาน">
+        <div class="g-cap" data-lang-th="เตรียมวัสดุก่อนลงมือ" data-lang-en="Materials staged on site">เตรียมวัสดุก่อนลงมือ</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1783587354630-3300699c053c?w=700&h=560&fit=crop" alt="ผนังโครงสร้างระหว่างการก่อสร้าง">
+        <div class="g-cap" data-lang-th="งานผนัง-ฝ้าเพดาน" data-lang-en="Walls & ceiling framing">งานผนัง-ฝ้าเพดาน</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1783587616774-eebb281c9b68?w=700&h=560&fit=crop" alt="บ้านพร้อมส่งมอบหลังปรับปรุง">
+        <div class="g-cap" data-lang-th="พื้นที่พร้อมส่งมอบ" data-lang-en="Ready for handover">พื้นที่พร้อมส่งมอบ</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1467139840664-96b244a66825?w=700&h=560&fit=crop" alt="อุปกรณ์ช่างจัดวางพร้อมใช้งาน">
+        <div class="g-cap" data-lang-th="อุปกรณ์พร้อมทุกหน้างาน" data-lang-en="Tools ready on every job">อุปกรณ์พร้อมทุกหน้างาน</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-lang-th="ขั้นตอนทำงาน" data-lang-en="How We Work">ขั้นตอนทำงาน</span>
+      <h2 data-lang-th="สี่ขั้นตอน จบงานตรงปก ไม่มีบวกเพิ่ม" data-lang-en="Four Steps, No Surprises">สี่ขั้นตอน จบงานตรงปก ไม่มีบวกเพิ่ม</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-step">
+        <div class="tl-num">STEP 01</div>
+        <h3 data-lang-th="สำรวจหน้างาน" data-lang-en="Site Survey">สำรวจหน้างาน</h3>
+        <p data-lang-th="ช่างลงพื้นที่ประเมินจริง วัดขนาด ตรวจโครงสร้าง ให้คำแนะนำตรงไปตรงมาโดยไม่มีค่าใช้จ่าย" data-lang-en="Our crew visits in person to measure, inspect structure, and give honest advice — no charge for the visit.">ช่างลงพื้นที่ประเมินจริง วัดขนาด ตรวจโครงสร้าง ให้คำแนะนำตรงไปตรงมาโดยไม่มีค่าใช้จ่าย</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">STEP 02</div>
+        <h3 data-lang-th="เสนอราคา-แบบ" data-lang-en="Quote & Plan">เสนอราคา-แบบ</h3>
+        <p data-lang-th="สรุปงบประมาณ วัสดุ และระยะเวลาให้ชัดเจนเป็นลายลักษณ์อักษร ไม่มีค่าใช้จ่ายแอบแฝงทีหลัง" data-lang-en="A clear written breakdown of budget, materials, and timeline — no hidden costs added later.">สรุปงบประมาณ วัสดุ และระยะเวลาให้ชัดเจนเป็นลายลักษณ์อักษร ไม่มีค่าใช้จ่ายแอบแฝงทีหลัง</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">STEP 03</div>
+        <h3 data-lang-th="ลงมือทำ" data-lang-en="Execution">ลงมือทำ</h3>
+        <p data-lang-th="ทีมช่างพร้อมอุปกรณ์เข้าดำเนินงานตามแผนที่วางไว้ ควบคุมคุณภาพทุกขั้นตอนหน้างาน" data-lang-en="A fully-equipped crew executes the plan on schedule, with quality checks at every stage.">ทีมช่างพร้อมอุปกรณ์เข้าดำเนินงานตามแผนที่วางไว้ ควบคุมคุณภาพทุกขั้นตอนหน้างาน</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num">STEP 04</div>
+        <h3 data-lang-th="ตรวจรับ-รับประกัน" data-lang-en="Handover & Warranty">ตรวจรับ-รับประกัน</h3>
+        <p data-lang-th="ตรวจงานร่วมกับเจ้าของบ้าน ส่งมอบพร้อมใบรับประกันงานทุกโปรเจกต์" data-lang-en="We inspect the finished work together with you and hand over a full workmanship warranty.">ตรวจงานร่วมกับเจ้าของบ้าน ส่งมอบพร้อมใบรับประกันงานทุกโปรเจกต์</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-lang-th="เสียงจากลูกบ้าน" data-lang-en="What Customers Say">เสียงจากลูกบ้าน</span>
+      <h2 data-lang-th="งานที่ทำไป ลูกบ้านพูดแทนเรา" data-lang-en="Let the Homeowners Speak">งานที่ทำไป ลูกบ้านพูดแทนเรา</h2>
+    </div>
+    <div class="testi-row reveal">
+      <div class="t-card">
+        <p class="t-quote" data-lang-th="ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ต่อเติมครัวเสร็จไวมากและไม่มีเก็บงานเพิ่ม" data-lang-en="The crew arrived on time and the finish was better than expected — the kitchen extension finished fast with nothing left to fix.">ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ต่อเติมครัวเสร็จไวมากและไม่มีเก็บงานเพิ่ม</p>
+        <div class="t-name">คุณสมชาย ต.</div>
+        <div class="t-role" data-lang-th="ลูกบ้าน อ.เมือง ขอนแก่น" data-lang-en="Homeowner, Mueang Khon Kaen">ลูกบ้าน อ.เมือง ขอนแก่น</div>
+      </div>
+      <div class="t-card">
+        <p class="t-quote" data-lang-th="แจ้งซ่อมหลังคารั่วตอนกลางคืน ช่างมาถึงไม่เกินชั่วโมง แก้จบในรอบเดียว เก่งจริง" data-lang-en="Called about a roof leak at night and the crew arrived within the hour and fixed it in one pass — genuinely skilled.">แจ้งซ่อมหลังคารั่วตอนกลางคืน ช่างมาถึงไม่เกินชั่วโมง แก้จบในรอบเดียว เก่งจริง</p>
+        <div class="t-name">คุณนภา ว.</div>
+        <div class="t-role" data-lang-th="ลูกบ้าน อ.น้ำพอง" data-lang-en="Homeowner, Nam Phong">ลูกบ้าน อ.น้ำพอง</div>
+      </div>
+      <div class="t-card">
+        <p class="t-quote" data-lang-th="ราคาชัดเจนตั้งแต่แรกคุย ไม่มีบวกเพิ่มทีหลัง ทำงานสม่ำเสมอทุกวันจนจบ" data-lang-en="The price was clear from the first conversation, no add-ons later, and the crew showed up consistently every day until it was done.">ราคาชัดเจนตั้งแต่แรกคุย ไม่มีบวกเพิ่มทีหลัง ทำงานสม่ำเสมอทุกวันจนจบ</p>
+        <div class="t-name">คุณวีระ ส.</div>
+        <div class="t-role" data-lang-th="ลูกบ้าน อ.บ้านไผ่" data-lang-en="Homeowner, Ban Phai">ลูกบ้าน อ.บ้านไผ่</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--background)" data-lang-th="พร้อมเริ่มงานทันที" data-lang-en="Ready to Start Now">พร้อมเริ่มงานทันที</span>
+        <h2 data-lang-th="แจ้งงานวันนี้<br>ช่างถึงหน้าบ้านคุณ" data-lang-en="Call Today<br>We're At Your Door">แจ้งงานวันนี้<br>ช่างถึงหน้าบ้านคุณ</h2>
+        <p class="lead" data-lang-th="ไม่ว่าจะต่อเติม ซ่อมแซม หรือแก้ปัญหาเร่งด่วน ทีมแก่นนคร การช่าง พร้อมออกหน้างานทุกวัน" data-lang-en="Whether it's an extension, a repair, or an urgent fix — the Kaen Nakhon Karnchang crew is ready to head out every day.">ไม่ว่าจะต่อเติม ซ่อมแซม หรือแก้ปัญหาเร่งด่วน ทีมแก่นนคร การช่าง พร้อมออกหน้างานทุกวัน</p>
+        <a href="tel:0812345678" class="contact-phone"><i data-lucide="phone-call"></i>081-234-5678</a>
+        <div class="hero__ctas" style="margin-top:1.6rem;">
+          <a href="tel:0812345678" class="btn btn-dark"><i data-lucide="phone"></i><span data-lang-th="โทรติดต่อทีมช่าง" data-lang-en="Call the Crew">โทรติดต่อทีมช่าง</span></a>
+          <a href="#" class="btn btn-outline"><i data-lucide="message-circle"></i><span data-lang-th="แจ้งฉุกเฉิน 24 ชม." data-lang-en="24-Hr Emergency">แจ้งฉุกเฉิน 24 ชม.</span></a>
+        </div>
+      </div>
+      <div class="contact-info reveal">
+        <div class="c-card">
+          <span class="ic"><i data-lucide="map-pin"></i></span>
+          <div>
+            <h4 data-lang-th="พื้นที่ให้บริการ" data-lang-en="Service Area">พื้นที่ให้บริการ</h4>
+            <p data-lang-th="ขอนแก่นและอำเภอโดยรอบ ให้บริการนอกเขตกรุณาโทรสอบถาม" data-lang-en="Khon Kaen city and surrounding districts. Outside this area, please call to confirm.">ขอนแก่นและอำเภอโดยรอบ ให้บริการนอกเขตกรุณาโทรสอบถาม</p>
+          </div>
+        </div>
+        <div class="c-card">
+          <span class="ic"><i data-lucide="clock"></i></span>
+          <div>
+            <h4 data-lang-th="เวลาทำงาน" data-lang-en="Working Hours">เวลาทำงาน</h4>
+            <p data-lang-th="จันทร์-เสาร์ 07:00-18:00 น. ฉุกเฉินรับสายตลอด 24 ชม." data-lang-en="Mon–Sat 7:00 AM–6:00 PM. Emergency line answered 24 hours a day.">จันทร์-เสาร์ 07:00-18:00 น. ฉุกเฉินรับสายตลอด 24 ชม.</p>
+          </div>
+        </div>
+        <div class="c-card">
+          <span class="ic"><i data-lucide="shield-check"></i></span>
+          <div>
+            <h4 data-lang-th="รับประกันงาน" data-lang-en="Workmanship Warranty">รับประกันงาน</h4>
+            <p data-lang-th="งานทุกโปรเจกต์มีใบรับประกัน พร้อมติดตามผลหลังส่งมอบ" data-lang-en="Every project ships with a written warranty and post-handover follow-up.">งานทุกโปรเจกต์มีใบรับประกัน พร้อมติดตามผลหลังส่งมอบ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">แก่นนคร<span>การช่าง</span></div>
+        <p class="footer-desc" data-lang-th="ทีมช่างมืออาชีพ รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในเขตขอนแก่นและใกล้เคียง พร้อมลงมือทุกวัน" data-lang-en="A professional crew handling renovation and repair for every type of home in and around Khon Kaen, ready to work every day.">ทีมช่างมืออาชีพ รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในเขตขอนแก่นและใกล้เคียง พร้อมลงมือทุกวัน</p>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook" width="18" height="18"></i></a>
+          <a href="#" aria-label="Line"><i data-lucide="message-square" width="18" height="18"></i></a>
+          <a href="tel:0812345678" aria-label="Phone"><i data-lucide="phone" width="18" height="18"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4 data-lang-th="เมนู" data-lang-en="Menu">เมนู</h4>
+        <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+        <a href="#process" data-lang-th="ขั้นตอนทำงาน" data-lang-en="Process">ขั้นตอนทำงาน</a>
+        <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Work">ผลงาน</a>
+      </div>
+      <div class="footer-links">
+        <h4 data-lang-th="บริการ" data-lang-en="Services">บริการ</h4>
+        <a href="#services" data-lang-th="ต่อเติมบ้าน" data-lang-en="Home Extensions">ต่อเติมบ้าน</a>
+        <a href="#services" data-lang-th="ซ่อมโครงสร้าง" data-lang-en="Structural Repair">ซ่อมโครงสร้าง</a>
+        <a href="#services" data-lang-th="หลังคา-กันรั่ว" data-lang-en="Roofing">หลังคา-กันรั่ว</a>
+      </div>
+      <div class="footer-links">
+        <h4 data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</h4>
+        <a href="tel:0812345678">081-234-5678</a>
+        <a href="#" data-lang-th="ขอนแก่น ประเทศไทย" data-lang-en="Khon Kaen, Thailand">ขอนแก่น ประเทศไทย</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-lang-th="© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์ทุกส่วน" data-lang-en="© 2026 Kaen Nakhon Karnchang. All rights reserved.">© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์ทุกส่วน</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+});
+
+// Hamburger menu
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+var overlay = document.getElementById('overlay');
+function closeMenu(){
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  overlay.classList.remove('open');
+}
+hamburger.addEventListener('click', function(){
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-menu a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+// Scroll reveal
+var revealEls = document.querySelectorAll('.reveal');
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+revealEls.forEach(function(el){ io.observe(el); });
+</script>
+
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){if(/[<&]/.test(t)){e.innerHTML=t}else{e.textContent=t}}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
