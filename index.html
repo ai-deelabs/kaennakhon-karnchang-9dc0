@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แก่นนคร การช่าง — รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ขอนแก่น</title>
+<meta name="description" content="แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ทีมช่างมือโปร ประเมินราคาหน้างานฟรี รับประกันงานหลังส่งมอบ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+  :root{
+    --background:#F1EDE3;
+    --card:#FBF5E6;
+    --bg-accent:#EAD6A0;
+    --foreground:#241A12;
+    --muted:#6E5B45;
+    --border:#CDBBA0;
+    --primary:#B23A2E;
+    --secondary:#D9A441;
+    --accent:#22344E;
+
+    --font-heading:'Chonburi','Kanit',sans-serif;
+    --font-body:'IBM Plex Sans Thai','Sarabun',sans-serif;
+
+    --torn: polygon(0% 4%,4% 0%,9% 5%,14% 1%,19% 4%,24% 0%,29% 5%,34% 1%,39% 4%,44% 0%,49% 5%,54% 1%,59% 4%,64% 0%,69% 5%,74% 1%,79% 4%,84% 0%,89% 5%,94% 1%,100% 4%,100% 96%,95% 100%,90% 95%,85% 99%,80% 96%,75% 100%,70% 95%,65% 99%,60% 96%,55% 100%,50% 95%,45% 99%,40% 96%,35% 100%,30% 95%,25% 99%,20% 96%,15% 100%,10% 95%,5% 99%,0% 96%);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--background);
+    color:var(--foreground);
+    font-family:var(--font-body);
+    line-height:1.85;
+    word-break:break-word;
+    overflow-wrap:break-word;
+    overflow-x:hidden;
+    font-size:16px;
+    background-image:
+      radial-gradient(circle, rgba(36,26,18,0.05) 1px, transparent 1.4px);
+    background-size:16px 16px;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  section{position:relative;}
+
+  h1,h2,h3,h4{
+    font-family:var(--font-heading);
+    line-height:1.55;
+    font-weight:400;
+    letter-spacing:normal;
+  }
+  html:lang(en) h1, html:lang(en) h2, html:lang(en) h3, html:lang(en) h4,
+  html:lang(en) .stencil, html:lang(en) .kicker, html:lang(en) .stamp, html:lang(en) .receipt-code{
+    letter-spacing:0.03em;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
+  .container{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
+
+  /* ---------- utility: torn paper & tape & pins ---------- */
+  .torn{ clip-path:var(--torn); }
+  .paper{
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 10px 24px -10px rgba(36,26,18,.35), 0 2px 0 rgba(36,26,18,.06);
+    position:relative;
+  }
+  .tape{
+    position:absolute;
+    width:64px;height:24px;
+    background:linear-gradient(135deg, rgba(217,164,65,.92), rgba(217,164,65,.68));
+    box-shadow:0 3px 5px rgba(0,0,0,.2);
+    border:1px solid rgba(255,255,255,.5);
+    z-index:3;
+  }
+  .tape.navy{background:linear-gradient(135deg, rgba(34,52,78,.9), rgba(34,52,78,.65));}
+  .pin{
+    position:absolute;
+    width:16px;height:16px;border-radius:50%;
+    background:radial-gradient(circle at 32% 30%, var(--background), var(--primary) 55%, var(--foreground) 100%);
+    box-shadow:0 2px 4px rgba(0,0,0,.45);
+    z-index:4;
+  }
+  .rot1{transform:rotate(-2.2deg);}
+  .rot2{transform:rotate(1.6deg);}
+  .rot3{transform:rotate(-1.1deg);}
+  .rot4{transform:rotate(2.4deg);}
+  .rot5{transform:rotate(-3deg);}
+  .rot6{transform:rotate(1.1deg);}
+
+  .kicker{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--accent);
+    color:var(--background);
+    font-family:var(--font-heading);
+    font-size:.78rem;
+    padding:.65em 1em;
+    border-radius:3px;
+    transform:rotate(-1.5deg);
+    box-shadow:0 4px 10px -4px rgba(0,0,0,.4);
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-family:var(--font-heading);
+    font-size:.95rem;
+    padding:.9em 1.6em;
+    border-radius:4px;
+    border:2px solid var(--foreground);
+    cursor:pointer;
+    min-height:44px;
+    box-shadow:3px 4px 0 var(--foreground);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:5px 6px 0 var(--foreground);}
+  .btn:active{transform:translate(0,0);box-shadow:1px 1px 0 var(--foreground);}
+  .btn-primary{background:var(--primary);color:var(--background);}
+  .btn-secondary{background:var(--secondary);color:var(--foreground);}
+  .btn-outline{background:transparent;color:var(--background);border-color:var(--background);box-shadow:3px 4px 0 rgba(241,237,227,.5);}
+  .btn-outline:hover{box-shadow:5px 6px 0 rgba(241,237,227,.5);}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease-out, transform .6s ease-out;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--background);
+    border-bottom:3px dashed var(--primary);
+    padding:.9rem 0;
+    transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
+  }
+  header.nav.scrolled{
+    padding:.55rem 0;
+    background:var(--card);
+    box-shadow:0 6px 16px -8px rgba(36,26,18,.35);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .brand{display:flex;flex-direction:column;line-height:1;transform:rotate(-1.5deg);}
+  .brand .b1{font-family:var(--font-heading);color:var(--primary);font-size:1.5rem;}
+  .brand .b2{font-family:var(--font-heading);color:var(--accent);font-size:.7rem;margin-top:.15rem;}
+  .nav-links{display:none;align-items:center;gap:1.6rem;}
+  .nav-links a{font-size:.95rem;padding:.5rem .1rem;border-bottom:2px solid transparent;transition:border-color .25s, color .25s;}
+  .nav-links a:hover{border-color:var(--primary);color:var(--primary);}
+  .nav-right{display:flex;align-items:center;gap:1rem;}
+  .lang-sw{display:flex;align-items:center;gap:.3rem;font-size:.78em;color:var(--accent);padding:.4rem;border-radius:3px;}
+  .lang-sw svg{stroke:var(--accent);}
+  .hamburger{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--primary);color:var(--background);border-radius:4px;border:none;cursor:pointer;}
+  .nav-cta{display:none;}
+
+  .mobile-menu{
+    position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;height:100vh;
+    background:var(--card);
+    border-left:3px dashed var(--primary);
+    transform:translateX(100%);
+    transition:transform .35s ease;
+    z-index:60;
+    padding:5.5rem 1.75rem 2rem;
+    overflow-y:auto;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{display:block;font-family:var(--font-heading);font-size:1.15rem;padding:.9rem 0;border-bottom:1px solid var(--border);}
+  .menu-backdrop{position:fixed;inset:0;background:rgba(36,26,18,.5);opacity:0;visibility:hidden;transition:opacity .3s ease;z-index:55;}
+  .menu-backdrop.open{opacity:1;visibility:visible;}
+  .close-menu{position:absolute;top:1.4rem;right:1.4rem;width:40px;height:40px;background:var(--primary);color:var(--background);border-radius:4px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--primary);
+    padding:3.5rem 0 6rem;
+    position:relative;
+    overflow:visible;
+    background-image:
+      radial-gradient(circle, rgba(36,26,18,.16) 1.6px, transparent 1.8px);
+    background-size:22px 22px;
+  }
+  .hero-inner{display:flex;flex-direction:column;gap:2.5rem;}
+  .hero-text{color:var(--background);}
+  .hero-text h1{font-size:2.1rem;margin:1rem 0 1rem;color:var(--background);text-shadow:2px 2px 0 rgba(36,26,18,.35);}
+  .hero-text p{font-size:1.02rem;color:rgba(241,237,227,.9);max-width:34rem;margin-bottom:1.6rem;}
+  .hero-ctas{display:flex;flex-direction:column;gap:.9rem;}
+  .hero-media{position:relative;display:flex;justify-content:center;padding:1rem 0 2rem;}
+  .hero-photo-wrap{position:relative;width:260px;}
+  .hero-photo{width:100%;height:330px;object-fit:cover;}
+  .hero-chip{
+    position:absolute;bottom:-30px;left:-30px;
+    width:120px;
+    background:var(--card);
+    padding:.4rem;
+    box-shadow:0 8px 18px -8px rgba(0,0,0,.5);
+  }
+  .hero-chip img{height:110px;width:100%;object-fit:cover;}
+
+  /* stats strip */
+  .stats-wrap{margin-top:-3rem;position:relative;z-index:5;}
+  .stats-strip{
+    background:var(--card);
+    border:1px dashed var(--primary);
+    display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;
+    padding:1.6rem 1.4rem;
+  }
+  .stats-strip .stat{text-align:center;}
+  .stats-strip .num{font-family:var(--font-heading);font-size:1.6rem;color:var(--primary);}
+  .stats-strip .lab{font-size:.78rem;color:var(--muted);margin-top:.2rem;}
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec-head{margin-bottom:2.2rem;}
+  .sec-head h2{font-size:1.85rem;color:var(--primary);margin-top:.6rem;padding-top:.2rem;}
+  .sec-head .lead{color:var(--muted);margin-top:.6rem;max-width:36rem;}
+  .section{padding:4rem 0;}
+  .section.tint{background:var(--bg-accent);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:flex;flex-direction:column;gap:2.4rem;}
+  .about-photo-wrap{position:relative;max-width:340px;margin:0 auto;}
+  .about-photo{width:100%;height:380px;object-fit:cover;}
+  .about-chip{position:absolute;top:-24px;right:-18px;width:100px;background:var(--card);padding:.35rem;box-shadow:0 8px 16px -8px rgba(0,0,0,.5);}
+  .about-chip img{height:90px;width:100%;object-fit:cover;}
+  .about-copy p{margin-bottom:1.2rem;color:var(--foreground);}
+  .badge-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem;}
+  .badge{
+    background:var(--card);border:1px solid var(--border);
+    padding:.6em 1em;font-size:.85rem;
+    box-shadow:2px 3px 0 var(--border);
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .badge svg{color:var(--primary);flex-shrink:0;}
+
+  /* ---------- RECEIPT / SERVICES ---------- */
+  .receipt-wrap{display:flex;justify-content:center;}
+  .receipt{
+    background:var(--card);
+    max-width:480px;width:100%;
+    padding:2.2rem 1.6rem 2rem;
+    box-shadow:0 16px 32px -14px rgba(36,26,18,.4);
+    position:relative;
+  }
+  .receipt-head{text-align:center;border-bottom:2px dashed var(--border);padding-bottom:1.1rem;margin-bottom:1.1rem;}
+  .receipt-head .brandline{font-family:var(--font-heading);color:var(--primary);font-size:1.15rem;}
+  .receipt-head .subline{font-size:.8rem;color:var(--muted);margin-top:.4rem;}
+  .r-item{padding:.85rem 0;border-bottom:1px dashed var(--border);display:flex;gap:.8rem;}
+  .r-item:last-of-type{border-bottom:none;}
+  .r-code{
+    font-family:var(--font-heading);color:var(--background);background:var(--primary);
+    font-size:.72rem;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+    border-radius:3px;flex-shrink:0;
+  }
+  .r-title{font-weight:600;font-size:.95rem;}
+  .r-desc{font-size:.82rem;color:var(--muted);margin-top:.25rem;}
+  .r-total{
+    margin-top:1.1rem;padding-top:1rem;border-top:2px dashed var(--border);
+    display:flex;justify-content:space-between;align-items:center;gap:.6rem;
+  }
+  .r-total .tot-label{font-family:var(--font-heading);color:var(--accent);font-size:.95rem;}
+  .r-total .tot-val{font-family:var(--font-heading);color:var(--primary);font-size:.95rem;text-align:right;}
+  .receipt-foot{text-align:center;margin-top:1.2rem;font-size:.78rem;color:var(--muted);}
+  .receipt-tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-2deg);}
+
+  /* ---------- PROCESS ---------- */
+  .process-list{display:flex;flex-direction:column;gap:1.6rem;position:relative;}
+  .ticket{
+    background:var(--card);border:1px solid var(--border);
+    display:flex;align-items:flex-start;gap:1rem;
+    padding:1.3rem 1.3rem 1.3rem 0;
+    box-shadow:0 8px 18px -10px rgba(36,26,18,.35);
+    position:relative;
+  }
+  .ticket-num{
+    font-family:var(--font-heading);
+    background:var(--primary);color:var(--background);
+    width:56px;min-height:56px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;
+    margin-left:-1px;
+    border-right:2px dashed rgba(241,237,227,.5);
+  }
+  .ticket-body h4{font-size:1.02rem;color:var(--accent);margin-bottom:.35rem;padding-top:.1rem;}
+  .ticket-body p{font-size:.85rem;color:var(--muted);}
+
+  /* ---------- GALLERY ---------- */
+  .board{
+    position:relative;
+    background-image:radial-gradient(circle, rgba(36,26,18,.14) 1.5px, transparent 1.7px);
+    background-size:20px 20px;
+    padding:1.5rem 0 3rem;
+  }
+  .gallery-grid{display:grid;grid-template-columns:1fr;gap:2.6rem;padding:0 .5rem;}
+  .g-card{position:relative;background:var(--card);padding:.6rem;box-shadow:0 12px 26px -12px rgba(36,26,18,.45);}
+  .g-card img{width:100%;height:220px;object-fit:cover;}
+  .g-cap{font-size:.78rem;color:var(--muted);text-align:center;padding-top:.5rem;}
+
+  /* ---------- WHY US ---------- */
+  .why-grid{display:grid;grid-template-columns:1fr;gap:1.3rem;}
+  .why-card{
+    background:var(--card);border:1px solid var(--border);
+    padding:1.5rem 1.3rem;
+    display:flex;gap:1rem;align-items:flex-start;
+    box-shadow:3px 5px 0 var(--border);
+  }
+  .why-icon{
+    width:46px;height:46px;flex-shrink:0;border-radius:50%;
+    background:var(--accent);color:var(--background);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .why-card h4{font-size:1rem;color:var(--foreground);margin-bottom:.35rem;padding-top:.1rem;}
+  .why-card p{font-size:.85rem;color:var(--muted);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .notes-grid{display:flex;flex-direction:column;gap:2.2rem;}
+  .note{
+    background:var(--secondary);
+    padding:1.6rem 1.4rem;
+    position:relative;
+    box-shadow:0 10px 22px -12px rgba(36,26,18,.5);
+    color:var(--foreground);
+  }
+  .note::before{
+    content:"";position:absolute;top:14px;left:14px;right:14px;bottom:14px;
+    border:1px dashed rgba(36,26,18,.35);pointer-events:none;
+  }
+  .note p.quote{font-size:.92rem;margin-bottom:1rem;position:relative;z-index:1;}
+  .note-person{display:flex;align-items:center;gap:.7rem;}
+  .note-person img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--card);}
+  .note-person .nm{font-family:var(--font-heading);font-size:.85rem;color:var(--accent);}
+  .note-person .loc{font-size:.75rem;color:var(--muted);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-sec{background:var(--primary);padding:4rem 0;color:var(--background);}
+  .contact-grid{display:flex;flex-direction:column;gap:2.2rem;}
+  .contact-sec .sec-head h2{color:var(--background);}
+  .contact-sec .sec-head .lead{color:rgba(241,237,227,.85);}
+  .contact-card{
+    background:var(--card);color:var(--foreground);
+    padding:1.8rem 1.5rem;
+    box-shadow:0 14px 30px -14px rgba(0,0,0,.5);
+  }
+  .c-row{display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 0;border-bottom:1px dashed var(--border);}
+  .c-row:last-child{border-bottom:none;}
+  .c-row svg{color:var(--primary);flex-shrink:0;margin-top:.2rem;}
+  .c-row .c-label{font-size:.75rem;color:var(--muted);}
+  .c-row .c-val{font-size:.95rem;font-weight:600;}
+  .contact-photo-wrap{position:relative;max-width:320px;margin:0 auto;}
+  .contact-photo-wrap img{width:100%;height:220px;object-fit:cover;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--accent);color:var(--background);padding:3rem 0 1.6rem;}
+  .foot-grid{display:flex;flex-direction:column;gap:2rem;}
+  .foot-brand .b1{font-family:var(--font-heading);color:var(--secondary);font-size:1.5rem;}
+  .foot-brand p{color:rgba(241,237,227,.75);font-size:.85rem;margin-top:.6rem;max-width:26rem;}
+  .foot-links h5{font-family:var(--font-heading);font-size:.9rem;color:var(--secondary);margin-bottom:.7rem;padding-top:.1rem;}
+  .foot-links a{display:block;font-size:.85rem;color:rgba(241,237,227,.85);padding:.4rem 0;}
+  .foot-social{display:flex;gap:.7rem;margin-top:.8rem;}
+  .foot-social a{width:38px;height:38px;border-radius:50%;background:rgba(241,237,227,.12);display:flex;align-items:center;justify-content:center;}
+  .foot-bottom{border-top:1px solid rgba(241,237,227,.2);margin-top:2rem;padding-top:1.4rem;text-align:center;font-size:.78rem;color:rgba(241,237,227,.7);}
+
+  /* ================= DESKTOP ================= */
+  @media (min-width:768px){
+    .nav-links{display:flex;}
+    .hamburger{display:none;}
+    .nav-cta{display:inline-flex;}
+    .hero-inner{flex-direction:row;align-items:center;justify-content:space-between;}
+    .hero-text{flex:1;max-width:560px;}
+    .hero-text h1{font-size:2.9rem;}
+    .hero-media{flex:1;}
+    .hero-photo-wrap{width:340px;}
+    .hero-photo{height:420px;}
+    .hero-ctas{flex-direction:row;}
+    .stats-strip{grid-template-columns:repeat(4,1fr);}
+    .about-grid{flex-direction:row;align-items:center;gap:3.5rem;}
+    .about-photo-wrap{flex:0 0 340px;}
+    .about-copy{flex:1;}
+    .gallery-grid{grid-template-columns:repeat(3,1fr);gap:3rem 2rem;}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .notes-grid{flex-direction:row;}
+    .note{flex:1;}
+    .contact-grid{flex-direction:row;align-items:center;gap:3rem;}
+    .contact-card{flex:1;}
+    .contact-photo-wrap{flex:0 0 320px;}
+    .foot-grid{flex-direction:row;justify-content:space-between;align-items:flex-start;}
+    .sec-head h2{font-size:2.2rem;}
+  }
+  @media (min-width:1024px){
+    .hero-text h1{font-size:3.4rem;}
+    .gallery-grid{gap:3.5rem 2.4rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="b1">แก่นนคร</span>
+      <span class="b2">การช่าง</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
+      <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+      <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Our Work">ผลงาน</a>
+      <a href="#process" data-lang-th="ขั้นตอน" data-lang-en="Process">ขั้นตอน</a>
+      <a href="#reviews" data-lang-th="รีวิว" data-lang-en="Reviews">รีวิว</a>
+      <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-sw" aria-label="switch language">
+        <i data-lucide="globe" width="14" height="14"></i>
+        <span class="lang-sw__label">TH</span>
+      </div>
+      <a href="#contact" class="btn btn-primary nav-cta" data-lang-th="ขอใบเสนอราคา" data-lang-en="Get a Quote">ขอใบเสนอราคา</a>
+      <button class="hamburger" id="openMenu" aria-label="menu"><i data-lucide="menu"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-backdrop" id="backdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="close"><i data-lucide="x"></i></button>
+  <a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
+  <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+  <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Our Work">ผลงาน</a>
+  <a href="#process" data-lang-th="ขั้นตอน" data-lang-en="Process">ขั้นตอน</a>
+  <a href="#reviews" data-lang-th="รีวิว" data-lang-en="Reviews">รีวิว</a>
+  <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+  <a href="#contact" class="btn btn-primary" style="margin-top:1.2rem;width:100%;" data-lang-th="ขอใบเสนอราคา" data-lang-en="Get a Quote">ขอใบเสนอราคา</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <span class="kicker stencil" data-lang-th="รับเหมาช่างครบวงจร ขอนแก่น" data-lang-en="Full-Service Trade Contractor — Khon Kaen">รับเหมาช่างครบวงจร ขอนแก่น</span>
+        <h1 class="stencil" data-lang-th="ซ่อม ต่อ สร้าง งานช่างที่วางใจได้" data-lang-en="Repair. Extend. Build. Trade work you can trust.">ซ่อม ต่อ สร้าง งานช่างที่วางใจได้</h1>
+        <p data-lang-th="ทีมช่างมือโปรพร้อมเครื่องมือครบ รับงานต่อเติม ซ่อมแซม ทาสี ปูกระเบื้อง ไฟฟ้า-ประปา ทุกจุดของบ้านคุณ ประเมินราคาหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง" data-lang-en="A crew of skilled tradesmen with a full set of tools — extensions, repairs, painting, tiling, plumbing and electrical, every corner of your home covered. Free on-site quote, no hidden costs.">ทีมช่างมือโปรพร้อมเครื่องมือครบ รับงานต่อเติม ซ่อมแซม ทาสี ปูกระเบื้อง ไฟฟ้า-ประปา ทุกจุดของบ้านคุณ ประเมินราคาหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-secondary" data-lang-th="ขอใบเสนอราคาฟรี" data-lang-en="Get a Free Quote">ขอใบเสนอราคาฟรี</a>
+          <a href="#gallery" class="btn btn-outline" data-lang-th="ดูผลงานของเรา" data-lang-en="See Our Work">ดูผลงานของเรา</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-photo-wrap torn rot2 paper">
+          <div class="tape rot4" style="top:-12px;left:calc(50% - 32px);"></div>
+          <img class="hero-photo" src="https://images.unsplash.com/photo-1647513690842-e15bc73ac7b2?w=640&h=800&fit=crop" alt="ช่างกำลังทำงานบนโครงสร้างไม้">
+          <div class="hero-chip torn rot4">
+            <img src="https://images.unsplash.com/photo-1623927576966-9fbc0d3cdda6?w=380&h=380&fit=crop" alt="ค้อนของช่าง">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap stats-wrap reveal">
+      <div class="stats-strip rot1 torn">
+        <div class="stat">
+          <div class="num">12+</div>
+          <div class="lab" data-lang-th="ปีในสายงานช่าง" data-lang-en="years in the trade">ปีในสายงานช่าง</div>
+        </div>
+        <div class="stat">
+          <div class="num">480+</div>
+          <div class="lab" data-lang-th="งานที่ส่งมอบแล้ว" data-lang-en="jobs delivered">งานที่ส่งมอบแล้ว</div>
+        </div>
+        <div class="stat">
+          <div class="num">15</div>
+          <div class="lab" data-lang-th="ช่างในทีม" data-lang-en="crew members">ช่างในทีม</div>
+        </div>
+        <div class="stat">
+          <div class="num">1 <span data-lang-th="ปี" data-lang-en="yr">ปี</span></div>
+          <div class="lab" data-lang-th="รับประกันงาน" data-lang-en="workmanship guarantee">รับประกันงาน</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="rot3 torn paper" style="overflow:visible;">
+          <div class="tape navy rot2" style="top:-12px;right:20px;"></div>
+          <img class="about-photo" src="https://images.unsplash.com/photo-1598226863630-2826f1d31532?w=520&h=680&fit=crop" alt="ช่างในทีมแก่นนคร การช่าง">
+        </div>
+        <div class="about-chip torn rot5">
+          <img src="https://images.unsplash.com/photo-1569783899817-a49d2d25287c?w=320&h=320&fit=crop" alt="ประแจของช่าง">
+        </div>
+      </div>
+      <div class="about-copy reveal">
+        <span class="kicker stencil rot2" data-lang-th="เรื่องของเรา" data-lang-en="Our Story">เรื่องของเรา</span>
+        <h2 class="stencil" data-lang-th="จากแรงงานสองมือ สู่ทีมช่างที่ไว้ใจได้" data-lang-en="From two hands to a crew you can trust">จากแรงงานสองมือ สู่ทีมช่างที่ไว้ใจได้</h2>
+        <p data-lang-th="แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิดในขอนแก่น ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก" data-lang-en="Kaen Nakhon Karnchang began with a father's generation of carpenters fixing houses around their hometown in Khon Kaen, building trust job by job through honest work and word of mouth.">แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิดในขอนแก่น ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก</p>
+        <p data-lang-th="วันนี้เราเติบโตเป็นทีมช่างครบวงจร ตั้งแต่โครงสร้าง ไฟฟ้า ประปา สี ไปจนถึงกระเบื้อง แต่ยังยึดหลักเดิม คือ ทำงานทุกบ้านเหมือนซ่อมบ้านตัวเอง" data-lang-en="Today we've grown into a full-service crew covering structure, electrical, plumbing, paint and tile — but we still work every house like it's our own.">วันนี้เราเติบโตเป็นทีมช่างครบวงจร ตั้งแต่โครงสร้าง ไฟฟ้า ประปา สี ไปจนถึงกระเบื้อง แต่ยังยึดหลักเดิม คือ ทำงานทุกบ้านเหมือนซ่อมบ้านตัวเอง</p>
+        <div class="badge-row">
+          <span class="badge rot1"><i data-lucide="shield-check" width="18" height="18"></i><span data-lang-th="ซื่อตรงโปร่งใส" data-lang-en="Honest & transparent">ซื่อตรงโปร่งใส</span></span>
+          <span class="badge rot2"><i data-lucide="ruler" width="18" height="18"></i><span data-lang-th="งานเนี้ยบตรงเวลา" data-lang-en="Neat & on schedule">งานเนี้ยบตรงเวลา</span></span>
+          <span class="badge rot3"><i data-lucide="check-circle" width="18" height="18"></i><span data-lang-th="รับประกันหลังส่งมอบ" data-lang-en="Warrantied after handover">รับประกันหลังส่งมอบ</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / RECEIPT -->
+  <section class="section tint" id="services">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;">
+        <span class="kicker stencil rot3" data-lang-th="บริการของเรา" data-lang-en="Our Services">บริการของเรา</span>
+        <h2 class="stencil" data-lang-th="ใบรายการงานช่าง" data-lang-en="The Job Sheet">ใบรายการงานช่าง</h2>
+        <p class="lead" style="margin-left:auto;margin-right:auto;" data-lang-th="เลือกงานที่บ้านคุณต้องการ เราสรุปให้เหมือนใบเสร็จ อ่านง่าย ไม่มีตัวเล็กซ่อนอยู่" data-lang-en="Pick what your home needs — laid out like a receipt, easy to read, nothing hidden in the fine print.">เลือกงานที่บ้านคุณต้องการ เราสรุปให้เหมือนใบเสร็จ อ่านง่าย ไม่มีตัวเล็กซ่อนอยู่</p>
+      </div>
+
+      <div class="receipt-wrap reveal">
+        <div class="receipt rot1 torn">
+          <div class="tape receipt-tape"></div>
+          <div class="receipt-head">
+            <div class="brandline">แก่นนคร การช่าง</div>
+            <div class="subline" data-lang-th="ใบรายการบริการ — บ้านทุกชนิด" data-lang-en="SERVICE RECEIPT — All Home Types">ใบรายการบริการ — บ้านทุกชนิด</div>
+          </div>
+
+          <div class="r-item">
+            <div class="r-code">01</div>
+            <div>
+              <div class="r-title" data-lang-th="ต่อเติมบ้าน ครัว ห้องน้ำ" data-lang-en="Home Extension, Kitchen & Bath">ต่อเติมบ้าน ครัว ห้องน้ำ</div>
+              <div class="r-desc" data-lang-th="ต่อเติมพื้นที่ใช้สอย ครัวไทย ห้องน้ำใหม่" data-lang-en="Extra living space, Thai kitchens, new bathrooms">ต่อเติมพื้นที่ใช้สอย ครัวไทย ห้องน้ำใหม่</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">02</div>
+            <div>
+              <div class="r-title" data-lang-th="ซ่อม-เปลี่ยนหลังคา กันรั่ว" data-lang-en="Roof Repair & Waterproofing">ซ่อม-เปลี่ยนหลังคา กันรั่ว</div>
+              <div class="r-desc" data-lang-th="แก้ปัญหารั่วซึม เปลี่ยนกระเบื้องหลังคา" data-lang-en="Leak diagnosis, re-roofing & sealing">แก้ปัญหารั่วซึม เปลี่ยนกระเบื้องหลังคา</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">03</div>
+            <div>
+              <div class="r-title" data-lang-th="ทาสีภายใน-ภายนอก ฝ้า-ผนัง" data-lang-en="Interior & Exterior Painting">ทาสีภายใน-ภายนอก ฝ้า-ผนัง</div>
+              <div class="r-desc" data-lang-th="เลือกสีให้เหมาะกับแดดและสไตล์บ้าน" data-lang-en="Color advice suited to your home & sun exposure">เลือกสีให้เหมาะกับแดดและสไตล์บ้าน</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">04</div>
+            <div>
+              <div class="r-title" data-lang-th="ปูกระเบื้อง พื้น-ผนัง แกรนิตโต้" data-lang-en="Tiling — Floor, Wall & Granite">ปูกระเบื้อง พื้น-ผนัง แกรนิตโต้</div>
+              <div class="r-desc" data-lang-th="งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน" data-lang-en="Clean lines, tidy grouting, no loose tiles">งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">05</div>
+            <div>
+              <div class="r-title" data-lang-th="ไฟฟ้า-ประปา เดินสาย เปลี่ยนท่อ" data-lang-en="Electrical & Plumbing">ไฟฟ้า-ประปา เดินสาย เปลี่ยนท่อ</div>
+              <div class="r-desc" data-lang-th="เดินสายไฟใหม่ เปลี่ยนท่อประปาเก่า" data-lang-en="Rewiring & repiping, safe and up to code">เดินสายไฟใหม่ เปลี่ยนท่อประปาเก่า</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">06</div>
+            <div>
+              <div class="r-title" data-lang-th="โครงสร้างเหล็ก-ไม้ กันสาด โรงรถ" data-lang-en="Steel & Wood Structures">โครงสร้างเหล็ก-ไม้ กันสาด โรงรถ</div>
+              <div class="r-desc" data-lang-th="ต่อกันสาด สร้างโรงจอดรถ โครงหลังคา" data-lang-en="Awnings, carports, roof framing">ต่อกันสาด สร้างโรงจอดรถ โครงหลังคา</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">07</div>
+            <div>
+              <div class="r-title" data-lang-th="รื้อถอน ทำความสะอาดหน้างาน" data-lang-en="Demolition & Site Cleanup">รื้อถอน ทำความสะอาดหน้างาน</div>
+              <div class="r-desc" data-lang-th="รื้อของเก่า เคลียร์หน้างานให้เรียบร้อย" data-lang-en="Clear out old structures, tidy site before we leave">รื้อของเก่า เคลียร์หน้างานให้เรียบร้อย</div>
+            </div>
+          </div>
+
+          <div class="r-total">
+            <span class="tot-label stencil" data-lang-th="ประเมินหน้างาน" data-lang-en="ON-SITE ESTIMATE">ประเมินหน้างาน</span>
+            <span class="tot-val stencil" data-lang-th="ไม่คิดค่าใช้จ่าย" data-lang-en="FREE OF CHARGE">ไม่คิดค่าใช้จ่าย</span>
+          </div>
+          <div class="receipt-foot" data-lang-th="ขอบคุณที่ไว้วางใจ แก่นนคร การช่าง" data-lang-en="Thank you for trusting Kaen Nakhon Karnchang">ขอบคุณที่ไว้วางใจ แก่นนคร การช่าง</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker stencil rot1" data-lang-th="ทำงานยังไง" data-lang-en="How It Works">ทำงานยังไง</span>
+        <h2 class="stencil" data-lang-th="ขั้นตอนทำงาน" data-lang-en="Our Process">ขั้นตอนทำงาน</h2>
+        <p class="lead" data-lang-th="ตั้งแต่โทรมาจนงานเสร็จ เรามีสี่ขั้นตอนง่าย ๆ ที่ชัดเจน" data-lang-en="From your first call to the finished job — four clear, simple steps.">ตั้งแต่โทรมาจนงานเสร็จ เรามีสี่ขั้นตอนง่าย ๆ ที่ชัดเจน</p>
+      </div>
+      <div class="process-list">
+        <div class="ticket rot1 reveal">
+          <div class="ticket-num">1</div>
+          <div class="ticket-body">
+            <h4 data-lang-th="ติดต่อสอบถาม" data-lang-en="Contact Us">ติดต่อสอบถาม</h4>
+            <p data-lang-th="โทรหรือแชทบอกปัญหาหรือสิ่งที่อยากทำที่บ้าน" data-lang-en="Call or chat with us and tell us what your home needs.">โทรหรือแชทบอกปัญหาหรือสิ่งที่อยากทำที่บ้าน</p>
+          </div>
+        </div>
+        <div class="ticket rot2 reveal">
+          <div class="ticket-num">2</div>
+          <div class="ticket-body">
+            <h4 data-lang-th="ประเมินหน้างาน" data-lang-en="Site Survey">ประเมินหน้างาน</h4>
+            <p data-lang-th="ช่างลงพื้นที่ดูจริง วัดจริง ไม่กะเอาจากรูปถ่าย" data-lang-en="Our crew visits, measures and inspects — no guessing from photos.">ช่างลงพื้นที่ดูจริง วัดจริง ไม่กะเอาจากรูปถ่าย</p>
+          </div>
+        </div>
+        <div class="ticket rot3 reveal">
+          <div class="ticket-num">3</div>
+          <div class="ticket-body">
+            <h4 data-lang-th="เสนอราคา วางแผนงาน" data-lang-en="Quote & Plan">เสนอราคา วางแผนงาน</h4>
+            <p data-lang-th="ใบเสนอราคาชัดเจน ไม่มีบวกเพิ่มทีหลัง" data-lang-en="Clear written quote with a plan — no surprise add-ons later.">ใบเสนอราคาชัดเจน ไม่มีบวกเพิ่มทีหลัง</p>
+          </div>
+        </div>
+        <div class="ticket rot4 reveal">
+          <div class="ticket-num">4</div>
+          <div class="ticket-body">
+            <h4 data-lang-th="เริ่มงาน ส่งมอบ รับประกัน" data-lang-en="Build & Deliver">เริ่มงาน ส่งมอบ รับประกัน</h4>
+            <p data-lang-th="ลงมือทำ เก็บงานเนี้ยบ พร้อมรับประกันหลังส่งมอบ" data-lang-en="We build, clean up thoroughly, and warranty the finished work.">ลงมือทำ เก็บงานเนี้ยบ พร้อมรับประกันหลังส่งมอบ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section tint board" id="gallery">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;">
+        <span class="kicker stencil rot4" data-lang-th="บอร์ดผลงาน" data-lang-en="The Job Board">บอร์ดผลงาน</span>
+        <h2 class="stencil" data-lang-th="ผลงานหน้างานจริง" data-lang-en="Real Jobs, Real Sites">ผลงานหน้างานจริง</h2>
+        <p class="lead" style="margin-left:auto;margin-right:auto;" data-lang-th="ภาพงานจริงที่ทีมเราลงมือทำในขอนแก่นและพื้นที่ใกล้เคียง" data-lang-en="Real project photos from our crew's work around Khon Kaen and nearby.">ภาพงานจริงที่ทีมเราลงมือทำในขอนแก่นและพื้นที่ใกล้เคียง</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="g-card rot1 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1736182615481-3795ea557614?w=460&h=340&fit=crop" alt="ห้องที่กำลังต่อเติมผนังสีแดง">
+          <div class="g-cap" data-lang-th="งานต่อเติมห้อง" data-lang-en="Room extension">งานต่อเติมห้อง</div>
+        </div>
+        <div class="g-card rot2 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1606383446056-eb3fc3cde97b?w=460&h=340&fit=crop" alt="อาคารคอนกรีตสีขาวน้ำตาล">
+          <div class="g-cap" data-lang-th="งานโครงสร้างอาคาร" data-lang-en="Structural build">งานโครงสร้างอาคาร</div>
+        </div>
+        <div class="g-card rot3 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1635424709961-f3a150459ad4?w=460&h=340&fit=crop" alt="ช่างสองคนซ่อมหลังคา">
+          <div class="g-cap" data-lang-th="งานซ่อมหลังคา" data-lang-en="Roof repair">งานซ่อมหลังคา</div>
+        </div>
+        <div class="g-card rot4 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1511822148790-e7b58ba14c72?w=460&h=340&fit=crop" alt="ช่างกำลังทาสีผนัง">
+          <div class="g-cap" data-lang-th="งานทาสีบ้าน" data-lang-en="House painting">งานทาสีบ้าน</div>
+        </div>
+        <div class="g-card rot5 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1641091059144-649f128d23ac?w=460&h=340&fit=crop" alt="โต๊ะเครื่องมือช่างเต็มโต๊ะ">
+          <div class="g-cap" data-lang-th="เครื่องมือประจำทีม" data-lang-en="Our tool kit">เครื่องมือประจำทีม</div>
+        </div>
+        <div class="g-card rot6 reveal">
+          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
+          <img class="torn" src="https://images.unsplash.com/photo-1783587616528-a37972228563?w=460&h=340&fit=crop" alt="ค้อนและสว่านวางบนขอบหน้าต่างซ่อม">
+          <div class="g-cap" data-lang-th="งานซ่อมแซมทั่วไป" data-lang-en="General repairs">งานซ่อมแซมทั่วไป</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section" id="whyus">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker stencil rot2" data-lang-th="ทำไมต้องเรา" data-lang-en="Why Choose Us">ทำไมต้องเรา</span>
+        <h2 class="stencil" data-lang-th="ทำไมต้องแก่นนคร การช่าง" data-lang-en="Why Kaen Nakhon Karnchang">ทำไมต้องแก่นนคร การช่าง</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon"><i data-lucide="hard-hat" width="22" height="22"></i></div>
+          <div>
+            <h4 data-lang-th="ทีมช่างประสบการณ์เกิน 10 ปี" data-lang-en="10+ years of hands-on crew experience">ทีมช่างประสบการณ์เกิน 10 ปี</h4>
+            <p data-lang-th="ช่างทุกคนผ่านงานจริงมานับร้อยหลัง แก้ปัญหาหน้างานได้ไว" data-lang-en="Every tradesman has worked hundreds of real homes and solves site issues fast.">ช่างทุกคนผ่านงานจริงมานับร้อยหลัง แก้ปัญหาหน้างานได้ไว</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon"><i data-lucide="layers" width="22" height="22"></i></div>
+          <div>
+            <h4 data-lang-th="วัสดุคุณภาพ เลือกได้ตามงบ" data-lang-en="Quality materials to fit your budget">วัสดุคุณภาพ เลือกได้ตามงบ</h4>
+            <p data-lang-th="แนะนำวัสดุที่คุ้มค่าที่สุดสำหรับงบและการใช้งานจริง" data-lang-en="We recommend the best-value materials for your budget and daily use.">แนะนำวัสดุที่คุ้มค่าที่สุดสำหรับงบและการใช้งานจริง</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon"><i data-lucide="receipt" width="22" height="22"></i></div>
+          <div>
+            <h4 data-lang-th="ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง" data-lang-en="Transparent pricing, no surprise add-ons">ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง</h4>
+            <p data-lang-th="ใบเสนอราคาชัดเจนตั้งแต่ต้น ราคาเดียวจนงานเสร็จ" data-lang-en="Clear quote from day one — the price we quote is the price you pay.">ใบเสนอราคาชัดเจนตั้งแต่ต้น ราคาเดียวจนงานเสร็จ</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon"><i data-lucide="shield-check" width="22" height="22"></i></div>
+          <div>
+            <h4 data-lang-th="รับประกันงานหลังส่งมอบ 1 ปี" data-lang-en="1-year post-handover warranty">รับประกันงานหลังส่งมอบ 1 ปี</h4>
+            <p data-lang-th="มีปัญหาหลังส่งงาน เราตามไปดูแลให้ ไม่ทิ้งลูกบ้าน" data-lang-en="Issues after handover? We follow up and fix them — we never disappear.">มีปัญหาหลังส่งงาน เราตามไปดูแลให้ ไม่ทิ้งลูกบ้าน</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section tint" id="reviews">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;">
+        <span class="kicker stencil rot5" data-lang-th="เสียงจากลูกบ้าน" data-lang-en="Notes From Customers">เสียงจากลูกบ้าน</span>
+        <h2 class="stencil" data-lang-th="เสียงจากลูกบ้านของเรา" data-lang-en="Notes From Our Customers">เสียงจากลูกบ้านของเรา</h2>
+      </div>
+      <div class="notes-grid">
+        <div class="note rot1 reveal">
+          <p class="quote" data-lang-th="“จ้างต่อเติมห้องครัวหลังบ้าน ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ราคาตรงตามที่คุยกันไว้เป๊ะ”" data-lang-en="“Hired them to extend our kitchen — showed up on time, work was neater than expected, and the price matched exactly what we agreed.”">“จ้างต่อเติมห้องครัวหลังบ้าน ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ราคาตรงตามที่คุยกันไว้เป๊ะ”</p>
+          <div class="note-person">
+            <img src="https://images.unsplash.com/photo-1683744319278-19d5b4309576?w=140&h=140&fit=crop" alt="คุณสมหญิง ลูกบ้าน">
+            <div>
+              <div class="nm">คุณสมหญิง</div>
+              <div class="loc" data-lang-th="บ้านสามเหลี่ยม" data-lang-en="Samliam, Khon Kaen">บ้านสามเหลี่ยม</div>
+            </div>
+          </div>
+        </div>
+        <div class="note rot2 reveal">
+          <p class="quote" data-lang-th="“หลังคารั่วมาสามปี ช่างมาดูวันเดียวจบ ซ่อมเสร็จไม่รั่วอีกเลย แถมทำความสะอาดให้ก่อนกลับ”" data-lang-en="“Our roof leaked for three years — they diagnosed it in one visit, fixed it for good, and even cleaned up before leaving.”">“หลังคารั่วมาสามปี ช่างมาดูวันเดียวจบ ซ่อมเสร็จไม่รั่วอีกเลย แถมทำความสะอาดให้ก่อนกลับ”</p>
+          <div class="note-person">
+            <img src="https://images.unsplash.com/photo-1598226863630-2826f1d31532?w=140&h=140&fit=crop" alt="คุณอนุชา ลูกบ้าน">
+            <div>
+              <div class="nm">คุณอนุชา</div>
+              <div class="loc" data-lang-th="เมืองเก่า" data-lang-en="Mueang Kao, Khon Kaen">เมืองเก่า</div>
+            </div>
+          </div>
+        </div>
+        <div class="note rot3 reveal">
+          <p class="quote" data-lang-th="“ทาสีบ้านทั้งหลัง ช่างแนะนำสีให้เหมาะกับแดดบ้านเรา งานเสร็จไวกว่ากำหนดด้วย”" data-lang-en="“Painted our whole house — they even advised on colors that suit our sun exposure, and finished ahead of schedule.”">“ทาสีบ้านทั้งหลัง ช่างแนะนำสีให้เหมาะกับแดดบ้านเรา งานเสร็จไวกว่ากำหนดด้วย”</p>
+          <div class="note-person">
+            <img src="https://images.unsplash.com/photo-1647513690842-e15bc73ac7b2?w=140&h=140&fit=crop" alt="คุณปิยะดา ลูกบ้าน">
+            <div>
+              <div class="nm">คุณปิยะดา</div>
+              <div class="loc" data-lang-th="ศิลา" data-lang-en="Sila, Khon Kaen">ศิลา</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-sec" id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;">
+        <span class="kicker stencil rot1" data-lang-th="ติดต่อเรา" data-lang-en="Get In Touch">ติดต่อเรา</span>
+        <h2 class="stencil" data-lang-th="ติดต่อแก่นนคร การช่าง" data-lang-en="Contact Kaen Nakhon Karnchang">ติดต่อแก่นนคร การช่าง</h2>
+        <p class="lead" style="margin-left:auto;margin-right:auto;" data-lang-th="ทักมาคุยงานได้ทุกวัน ทีมงานประเมินราคาให้ฟรี ไม่มีข้อผูกมัด" data-lang-en="Message us any day — we'll give you a free, no-obligation quote.">ทักมาคุยงานได้ทุกวัน ทีมงานประเมินราคาให้ฟรี ไม่มีข้อผูกมัด</p>
+      </div>
+      <div class="contact-grid reveal">
+        <div class="contact-card rot1">
+          <div class="c-row">
+            <i data-lucide="phone" width="20" height="20"></i>
+            <div>
+              <div class="c-label" data-lang-th="โทรศัพท์" data-lang-en="Phone">โทรศัพท์</div>
+              <div class="c-val">081-234-5678</div>
+            </div>
+          </div>
+          <div class="c-row">
+            <i data-lucide="message-circle" width="20" height="20"></i>
+            <div>
+              <div class="c-label">LINE</div>
+              <div class="c-val">@kaennakhon</div>
+            </div>
+          </div>
+          <div class="c-row">
+            <i data-lucide="map-pin" width="20" height="20"></i>
+            <div>
+              <div class="c-label" data-lang-th="ที่อยู่สำนักงาน" data-lang-en="Office Address">ที่อยู่สำนักงาน</div>
+              <div class="c-val" data-lang-th="ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น" data-lang-en="Mittraphap Rd, Nai Mueang, Khon Kaen">ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น</div>
+            </div>
+          </div>
+          <div class="c-row">
+            <i data-lucide="clock" width="20" height="20"></i>
+            <div>
+              <div class="c-label" data-lang-th="เวลาทำการ" data-lang-en="Working Hours">เวลาทำการ</div>
+              <div class="c-val" data-lang-th="จันทร์–เสาร์ 08:00–18:00 น." data-lang-en="Mon–Sat, 08:00–18:00">จันทร์–เสาร์ 08:00–18:00 น.</div>
+            </div>
+          </div>
+          <a href="tel:0812345678" class="btn btn-primary" style="width:100%;margin-top:1.2rem;" data-lang-th="โทรเลยตอนนี้" data-lang-en="Call Now">โทรเลยตอนนี้</a>
+        </div>
+        <div class="contact-photo-wrap">
+          <div class="rot4 torn paper" style="overflow:visible;">
+            <div class="tape rot2" style="top:-12px;left:calc(50% - 32px);"></div>
+            <img src="https://images.unsplash.com/photo-1725916631418-7c000895345f?w=420&h=300&fit=crop" alt="เครื่องมือช่างโบราณจัดวางบนโต๊ะ">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <div class="b1">แก่นนคร การช่าง</div>
+      <p data-lang-th="รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก" data-lang-en="Home extension and repair contractors serving Khon Kaen and nearby areas — a skilled crew built on honest, careful work.">รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก</p>
+      <div class="foot-social">
+        <a href="#" aria-label="Facebook"><i data-lucide="facebook" width="18" height="18"></i></a>
+        <a href="#" aria-label="Instagram"><i data-lucide="instagram" width="18" height="18"></i></a>
+        <a href="#" aria-label="Line"><i data-lucide="message-circle" width="18" height="18"></i></a>
+      </div>
+    </div>
+    <div class="foot-links">
+      <h5 data-lang-th="เมนู" data-lang-en="Menu">เมนู</h5>
+      <a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
+      <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+      <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Our Work">ผลงาน</a>
+      <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+    </div>
+    <div class="foot-links">
+      <h5 data-lang-th="ติดต่อด่วน" data-lang-en="Quick Contact">ติดต่อด่วน</h5>
+      <a href="tel:0812345678">081-234-5678</a>
+      <a href="#">LINE: @kaennakhon</a>
+      <a href="#" data-lang-th="ขอนแก่นและใกล้เคียง" data-lang-en="Khon Kaen & nearby">ขอนแก่นและใกล้เคียง</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span data-lang-th="© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์" data-lang-en="© 2026 Kaen Nakhon Karnchang. All rights reserved.">© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์</span>
+  </div>
+</footer>
+
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){if(/[<&]/.test(t)){e.innerHTML=t}else{e.textContent=t}}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+<script>
+  // navbar shrink on scroll
+  var nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  });
+
+  // mobile menu
+  var openBtn = document.getElementById('openMenu');
+  var closeBtn = document.getElementById('closeMenu');
+  var menu = document.getElementById('mobileMenu');
+  var backdrop = document.getElementById('backdrop');
+  function openMenu(){ menu.classList.add('open'); backdrop.classList.add('open'); }
+  function closeMenu(){ menu.classList.remove('open'); backdrop.classList.remove('open'); }
+  openBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  // scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in-view'); io.unobserve(en.target); }
+    });
+  }, {threshold:0.15});
+  reveals.forEach(function(el){ io.observe(el); });
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
