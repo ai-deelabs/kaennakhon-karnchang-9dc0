@@ -1,3 +1,8 @@
 meta.json
 .claude-*.log
 .omc/
+
+# Full-resolution source photos (~30 MB, kept locally only).
+# The site serves the derived assets/img/thumb/ and assets/img/web/ copies,
+# which ARE committed. Regenerate them from originals with sips if needed.
+assets/img/*.jpg

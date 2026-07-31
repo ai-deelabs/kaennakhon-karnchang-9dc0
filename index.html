@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แก่นนคร การช่าง — รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ขอนแก่น</title>
-<meta name="description" content="แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ทีมช่างมือโปร ประเมินราคาหน้างานฟรี รับประกันงานหลังส่งมอบ">
+<title>แก่นนคร การช่าง — รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด รับงานทั่วประเทศ</title>
+<meta name="description" content="แก่นนคร การช่าง รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด รับงานทุกจังหวัดทั่วประเทศ งานหลังคา ประปา ไฟฟ้า ปูกระเบื้อง ทาสี กันสาด รางน้ำ ทีมช่างมือโปร ประเมินราคาหน้างานฟรี">
+<meta name="keywords" content="รับซ่อมหลังคาทุกชนิด, รับตรวจเช็คน้ำรั่วไม่ทราบสาเหตุ, รับงานประปา, รับปูกระเบื้องทุกชนิด, รับเหมาต่อเติมทุกชนิด, รับทำโครงหลังคาทุกชนิด, เปลี่ยนแผ่นหลังคา, กันสาดทุกชนิด, งานฝ้าทุกชนิด, ระแนงทุกชนิด, เดินไฟภายในบ้าน, ซ่อมแซมงานบ้าน, ปรับระดับพื้นปูนเทปูน, ปูกระเบื้อง, งานซ่อมแซมทุกชนิด, รับติดตั้งสุขภัณฑ์ทุกชนิด, รับวางท่อระบบถังแซ็ก, รับงานทาสีทุกชนิด, รับงานท่อตันงูเหล็กทุกชนิด, รับงานต่อท่อ PVC PPR PE, รับงานปูนทุกชนิด, รับงานเหล็กทุกชนิด, รับงานรางน้ำฝนทุกชนิด, รับต่อเติมบ้าน, รับเหมาก่อสร้าง, รับสร้างบ้าน, รับงานหลังคา, โรงจอดรถ, ผนังเบา, แก้น้ำรั่ว">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -78,13 +79,6 @@
     z-index:3;
   }
   .tape.navy{background:linear-gradient(135deg, rgba(34,52,78,.9), rgba(34,52,78,.65));}
-  .pin{
-    position:absolute;
-    width:16px;height:16px;border-radius:50%;
-    background:radial-gradient(circle at 32% 30%, var(--background), var(--primary) 55%, var(--foreground) 100%);
-    box-shadow:0 2px 4px rgba(0,0,0,.45);
-    z-index:4;
-  }
   .rot1{transform:rotate(-2.2deg);}
   .rot2{transform:rotate(1.6deg);}
   .rot3{transform:rotate(-1.1deg);}
@@ -122,6 +116,8 @@
   .btn-secondary{background:var(--secondary);color:var(--foreground);}
   .btn-outline{background:transparent;color:var(--background);border-color:var(--background);box-shadow:3px 4px 0 rgba(241,237,227,.5);}
   .btn-outline:hover{box-shadow:5px 6px 0 rgba(241,237,227,.5);}
+  /* outline variant for light/tinted backgrounds */
+  .btn-outline-dark{background:var(--card);color:var(--foreground);border-color:var(--foreground);}
 
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease-out, transform .6s ease-out;}
   .reveal.in-view{opacity:1;transform:translateY(0);}
@@ -230,6 +226,14 @@
   }
   .badge svg{color:var(--primary);flex-shrink:0;}
 
+  .tag-strip{margin-top:2.6rem;text-align:center;}
+  .tag-strip-label{
+    display:inline-block;font-size:.8rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:1rem;
+  }
+  .tag-chips{justify-content:center;gap:.5rem;margin-top:0;}
+  .tag-chips .badge{font-size:.8rem;padding:.45em .85em;box-shadow:1px 2px 0 var(--border);}
+
   /* ---------- RECEIPT / SERVICES ---------- */
   .receipt-wrap{display:flex;justify-content:center;}
   .receipt{
@@ -238,6 +242,11 @@
     padding:2.2rem 1.6rem 2rem;
     box-shadow:0 16px 32px -14px rgba(36,26,18,.4);
     position:relative;
+  }
+  /* the receipt is very tall, so even a 2deg tilt pushes its bounding box
+     past a narrow viewport and causes sideways page scroll — sit it straight on mobile */
+  @media (max-width:767px){
+    .receipt.rot1{transform:none;}
   }
   .receipt-head{text-align:center;border-bottom:2px dashed var(--border);padding-bottom:1.1rem;margin-bottom:1.1rem;}
   .receipt-head .brandline{font-family:var(--font-heading);color:var(--primary);font-size:1.15rem;}
@@ -278,7 +287,7 @@
     margin-left:-1px;
     border-right:2px dashed rgba(241,237,227,.5);
   }
-  .ticket-body h4{font-size:1.02rem;color:var(--accent);margin-bottom:.35rem;padding-top:.1rem;}
+  .ticket-body h3{font-size:1.02rem;color:var(--accent);margin-bottom:.35rem;padding-top:.1rem;}
   .ticket-body p{font-size:.85rem;color:var(--muted);}
 
   /* ---------- GALLERY ---------- */
@@ -288,10 +297,47 @@
     background-size:20px 20px;
     padding:1.5rem 0 3rem;
   }
-  .gallery-grid{display:grid;grid-template-columns:1fr;gap:2.6rem;padding:0 .5rem;}
-  .g-card{position:relative;background:var(--card);padding:.6rem;box-shadow:0 12px 26px -12px rgba(36,26,18,.45);}
-  .g-card img{width:100%;height:220px;object-fit:cover;}
-  .g-cap{font-size:.78rem;color:var(--muted);text-align:center;padding-top:.5rem;}
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:1rem;padding:0 .5rem;
+  }
+  .g-card{
+    position:relative;background:var(--card);padding:.4rem;
+    box-shadow:0 8px 18px -10px rgba(36,26,18,.45);
+    border:none;cursor:pointer;font:inherit;text-align:inherit;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .g-card img{width:100%;height:130px;object-fit:cover;display:block;background:var(--border);}
+  .g-card:hover,.g-card:focus-visible{transform:translateY(-4px) rotate(0deg);box-shadow:0 16px 30px -12px rgba(36,26,18,.6);z-index:2;}
+  .g-card:focus-visible{outline:3px solid var(--accent);outline-offset:3px;}
+  .g-card.is-hidden{display:none;}
+  .gallery-more{display:flex;justify-content:center;margin-top:2.2rem;}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lb{
+    position:fixed;inset:0;z-index:200;display:none;
+    background:rgba(24,18,12,.94);
+    align-items:center;justify-content:center;
+  }
+  .lb.open{display:flex;}
+  .lb img{max-width:92vw;max-height:82vh;object-fit:contain;box-shadow:0 24px 60px -20px #000;}
+  .lb-count{
+    position:absolute;top:1.1rem;left:50%;transform:translateX(-50%);
+    color:#f3ede2;font-size:.85rem;letter-spacing:.08em;
+  }
+  .lb-btn{
+    position:absolute;background:rgba(243,237,226,.12);border:1px solid rgba(243,237,226,.35);
+    color:#f3ede2;width:46px;height:46px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background .15s ease;
+  }
+  .lb-btn:hover{background:rgba(243,237,226,.28);}
+  .lb-close{top:1rem;right:1rem;}
+  .lb-prev{left:1rem;top:50%;transform:translateY(-50%);}
+  .lb-next{right:1rem;top:50%;transform:translateY(-50%);}
+  @media (max-width:600px){
+    .lb-prev{left:.4rem;} .lb-next{right:.4rem;}
+    .lb-btn{width:40px;height:40px;}
+  }
 
   /* ---------- WHY US ---------- */
   .why-grid{display:grid;grid-template-columns:1fr;gap:1.3rem;}
@@ -306,7 +352,7 @@
     background:var(--accent);color:var(--background);
     display:flex;align-items:center;justify-content:center;
   }
-  .why-card h4{font-size:1rem;color:var(--foreground);margin-bottom:.35rem;padding-top:.1rem;}
+  .why-card h3{font-size:1rem;color:var(--foreground);margin-bottom:.35rem;padding-top:.1rem;}
   .why-card p{font-size:.85rem;color:var(--muted);}
 
   /* ---------- TESTIMONIALS ---------- */
@@ -343,6 +389,9 @@
   .c-row svg{color:var(--primary);flex-shrink:0;margin-top:.2rem;}
   .c-row .c-label{font-size:.75rem;color:var(--muted);}
   .c-row .c-val{font-size:.95rem;font-weight:600;}
+  .c-row .c-val a{color:inherit;text-decoration:none;border-bottom:1px solid var(--primary);}
+  .c-row .c-val a:hover{color:var(--primary);}
+  .c-row .c-sub{font-size:.78rem;color:var(--muted);margin-top:.15rem;}
   .contact-photo-wrap{position:relative;max-width:320px;margin:0 auto;}
   .contact-photo-wrap img{width:100%;height:220px;object-fit:cover;}
 
@@ -351,7 +400,7 @@
   .foot-grid{display:flex;flex-direction:column;gap:2rem;}
   .foot-brand .b1{font-family:var(--font-heading);color:var(--secondary);font-size:1.5rem;}
   .foot-brand p{color:rgba(241,237,227,.75);font-size:.85rem;margin-top:.6rem;max-width:26rem;}
-  .foot-links h5{font-family:var(--font-heading);font-size:.9rem;color:var(--secondary);margin-bottom:.7rem;padding-top:.1rem;}
+  .foot-links h2{font-family:var(--font-heading);font-size:.9rem;color:var(--secondary);margin-bottom:.7rem;padding-top:.1rem;}
   .foot-links a{display:block;font-size:.85rem;color:rgba(241,237,227,.85);padding:.4rem 0;}
   .foot-social{display:flex;gap:.7rem;margin-top:.8rem;}
   .foot-social a{width:38px;height:38px;border-radius:50%;background:rgba(241,237,227,.12);display:flex;align-items:center;justify-content:center;}
@@ -373,7 +422,7 @@
     .about-grid{flex-direction:row;align-items:center;gap:3.5rem;}
     .about-photo-wrap{flex:0 0 340px;}
     .about-copy{flex:1;}
-    .gallery-grid{grid-template-columns:repeat(3,1fr);gap:3rem 2rem;}
+    .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.2rem;}
     .why-grid{grid-template-columns:repeat(2,1fr);}
     .notes-grid{flex-direction:row;}
     .note{flex:1;}
@@ -385,7 +434,8 @@
   }
   @media (min-width:1024px){
     .hero-text h1{font-size:3.4rem;}
-    .gallery-grid{gap:3.5rem 2.4rem;}
+    .gallery-grid{gap:1.4rem;}
+    .g-card img{height:150px;}
   }
 </style>
 </head>
@@ -434,7 +484,7 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <span class="kicker stencil" data-lang-th="รับเหมาช่างครบวงจร ขอนแก่น" data-lang-en="Full-Service Trade Contractor — Khon Kaen">รับเหมาช่างครบวงจร ขอนแก่น</span>
+        <span class="kicker stencil" data-lang-th="รับเหมาช่างครบวงจร รับงานทั่วประเทศ" data-lang-en="Full-Service Trade Contractor — Nationwide">รับเหมาช่างครบวงจร รับงานทั่วประเทศ</span>
         <h1 class="stencil" data-lang-th="ซ่อม ต่อ สร้าง งานช่างที่วางใจได้" data-lang-en="Repair. Extend. Build. Trade work you can trust.">ซ่อม ต่อ สร้าง งานช่างที่วางใจได้</h1>
         <p data-lang-th="ทีมช่างมือโปรพร้อมเครื่องมือครบ รับงานต่อเติม ซ่อมแซม ทาสี ปูกระเบื้อง ไฟฟ้า-ประปา ทุกจุดของบ้านคุณ ประเมินราคาหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง" data-lang-en="A crew of skilled tradesmen with a full set of tools — extensions, repairs, painting, tiling, plumbing and electrical, every corner of your home covered. Free on-site quote, no hidden costs.">ทีมช่างมือโปรพร้อมเครื่องมือครบ รับงานต่อเติม ซ่อมแซม ทาสี ปูกระเบื้อง ไฟฟ้า-ประปา ทุกจุดของบ้านคุณ ประเมินราคาหน้างานฟรี ไม่มีค่าใช้จ่ายแอบแฝง</p>
         <div class="hero-ctas">
@@ -445,9 +495,9 @@
       <div class="hero-media">
         <div class="hero-photo-wrap torn rot2 paper">
           <div class="tape rot4" style="top:-12px;left:calc(50% - 32px);"></div>
-          <img class="hero-photo" src="https://images.unsplash.com/photo-1647513690842-e15bc73ac7b2?w=640&h=800&fit=crop" alt="ช่างกำลังทำงานบนโครงสร้างไม้">
+          <img class="hero-photo" src="assets/img/web/line_oa_chat_260730_124318.jpg" loading="eager" width="1050" height="1400" alt="ช่างในทีมแก่นนคร การช่าง ขณะทำงานบนหลังคา">
           <div class="hero-chip torn rot4">
-            <img src="https://images.unsplash.com/photo-1623927576966-9fbc0d3cdda6?w=380&h=380&fit=crop" alt="ค้อนของช่าง">
+            <img src="assets/img/thumb/line_oa_chat_260730_124546.jpg" loading="lazy" width="500" height="375" alt="งานปูกระเบื้องห้องน้ำพร้อมช่องระบายน้ำ">
           </div>
         </div>
       </div>
@@ -481,16 +531,16 @@
       <div class="about-photo-wrap reveal">
         <div class="rot3 torn paper" style="overflow:visible;">
           <div class="tape navy rot2" style="top:-12px;right:20px;"></div>
-          <img class="about-photo" src="https://images.unsplash.com/photo-1598226863630-2826f1d31532?w=520&h=680&fit=crop" alt="ช่างในทีมแก่นนคร การช่าง">
+          <img class="about-photo" src="assets/img/web/line_oa_chat_260730_124625.jpg" loading="lazy" width="1400" height="1050" alt="ช่างกำลังมุงหลังคาเมทัลชีทสีเขียวหน้างานจริง">
         </div>
         <div class="about-chip torn rot5">
-          <img src="https://images.unsplash.com/photo-1569783899817-a49d2d25287c?w=320&h=320&fit=crop" alt="ประแจของช่าง">
+          <img src="assets/img/thumb/line_oa_chat_260730_124653.jpg" loading="lazy" width="500" height="375" alt="ช่างกำลังตัดแผ่นหลังคาโปร่งแสงหน้างาน">
         </div>
       </div>
       <div class="about-copy reveal">
         <span class="kicker stencil rot2" data-lang-th="เรื่องของเรา" data-lang-en="Our Story">เรื่องของเรา</span>
         <h2 class="stencil" data-lang-th="จากแรงงานสองมือ สู่ทีมช่างที่ไว้ใจได้" data-lang-en="From two hands to a crew you can trust">จากแรงงานสองมือ สู่ทีมช่างที่ไว้ใจได้</h2>
-        <p data-lang-th="แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิดในขอนแก่น ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก" data-lang-en="Kaen Nakhon Karnchang began with a father's generation of carpenters fixing houses around their hometown in Khon Kaen, building trust job by job through honest work and word of mouth.">แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิดในขอนแก่น ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก</p>
+        <p data-lang-th="แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิด ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก" data-lang-en="Kaen Nakhon Karnchang began with a father's generation of carpenters fixing houses around their hometown, building trust job by job through honest work and word of mouth.">แก่นนคร การช่าง เริ่มต้นจากช่างไม้รุ่นพ่อที่รับซ่อมบ้านแถวบ้านเกิด ทำงานด้วยความซื่อตรงและฝีมือจนลูกบ้านบอกต่อกันปากต่อปาก</p>
         <p data-lang-th="วันนี้เราเติบโตเป็นทีมช่างครบวงจร ตั้งแต่โครงสร้าง ไฟฟ้า ประปา สี ไปจนถึงกระเบื้อง แต่ยังยึดหลักเดิม คือ ทำงานทุกบ้านเหมือนซ่อมบ้านตัวเอง" data-lang-en="Today we've grown into a full-service crew covering structure, electrical, plumbing, paint and tile — but we still work every house like it's our own.">วันนี้เราเติบโตเป็นทีมช่างครบวงจร ตั้งแต่โครงสร้าง ไฟฟ้า ประปา สี ไปจนถึงกระเบื้อง แต่ยังยึดหลักเดิม คือ ทำงานทุกบ้านเหมือนซ่อมบ้านตัวเอง</p>
         <div class="badge-row">
           <span class="badge rot1"><i data-lucide="shield-check" width="18" height="18"></i><span data-lang-th="ซื่อตรงโปร่งใส" data-lang-en="Honest & transparent">ซื่อตรงโปร่งใส</span></span>
@@ -521,50 +571,99 @@
           <div class="r-item">
             <div class="r-code">01</div>
             <div>
-              <div class="r-title" data-lang-th="ต่อเติมบ้าน ครัว ห้องน้ำ" data-lang-en="Home Extension, Kitchen & Bath">ต่อเติมบ้าน ครัว ห้องน้ำ</div>
-              <div class="r-desc" data-lang-th="ต่อเติมพื้นที่ใช้สอย ครัวไทย ห้องน้ำใหม่" data-lang-en="Extra living space, Thai kitchens, new bathrooms">ต่อเติมพื้นที่ใช้สอย ครัวไทย ห้องน้ำใหม่</div>
+              <div class="r-title" data-lang-th="งานหลังคาทุกชนิด ซ่อม-เปลี่ยนแผ่น-ทำโครง" data-lang-en="All Roofing — Repair, Re-sheet & Framing">งานหลังคาทุกชนิด ซ่อม-เปลี่ยนแผ่น-ทำโครง</div>
+              <div class="r-desc" data-lang-th="รับซ่อมหลังคา เปลี่ยนแผ่นหลังคา ทำโครงหลังคาทุกแบบ" data-lang-en="Roof repairs, sheet replacement and new roof framing of every type">รับซ่อมหลังคา เปลี่ยนแผ่นหลังคา ทำโครงหลังคาทุกแบบ</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">02</div>
             <div>
-              <div class="r-title" data-lang-th="ซ่อม-เปลี่ยนหลังคา กันรั่ว" data-lang-en="Roof Repair & Waterproofing">ซ่อม-เปลี่ยนหลังคา กันรั่ว</div>
-              <div class="r-desc" data-lang-th="แก้ปัญหารั่วซึม เปลี่ยนกระเบื้องหลังคา" data-lang-en="Leak diagnosis, re-roofing & sealing">แก้ปัญหารั่วซึม เปลี่ยนกระเบื้องหลังคา</div>
+              <div class="r-title" data-lang-th="ตรวจเช็ค-แก้ปัญหาน้ำรั่ว" data-lang-en="Leak Tracing & Repair">ตรวจเช็ค-แก้ปัญหาน้ำรั่ว</div>
+              <div class="r-desc" data-lang-th="รับตรวจหาจุดรั่วที่ไม่ทราบสาเหตุ แล้วแก้ให้จบ" data-lang-en="We find leaks with no obvious source — then fix them for good">รับตรวจหาจุดรั่วที่ไม่ทราบสาเหตุ แล้วแก้ให้จบ</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">03</div>
             <div>
-              <div class="r-title" data-lang-th="ทาสีภายใน-ภายนอก ฝ้า-ผนัง" data-lang-en="Interior & Exterior Painting">ทาสีภายใน-ภายนอก ฝ้า-ผนัง</div>
-              <div class="r-desc" data-lang-th="เลือกสีให้เหมาะกับแดดและสไตล์บ้าน" data-lang-en="Color advice suited to your home & sun exposure">เลือกสีให้เหมาะกับแดดและสไตล์บ้าน</div>
+              <div class="r-title" data-lang-th="งานประปา เดินท่อ PVC PPR PE" data-lang-en="Plumbing — PVC, PPR & PE Pipework">งานประปา เดินท่อ PVC PPR PE</div>
+              <div class="r-desc" data-lang-th="รับงานประปาทุกชนิด ต่อท่อใหม่ เปลี่ยนท่อเก่า" data-lang-en="All plumbing work — new runs and replacing tired old pipe">รับงานประปาทุกชนิด ต่อท่อใหม่ เปลี่ยนท่อเก่า</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">04</div>
             <div>
-              <div class="r-title" data-lang-th="ปูกระเบื้อง พื้น-ผนัง แกรนิตโต้" data-lang-en="Tiling — Floor, Wall & Granite">ปูกระเบื้อง พื้น-ผนัง แกรนิตโต้</div>
-              <div class="r-desc" data-lang-th="งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน" data-lang-en="Clean lines, tidy grouting, no loose tiles">งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน</div>
+              <div class="r-title" data-lang-th="ท่อตัน งูเหล็ก วางท่อระบบถังแซ็ก" data-lang-en="Drain Clearing & Septic Lines">ท่อตัน งูเหล็ก วางท่อระบบถังแซ็ก</div>
+              <div class="r-desc" data-lang-th="ทะลวงท่อตันด้วยงูเหล็ก วางระบบท่อถังบำบัด" data-lang-en="Power-snake blocked drains, lay septic tank pipework">ทะลวงท่อตันด้วยงูเหล็ก วางระบบท่อถังบำบัด</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">05</div>
             <div>
-              <div class="r-title" data-lang-th="ไฟฟ้า-ประปา เดินสาย เปลี่ยนท่อ" data-lang-en="Electrical & Plumbing">ไฟฟ้า-ประปา เดินสาย เปลี่ยนท่อ</div>
-              <div class="r-desc" data-lang-th="เดินสายไฟใหม่ เปลี่ยนท่อประปาเก่า" data-lang-en="Rewiring & repiping, safe and up to code">เดินสายไฟใหม่ เปลี่ยนท่อประปาเก่า</div>
+              <div class="r-title" data-lang-th="ติดตั้งสุขภัณฑ์ทุกชนิด" data-lang-en="Sanitary Ware Installation">ติดตั้งสุขภัณฑ์ทุกชนิด</div>
+              <div class="r-desc" data-lang-th="ชักโครก อ่างล้างหน้า ก๊อกน้ำ ฝักบัว ติดตั้งครบ" data-lang-en="Toilets, basins, taps and showers — fitted and sealed properly">ชักโครก อ่างล้างหน้า ก๊อกน้ำ ฝักบัว ติดตั้งครบ</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">06</div>
             <div>
-              <div class="r-title" data-lang-th="โครงสร้างเหล็ก-ไม้ กันสาด โรงรถ" data-lang-en="Steel & Wood Structures">โครงสร้างเหล็ก-ไม้ กันสาด โรงรถ</div>
-              <div class="r-desc" data-lang-th="ต่อกันสาด สร้างโรงจอดรถ โครงหลังคา" data-lang-en="Awnings, carports, roof framing">ต่อกันสาด สร้างโรงจอดรถ โครงหลังคา</div>
+              <div class="r-title" data-lang-th="ปูกระเบื้องทุกชนิด พื้น-ผนัง" data-lang-en="All Tiling — Floor & Wall">ปูกระเบื้องทุกชนิด พื้น-ผนัง</div>
+              <div class="r-desc" data-lang-th="งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน ไม่โก่ง" data-lang-en="Flat lay, tidy grouting, no loose or lifting tiles">งานปูเรียบ ร่องยาแนวสวย ไม่ล่อน ไม่โก่ง</div>
             </div>
           </div>
           <div class="r-item">
             <div class="r-code">07</div>
             <div>
-              <div class="r-title" data-lang-th="รื้อถอน ทำความสะอาดหน้างาน" data-lang-en="Demolition & Site Cleanup">รื้อถอน ทำความสะอาดหน้างาน</div>
-              <div class="r-desc" data-lang-th="รื้อของเก่า เคลียร์หน้างานให้เรียบร้อย" data-lang-en="Clear out old structures, tidy site before we leave">รื้อของเก่า เคลียร์หน้างานให้เรียบร้อย</div>
+              <div class="r-title" data-lang-th="งานปูนทุกชนิด เทปูน ปรับระดับพื้น" data-lang-en="Concrete & Screed — Pouring, Levelling">งานปูนทุกชนิด เทปูน ปรับระดับพื้น</div>
+              <div class="r-desc" data-lang-th="เทพื้น ปรับระดับให้เรียบ ฉาบผนัง งานปูนครบวงจร" data-lang-en="Slab pours, floor levelling, rendering — all concrete work">เทพื้น ปรับระดับให้เรียบ ฉาบผนัง งานปูนครบวงจร</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">08</div>
+            <div>
+              <div class="r-title" data-lang-th="รับเหมาต่อเติม ก่อสร้าง สร้างบ้าน" data-lang-en="Extensions, Construction & New Builds">รับเหมาต่อเติม ก่อสร้าง สร้างบ้าน</div>
+              <div class="r-desc" data-lang-th="ต่อเติมบ้าน ครัว ห้องน้ำ รับเหมาก่อสร้าง รับสร้างบ้านทั้งหลัง" data-lang-en="Home, kitchen and bathroom extensions, general contracting, full new builds">ต่อเติมบ้าน ครัว ห้องน้ำ รับเหมาก่อสร้าง รับสร้างบ้านทั้งหลัง</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">09</div>
+            <div>
+              <div class="r-title" data-lang-th="งานเหล็ก กันสาด โรงจอดรถ" data-lang-en="Steelwork, Awnings & Carports">งานเหล็ก กันสาด โรงจอดรถ</div>
+              <div class="r-desc" data-lang-th="รับงานเหล็กทุกชนิด ต่อกันสาด สร้างโรงจอดรถ" data-lang-en="All steel fabrication — awnings of every kind, carports built to fit">รับงานเหล็กทุกชนิด ต่อกันสาด สร้างโรงจอดรถ</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">10</div>
+            <div>
+              <div class="r-title" data-lang-th="งานฝ้า ระแนง ผนังเบา" data-lang-en="Ceilings, Battens & Lightweight Walls">งานฝ้า ระแนง ผนังเบา</div>
+              <div class="r-desc" data-lang-th="ฝ้าทุกชนิด ระแนงไม้-อลูมิเนียม กั้นห้องผนังเบา" data-lang-en="Ceilings of all types, timber & aluminium battens, partition walls">ฝ้าทุกชนิด ระแนงไม้-อลูมิเนียม กั้นห้องผนังเบา</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">11</div>
+            <div>
+              <div class="r-title" data-lang-th="เดินไฟภายในบ้าน" data-lang-en="House Wiring">เดินไฟภายในบ้าน</div>
+              <div class="r-desc" data-lang-th="เดินสายไฟใหม่ เพิ่มจุดปลั๊ก-ไฟส่องสว่าง ปลอดภัยได้มาตรฐาน" data-lang-en="New circuits, extra outlets and lighting points — safe and up to code">เดินสายไฟใหม่ เพิ่มจุดปลั๊ก-ไฟส่องสว่าง ปลอดภัยได้มาตรฐาน</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">12</div>
+            <div>
+              <div class="r-title" data-lang-th="งานทาสีทุกชนิด ภายใน-ภายนอก" data-lang-en="All Painting — Interior & Exterior">งานทาสีทุกชนิด ภายใน-ภายนอก</div>
+              <div class="r-desc" data-lang-th="เลือกสีให้เหมาะกับแดดและสไตล์บ้าน เก็บงานเรียบร้อย" data-lang-en="Color advice suited to your home & sun exposure, clean edges">เลือกสีให้เหมาะกับแดดและสไตล์บ้าน เก็บงานเรียบร้อย</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">13</div>
+            <div>
+              <div class="r-title" data-lang-th="รางน้ำฝนทุกชนิด" data-lang-en="Rain Gutters — All Types">รางน้ำฝนทุกชนิด</div>
+              <div class="r-desc" data-lang-th="ติดตั้งรางน้ำใหม่ เปลี่ยนรางเก่า แก้ปัญหาน้ำล้น" data-lang-en="New gutter runs, replacements, and fixing overflow problems">ติดตั้งรางน้ำใหม่ เปลี่ยนรางเก่า แก้ปัญหาน้ำล้น</div>
+            </div>
+          </div>
+          <div class="r-item">
+            <div class="r-code">14</div>
+            <div>
+              <div class="r-title" data-lang-th="ซ่อมแซมงานบ้านทุกชนิด" data-lang-en="General Home Repairs — Anything">ซ่อมแซมงานบ้านทุกชนิด</div>
+              <div class="r-desc" data-lang-th="งานจุกจิกถึงงานใหญ่ รับซ่อมทุกอย่างในบ้าน เก็บหน้างานให้เรียบร้อย" data-lang-en="Odd jobs to major work — we repair anything in the house and tidy up after">งานจุกจิกถึงงานใหญ่ รับซ่อมทุกอย่างในบ้าน เก็บหน้างานให้เรียบร้อย</div>
             </div>
           </div>
 
@@ -573,6 +672,31 @@
             <span class="tot-val stencil" data-lang-th="ไม่คิดค่าใช้จ่าย" data-lang-en="FREE OF CHARGE">ไม่คิดค่าใช้จ่าย</span>
           </div>
           <div class="receipt-foot" data-lang-th="ขอบคุณที่ไว้วางใจ แก่นนคร การช่าง" data-lang-en="Thank you for trusting Kaen Nakhon Karnchang">ขอบคุณที่ไว้วางใจ แก่นนคร การช่าง</div>
+        </div>
+      </div>
+
+      <div class="tag-strip reveal">
+        <span class="tag-strip-label stencil" data-lang-th="รับงานเหล่านี้ด้วย" data-lang-en="We also take on">รับงานเหล่านี้ด้วย</span>
+        <div class="badge-row tag-chips">
+          <span class="badge rot1">#งานหลังคา</span>
+          <span class="badge rot2">#กันสาด</span>
+          <span class="badge rot3">#รางน้ำ</span>
+          <span class="badge rot4">#ฝ้า</span>
+          <span class="badge rot5">#ผนังเบา</span>
+          <span class="badge rot6">#ระแนง</span>
+          <span class="badge rot2">#แก้น้ำรั่ว</span>
+          <span class="badge rot1">#ท่อตัน</span>
+          <span class="badge rot3">#ถังแซ็ก</span>
+          <span class="badge rot5">#สุขภัณฑ์</span>
+          <span class="badge rot4">#ปูกระเบื้อง</span>
+          <span class="badge rot6">#งานปูน</span>
+          <span class="badge rot1">#งานเหล็ก</span>
+          <span class="badge rot3">#เดินไฟ</span>
+          <span class="badge rot2">#ทาสี</span>
+          <span class="badge rot5">#โรงจอดรถ</span>
+          <span class="badge rot4">#ต่อเติมบ้าน</span>
+          <span class="badge rot6">#รับสร้างบ้าน</span>
+          <span class="badge rot1">#รับเหมาก่อสร้าง</span>
         </div>
       </div>
     </div>
@@ -590,28 +714,28 @@
         <div class="ticket rot1 reveal">
           <div class="ticket-num">1</div>
           <div class="ticket-body">
-            <h4 data-lang-th="ติดต่อสอบถาม" data-lang-en="Contact Us">ติดต่อสอบถาม</h4>
+            <h3 data-lang-th="ติดต่อสอบถาม" data-lang-en="Contact Us">ติดต่อสอบถาม</h3>
             <p data-lang-th="โทรหรือแชทบอกปัญหาหรือสิ่งที่อยากทำที่บ้าน" data-lang-en="Call or chat with us and tell us what your home needs.">โทรหรือแชทบอกปัญหาหรือสิ่งที่อยากทำที่บ้าน</p>
           </div>
         </div>
         <div class="ticket rot2 reveal">
           <div class="ticket-num">2</div>
           <div class="ticket-body">
-            <h4 data-lang-th="ประเมินหน้างาน" data-lang-en="Site Survey">ประเมินหน้างาน</h4>
+            <h3 data-lang-th="ประเมินหน้างาน" data-lang-en="Site Survey">ประเมินหน้างาน</h3>
             <p data-lang-th="ช่างลงพื้นที่ดูจริง วัดจริง ไม่กะเอาจากรูปถ่าย" data-lang-en="Our crew visits, measures and inspects — no guessing from photos.">ช่างลงพื้นที่ดูจริง วัดจริง ไม่กะเอาจากรูปถ่าย</p>
           </div>
         </div>
         <div class="ticket rot3 reveal">
           <div class="ticket-num">3</div>
           <div class="ticket-body">
-            <h4 data-lang-th="เสนอราคา วางแผนงาน" data-lang-en="Quote & Plan">เสนอราคา วางแผนงาน</h4>
+            <h3 data-lang-th="เสนอราคา วางแผนงาน" data-lang-en="Quote & Plan">เสนอราคา วางแผนงาน</h3>
             <p data-lang-th="ใบเสนอราคาชัดเจน ไม่มีบวกเพิ่มทีหลัง" data-lang-en="Clear written quote with a plan — no surprise add-ons later.">ใบเสนอราคาชัดเจน ไม่มีบวกเพิ่มทีหลัง</p>
           </div>
         </div>
         <div class="ticket rot4 reveal">
           <div class="ticket-num">4</div>
           <div class="ticket-body">
-            <h4 data-lang-th="เริ่มงาน ส่งมอบ รับประกัน" data-lang-en="Build & Deliver">เริ่มงาน ส่งมอบ รับประกัน</h4>
+            <h3 data-lang-th="เริ่มงาน ส่งมอบ รับประกัน" data-lang-en="Build & Deliver">เริ่มงาน ส่งมอบ รับประกัน</h3>
             <p data-lang-th="ลงมือทำ เก็บงานเนี้ยบ พร้อมรับประกันหลังส่งมอบ" data-lang-en="We build, clean up thoroughly, and warranty the finished work.">ลงมือทำ เก็บงานเนี้ยบ พร้อมรับประกันหลังส่งมอบ</p>
           </div>
         </div>
@@ -625,39 +749,270 @@
       <div class="sec-head reveal" style="text-align:center;">
         <span class="kicker stencil rot4" data-lang-th="บอร์ดผลงาน" data-lang-en="The Job Board">บอร์ดผลงาน</span>
         <h2 class="stencil" data-lang-th="ผลงานหน้างานจริง" data-lang-en="Real Jobs, Real Sites">ผลงานหน้างานจริง</h2>
-        <p class="lead" style="margin-left:auto;margin-right:auto;" data-lang-th="ภาพงานจริงที่ทีมเราลงมือทำในขอนแก่นและพื้นที่ใกล้เคียง" data-lang-en="Real project photos from our crew's work around Khon Kaen and nearby.">ภาพงานจริงที่ทีมเราลงมือทำในขอนแก่นและพื้นที่ใกล้เคียง</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;" data-lang-th="ภาพงานจริงที่ทีมเราลงมือทำจากหลายจังหวัดทั่วประเทศ" data-lang-en="Real project photos from our crew's work in provinces across Thailand.">ภาพงานจริงที่ทีมเราลงมือทำจากหลายจังหวัดทั่วประเทศ</p>
       </div>
-      <div class="gallery-grid">
-        <div class="g-card rot1 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1736182615481-3795ea557614?w=460&h=340&fit=crop" alt="ห้องที่กำลังต่อเติมผนังสีแดง">
-          <div class="g-cap" data-lang-th="งานต่อเติมห้อง" data-lang-en="Room extension">งานต่อเติมห้อง</div>
-        </div>
-        <div class="g-card rot2 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1606383446056-eb3fc3cde97b?w=460&h=340&fit=crop" alt="อาคารคอนกรีตสีขาวน้ำตาล">
-          <div class="g-cap" data-lang-th="งานโครงสร้างอาคาร" data-lang-en="Structural build">งานโครงสร้างอาคาร</div>
-        </div>
-        <div class="g-card rot3 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1635424709961-f3a150459ad4?w=460&h=340&fit=crop" alt="ช่างสองคนซ่อมหลังคา">
-          <div class="g-cap" data-lang-th="งานซ่อมหลังคา" data-lang-en="Roof repair">งานซ่อมหลังคา</div>
-        </div>
-        <div class="g-card rot4 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1511822148790-e7b58ba14c72?w=460&h=340&fit=crop" alt="ช่างกำลังทาสีผนัง">
-          <div class="g-cap" data-lang-th="งานทาสีบ้าน" data-lang-en="House painting">งานทาสีบ้าน</div>
-        </div>
-        <div class="g-card rot5 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1641091059144-649f128d23ac?w=460&h=340&fit=crop" alt="โต๊ะเครื่องมือช่างเต็มโต๊ะ">
-          <div class="g-cap" data-lang-th="เครื่องมือประจำทีม" data-lang-en="Our tool kit">เครื่องมือประจำทีม</div>
-        </div>
-        <div class="g-card rot6 reveal">
-          <div class="pin" style="top:-6px;left:calc(50% - 8px);"></div>
-          <img class="torn" src="https://images.unsplash.com/photo-1783587616528-a37972228563?w=460&h=340&fit=crop" alt="ค้อนและสว่านวางบนขอบหน้าต่างซ่อม">
-          <div class="g-cap" data-lang-th="งานซ่อมแซมทั่วไป" data-lang-en="General repairs">งานซ่อมแซมทั่วไป</div>
-        </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <button type="button" class="g-card rot2" data-full="assets/img/web/line_oa_chat_260730_124300.jpg" aria-label="ดูภาพผลงานที่ 1 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124300.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 1">
+        </button>
+        <button type="button" class="g-card rot3" data-full="assets/img/web/line_oa_chat_260730_124303.jpg" aria-label="ดูภาพผลงานที่ 2 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124303.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 2">
+        </button>
+        <button type="button" class="g-card rot4" data-full="assets/img/web/line_oa_chat_260730_124306.jpg" aria-label="ดูภาพผลงานที่ 3 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124306.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 3">
+        </button>
+        <button type="button" class="g-card rot5" data-full="assets/img/web/line_oa_chat_260730_124308.jpg" aria-label="ดูภาพผลงานที่ 4 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124308.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 4">
+        </button>
+        <button type="button" class="g-card rot6" data-full="assets/img/web/line_oa_chat_260730_124311.jpg" aria-label="ดูภาพผลงานที่ 5 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124311.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 5">
+        </button>
+        <button type="button" class="g-card rot1" data-full="assets/img/web/line_oa_chat_260730_124313.jpg" aria-label="ดูภาพผลงานที่ 6 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124313.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 6">
+        </button>
+        <button type="button" class="g-card rot2" data-full="assets/img/web/line_oa_chat_260730_124318.jpg" aria-label="ดูภาพผลงานที่ 7 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124318.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 7">
+        </button>
+        <button type="button" class="g-card rot3" data-full="assets/img/web/line_oa_chat_260730_124321.jpg" aria-label="ดูภาพผลงานที่ 8 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124321.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 8">
+        </button>
+        <button type="button" class="g-card rot4" data-full="assets/img/web/line_oa_chat_260730_124323.jpg" aria-label="ดูภาพผลงานที่ 9 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124323.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 9">
+        </button>
+        <button type="button" class="g-card rot5" data-full="assets/img/web/line_oa_chat_260730_124326.jpg" aria-label="ดูภาพผลงานที่ 10 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124326.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 10">
+        </button>
+        <button type="button" class="g-card rot6" data-full="assets/img/web/line_oa_chat_260730_124328.jpg" aria-label="ดูภาพผลงานที่ 11 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124328.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 11">
+        </button>
+        <button type="button" class="g-card rot1" data-full="assets/img/web/line_oa_chat_260730_124331.jpg" aria-label="ดูภาพผลงานที่ 12 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124331.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 12">
+        </button>
+        <button type="button" class="g-card rot2" data-full="assets/img/web/line_oa_chat_260730_124334.jpg" aria-label="ดูภาพผลงานที่ 13 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124334.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 13">
+        </button>
+        <button type="button" class="g-card rot3" data-full="assets/img/web/line_oa_chat_260730_124341.jpg" aria-label="ดูภาพผลงานที่ 14 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124341.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 14">
+        </button>
+        <button type="button" class="g-card rot4" data-full="assets/img/web/line_oa_chat_260730_124345.jpg" aria-label="ดูภาพผลงานที่ 15 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124345.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 15">
+        </button>
+        <button type="button" class="g-card rot5" data-full="assets/img/web/line_oa_chat_260730_124347.jpg" aria-label="ดูภาพผลงานที่ 16 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124347.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 16">
+        </button>
+        <button type="button" class="g-card rot6" data-full="assets/img/web/line_oa_chat_260730_124350.jpg" aria-label="ดูภาพผลงานที่ 17 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124350.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 17">
+        </button>
+        <button type="button" class="g-card rot1" data-full="assets/img/web/line_oa_chat_260730_124352.jpg" aria-label="ดูภาพผลงานที่ 18 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124352.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 18">
+        </button>
+        <button type="button" class="g-card rot2" data-full="assets/img/web/line_oa_chat_260730_124355.jpg" aria-label="ดูภาพผลงานที่ 19 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124355.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 19">
+        </button>
+        <button type="button" class="g-card rot3" data-full="assets/img/web/line_oa_chat_260730_124358.jpg" aria-label="ดูภาพผลงานที่ 20 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124358.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 20">
+        </button>
+        <button type="button" class="g-card rot4" data-full="assets/img/web/line_oa_chat_260730_124400.jpg" aria-label="ดูภาพผลงานที่ 21 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124400.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 21">
+        </button>
+        <button type="button" class="g-card rot5" data-full="assets/img/web/line_oa_chat_260730_124403.jpg" aria-label="ดูภาพผลงานที่ 22 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124403.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 22">
+        </button>
+        <button type="button" class="g-card rot6" data-full="assets/img/web/line_oa_chat_260730_124406.jpg" aria-label="ดูภาพผลงานที่ 23 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124406.jpg" loading="lazy" width="230" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 23">
+        </button>
+        <button type="button" class="g-card rot1" data-full="assets/img/web/line_oa_chat_260730_124408.jpg" aria-label="ดูภาพผลงานที่ 24 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124408.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 24">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124410.jpg" aria-label="ดูภาพผลงานที่ 25 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124410.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 25">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124422.jpg" aria-label="ดูภาพผลงานที่ 26 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124422.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 26">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124427.jpg" aria-label="ดูภาพผลงานที่ 27 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124427.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 27">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124430.jpg" aria-label="ดูภาพผลงานที่ 28 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124430.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 28">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124433.jpg" aria-label="ดูภาพผลงานที่ 29 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124433.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 29">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124436.jpg" aria-label="ดูภาพผลงานที่ 30 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124436.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 30">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124438.jpg" aria-label="ดูภาพผลงานที่ 31 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124438.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 31">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124440.jpg" aria-label="ดูภาพผลงานที่ 32 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124440.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 32">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124443.jpg" aria-label="ดูภาพผลงานที่ 33 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124443.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 33">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124446.jpg" aria-label="ดูภาพผลงานที่ 34 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124446.jpg" loading="lazy" width="231" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 34">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124448.jpg" aria-label="ดูภาพผลงานที่ 35 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124448.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 35">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124450.jpg" aria-label="ดูภาพผลงานที่ 36 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124450.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 36">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124453.jpg" aria-label="ดูภาพผลงานที่ 37 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124453.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 37">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124456.jpg" aria-label="ดูภาพผลงานที่ 38 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124456.jpg" loading="lazy" width="500" height="231" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 38">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124458.jpg" aria-label="ดูภาพผลงานที่ 39 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124458.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 39">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124500.jpg" aria-label="ดูภาพผลงานที่ 40 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124500.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 40">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124502.jpg" aria-label="ดูภาพผลงานที่ 41 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124502.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 41">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124505.jpg" aria-label="ดูภาพผลงานที่ 42 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124505.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 42">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124509.jpg" aria-label="ดูภาพผลงานที่ 43 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124509.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 43">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124511.jpg" aria-label="ดูภาพผลงานที่ 44 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124511.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 44">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124513.jpg" aria-label="ดูภาพผลงานที่ 45 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124513.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 45">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124514.jpg" aria-label="ดูภาพผลงานที่ 46 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124514.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 46">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124516.jpg" aria-label="ดูภาพผลงานที่ 47 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124516.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 47">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124519.jpg" aria-label="ดูภาพผลงานที่ 48 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124519.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 48">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124522.jpg" aria-label="ดูภาพผลงานที่ 49 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124522.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 49">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124524.jpg" aria-label="ดูภาพผลงานที่ 50 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124524.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 50">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124526.jpg" aria-label="ดูภาพผลงานที่ 51 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124526.jpg" loading="lazy" width="500" height="230" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 51">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124528.jpg" aria-label="ดูภาพผลงานที่ 52 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124528.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 52">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124531.jpg" aria-label="ดูภาพผลงานที่ 53 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124531.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 53">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124533.jpg" aria-label="ดูภาพผลงานที่ 54 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124533.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 54">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124536.jpg" aria-label="ดูภาพผลงานที่ 55 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124536.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 55">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124539.jpg" aria-label="ดูภาพผลงานที่ 56 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124539.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 56">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124541.jpg" aria-label="ดูภาพผลงานที่ 57 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124541.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 57">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124543.jpg" aria-label="ดูภาพผลงานที่ 58 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124543.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 58">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124546.jpg" aria-label="ดูภาพผลงานที่ 59 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124546.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 59">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124548.jpg" aria-label="ดูภาพผลงานที่ 60 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124548.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 60">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124550.jpg" aria-label="ดูภาพผลงานที่ 61 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124550.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 61">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124552.jpg" aria-label="ดูภาพผลงานที่ 62 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124552.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 62">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124555.jpg" aria-label="ดูภาพผลงานที่ 63 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124555.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 63">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124557.jpg" aria-label="ดูภาพผลงานที่ 64 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124557.jpg" loading="lazy" width="500" height="281" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 64">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124559.jpg" aria-label="ดูภาพผลงานที่ 65 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124559.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 65">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124602.jpg" aria-label="ดูภาพผลงานที่ 66 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124602.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 66">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124604.jpg" aria-label="ดูภาพผลงานที่ 67 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124604.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 67">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124606.jpg" aria-label="ดูภาพผลงานที่ 68 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124606.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 68">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124608.jpg" aria-label="ดูภาพผลงานที่ 69 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124608.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 69">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124611.jpg" aria-label="ดูภาพผลงานที่ 70 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124611.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 70">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124614.jpg" aria-label="ดูภาพผลงานที่ 71 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124614.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 71">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124617.jpg" aria-label="ดูภาพผลงานที่ 72 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124617.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 72">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124619.jpg" aria-label="ดูภาพผลงานที่ 73 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124619.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 73">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124621.jpg" aria-label="ดูภาพผลงานที่ 74 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124621.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 74">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124625.jpg" aria-label="ดูภาพผลงานที่ 75 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124625.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 75">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124627.jpg" aria-label="ดูภาพผลงานที่ 76 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124627.jpg" loading="lazy" width="500" height="281" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 76">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124646.jpg" aria-label="ดูภาพผลงานที่ 77 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124646.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 77">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124648.jpg" aria-label="ดูภาพผลงานที่ 78 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124648.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 78">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124650.jpg" aria-label="ดูภาพผลงานที่ 79 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124650.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 79">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124651.jpg" aria-label="ดูภาพผลงานที่ 80 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124651.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 80">
+        </button>
+        <button type="button" class="g-card rot4 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124653.jpg" aria-label="ดูภาพผลงานที่ 81 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124653.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 81">
+        </button>
+        <button type="button" class="g-card rot5 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124656.jpg" aria-label="ดูภาพผลงานที่ 82 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124656.jpg" loading="lazy" width="500" height="375" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 82">
+        </button>
+        <button type="button" class="g-card rot6 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124658.jpg" aria-label="ดูภาพผลงานที่ 83 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124658.jpg" loading="lazy" width="375" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 83">
+        </button>
+        <button type="button" class="g-card rot1 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124700.jpg" aria-label="ดูภาพผลงานที่ 84 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124700.jpg" loading="lazy" width="281" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 84">
+        </button>
+        <button type="button" class="g-card rot2 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124705.jpg" aria-label="ดูภาพผลงานที่ 85 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124705.jpg" loading="lazy" width="281" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 85">
+        </button>
+        <button type="button" class="g-card rot3 is-hidden" data-full="assets/img/web/line_oa_chat_260730_124706.jpg" aria-label="ดูภาพผลงานที่ 86 แบบเต็มจอ">
+          <img class="torn" src="assets/img/thumb/line_oa_chat_260730_124706.jpg" loading="lazy" width="281" height="500" alt="ผลงานจริงของแก่นนคร การช่าง ภาพที่ 86">
+        </button>
+      </div>
+      <div class="gallery-more">
+        <button type="button" id="galleryMore" class="btn btn-outline-dark" data-lang-th="ดูผลงานทั้งหมด (86 ภาพ)" data-lang-en="View all work (86 photos)">ดูผลงานทั้งหมด (86 ภาพ)</button>
       </div>
     </div>
   </section>
@@ -673,28 +1028,28 @@
         <div class="why-card reveal">
           <div class="why-icon"><i data-lucide="hard-hat" width="22" height="22"></i></div>
           <div>
-            <h4 data-lang-th="ทีมช่างประสบการณ์เกิน 10 ปี" data-lang-en="10+ years of hands-on crew experience">ทีมช่างประสบการณ์เกิน 10 ปี</h4>
+            <h3 data-lang-th="ทีมช่างประสบการณ์เกิน 10 ปี" data-lang-en="10+ years of hands-on crew experience">ทีมช่างประสบการณ์เกิน 10 ปี</h3>
             <p data-lang-th="ช่างทุกคนผ่านงานจริงมานับร้อยหลัง แก้ปัญหาหน้างานได้ไว" data-lang-en="Every tradesman has worked hundreds of real homes and solves site issues fast.">ช่างทุกคนผ่านงานจริงมานับร้อยหลัง แก้ปัญหาหน้างานได้ไว</p>
           </div>
         </div>
         <div class="why-card reveal">
           <div class="why-icon"><i data-lucide="layers" width="22" height="22"></i></div>
           <div>
-            <h4 data-lang-th="วัสดุคุณภาพ เลือกได้ตามงบ" data-lang-en="Quality materials to fit your budget">วัสดุคุณภาพ เลือกได้ตามงบ</h4>
+            <h3 data-lang-th="วัสดุคุณภาพ เลือกได้ตามงบ" data-lang-en="Quality materials to fit your budget">วัสดุคุณภาพ เลือกได้ตามงบ</h3>
             <p data-lang-th="แนะนำวัสดุที่คุ้มค่าที่สุดสำหรับงบและการใช้งานจริง" data-lang-en="We recommend the best-value materials for your budget and daily use.">แนะนำวัสดุที่คุ้มค่าที่สุดสำหรับงบและการใช้งานจริง</p>
           </div>
         </div>
         <div class="why-card reveal">
           <div class="why-icon"><i data-lucide="receipt" width="22" height="22"></i></div>
           <div>
-            <h4 data-lang-th="ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง" data-lang-en="Transparent pricing, no surprise add-ons">ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง</h4>
+            <h3 data-lang-th="ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง" data-lang-en="Transparent pricing, no surprise add-ons">ราคาโปร่งใส ไม่มีทวงเพิ่มทีหลัง</h3>
             <p data-lang-th="ใบเสนอราคาชัดเจนตั้งแต่ต้น ราคาเดียวจนงานเสร็จ" data-lang-en="Clear quote from day one — the price we quote is the price you pay.">ใบเสนอราคาชัดเจนตั้งแต่ต้น ราคาเดียวจนงานเสร็จ</p>
           </div>
         </div>
         <div class="why-card reveal">
           <div class="why-icon"><i data-lucide="shield-check" width="22" height="22"></i></div>
           <div>
-            <h4 data-lang-th="รับประกันงานหลังส่งมอบ 1 ปี" data-lang-en="1-year post-handover warranty">รับประกันงานหลังส่งมอบ 1 ปี</h4>
+            <h3 data-lang-th="รับประกันงานหลังส่งมอบ 1 ปี" data-lang-en="1-year post-handover warranty">รับประกันงานหลังส่งมอบ 1 ปี</h3>
             <p data-lang-th="มีปัญหาหลังส่งงาน เราตามไปดูแลให้ ไม่ทิ้งลูกบ้าน" data-lang-en="Issues after handover? We follow up and fix them — we never disappear.">มีปัญหาหลังส่งงาน เราตามไปดูแลให้ ไม่ทิ้งลูกบ้าน</p>
           </div>
         </div>
@@ -713,30 +1068,27 @@
         <div class="note rot1 reveal">
           <p class="quote" data-lang-th="“จ้างต่อเติมห้องครัวหลังบ้าน ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ราคาตรงตามที่คุยกันไว้เป๊ะ”" data-lang-en="“Hired them to extend our kitchen — showed up on time, work was neater than expected, and the price matched exactly what we agreed.”">“จ้างต่อเติมห้องครัวหลังบ้าน ช่างมาตรงเวลา งานเนี้ยบกว่าที่คิด ราคาตรงตามที่คุยกันไว้เป๊ะ”</p>
           <div class="note-person">
-            <img src="https://images.unsplash.com/photo-1683744319278-19d5b4309576?w=140&h=140&fit=crop" alt="คุณสมหญิง ลูกบ้าน">
             <div>
               <div class="nm">คุณสมหญิง</div>
-              <div class="loc" data-lang-th="บ้านสามเหลี่ยม" data-lang-en="Samliam, Khon Kaen">บ้านสามเหลี่ยม</div>
+              <div class="loc" data-lang-th="จ.นครราชสีมา" data-lang-en="Nakhon Ratchasima">จ.นครราชสีมา</div>
             </div>
           </div>
         </div>
         <div class="note rot2 reveal">
           <p class="quote" data-lang-th="“หลังคารั่วมาสามปี ช่างมาดูวันเดียวจบ ซ่อมเสร็จไม่รั่วอีกเลย แถมทำความสะอาดให้ก่อนกลับ”" data-lang-en="“Our roof leaked for three years — they diagnosed it in one visit, fixed it for good, and even cleaned up before leaving.”">“หลังคารั่วมาสามปี ช่างมาดูวันเดียวจบ ซ่อมเสร็จไม่รั่วอีกเลย แถมทำความสะอาดให้ก่อนกลับ”</p>
           <div class="note-person">
-            <img src="https://images.unsplash.com/photo-1598226863630-2826f1d31532?w=140&h=140&fit=crop" alt="คุณอนุชา ลูกบ้าน">
             <div>
               <div class="nm">คุณอนุชา</div>
-              <div class="loc" data-lang-th="เมืองเก่า" data-lang-en="Mueang Kao, Khon Kaen">เมืองเก่า</div>
+              <div class="loc" data-lang-th="จ.ปทุมธานี" data-lang-en="Pathum Thani">จ.ปทุมธานี</div>
             </div>
           </div>
         </div>
         <div class="note rot3 reveal">
           <p class="quote" data-lang-th="“ทาสีบ้านทั้งหลัง ช่างแนะนำสีให้เหมาะกับแดดบ้านเรา งานเสร็จไวกว่ากำหนดด้วย”" data-lang-en="“Painted our whole house — they even advised on colors that suit our sun exposure, and finished ahead of schedule.”">“ทาสีบ้านทั้งหลัง ช่างแนะนำสีให้เหมาะกับแดดบ้านเรา งานเสร็จไวกว่ากำหนดด้วย”</p>
           <div class="note-person">
-            <img src="https://images.unsplash.com/photo-1647513690842-e15bc73ac7b2?w=140&h=140&fit=crop" alt="คุณปิยะดา ลูกบ้าน">
             <div>
               <div class="nm">คุณปิยะดา</div>
-              <div class="loc" data-lang-th="ศิลา" data-lang-en="Sila, Khon Kaen">ศิลา</div>
+              <div class="loc" data-lang-th="จ.ชลบุรี" data-lang-en="Chonburi">จ.ชลบุรี</div>
             </div>
           </div>
         </div>
@@ -758,21 +1110,30 @@
             <i data-lucide="phone" width="20" height="20"></i>
             <div>
               <div class="c-label" data-lang-th="โทรศัพท์" data-lang-en="Phone">โทรศัพท์</div>
-              <div class="c-val">081-234-5678</div>
+              <div class="c-val"><a href="tel:0990177463">099-017-7463</a></div>
+              <div class="c-sub" data-lang-th="ช่างเทวัญ" data-lang-en="Foreman Thewan">ช่างเทวัญ</div>
             </div>
           </div>
           <div class="c-row">
             <i data-lucide="message-circle" width="20" height="20"></i>
             <div>
               <div class="c-label">LINE</div>
-              <div class="c-val">@kaennakhon</div>
+              <div class="c-val"><a href="https://line.me/ti/p/tC8r5s-Dsp" target="_blank" rel="noopener" data-lang-th="เพิ่มเพื่อนทาง LINE" data-lang-en="Add us on LINE">เพิ่มเพื่อนทาง LINE</a></div>
+            </div>
+          </div>
+          <div class="c-row">
+            <i data-lucide="facebook" width="20" height="20"></i>
+            <div>
+              <div class="c-label">Facebook</div>
+              <div class="c-val"><a href="https://www.facebook.com/share/1DUG4TAhbw/?mibextid=wwXIfr" target="_blank" rel="noopener">แก่นนครการช่าง</a></div>
+              <div class="c-sub" data-lang-th="ติดตามผลงานของเราได้ที่เพจ" data-lang-en="Follow our work on the page">ติดตามผลงานของเราได้ที่เพจ</div>
             </div>
           </div>
           <div class="c-row">
             <i data-lucide="map-pin" width="20" height="20"></i>
             <div>
-              <div class="c-label" data-lang-th="ที่อยู่สำนักงาน" data-lang-en="Office Address">ที่อยู่สำนักงาน</div>
-              <div class="c-val" data-lang-th="ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น" data-lang-en="Mittraphap Rd, Nai Mueang, Khon Kaen">ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น</div>
+              <div class="c-label" data-lang-th="พื้นที่ให้บริการ" data-lang-en="Service Area">พื้นที่ให้บริการ</div>
+              <div class="c-val" data-lang-th="รับงานทุกจังหวัดทั่วประเทศ" data-lang-en="All provinces nationwide">รับงานทุกจังหวัดทั่วประเทศ</div>
             </div>
           </div>
           <div class="c-row">
@@ -782,12 +1143,13 @@
               <div class="c-val" data-lang-th="จันทร์–เสาร์ 08:00–18:00 น." data-lang-en="Mon–Sat, 08:00–18:00">จันทร์–เสาร์ 08:00–18:00 น.</div>
             </div>
           </div>
-          <a href="tel:0812345678" class="btn btn-primary" style="width:100%;margin-top:1.2rem;" data-lang-th="โทรเลยตอนนี้" data-lang-en="Call Now">โทรเลยตอนนี้</a>
+          <a href="tel:0990177463" class="btn btn-primary" style="width:100%;margin-top:1.2rem;" data-lang-th="โทรเลยตอนนี้ 099-017-7463" data-lang-en="Call Now — 099-017-7463">โทรเลยตอนนี้ 099-017-7463</a>
+          <a href="https://line.me/ti/p/tC8r5s-Dsp" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%;margin-top:.7rem;" data-lang-th="ทักแชททาง LINE" data-lang-en="Chat with us on LINE">ทักแชททาง LINE</a>
         </div>
         <div class="contact-photo-wrap">
           <div class="rot4 torn paper" style="overflow:visible;">
             <div class="tape rot2" style="top:-12px;left:calc(50% - 32px);"></div>
-            <img src="https://images.unsplash.com/photo-1725916631418-7c000895345f?w=420&h=300&fit=crop" alt="เครื่องมือช่างโบราณจัดวางบนโต๊ะ">
+            <img src="assets/img/thumb/line_oa_chat_260730_124334.jpg" loading="lazy" width="500" height="375" alt="ทีมช่างแก่นนคร การช่าง กำลังติดตั้งโครงหลังคาเหล็ก">
           </div>
         </div>
       </div>
@@ -800,31 +1162,40 @@
   <div class="wrap foot-grid">
     <div class="foot-brand">
       <div class="b1">แก่นนคร การช่าง</div>
-      <p data-lang-th="รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก" data-lang-en="Home extension and repair contractors serving Khon Kaen and nearby areas — a skilled crew built on honest, careful work.">รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด ในขอนแก่นและพื้นที่ใกล้เคียง ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก</p>
+      <p data-lang-th="รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด รับงานทุกจังหวัดทั่วประเทศ ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก" data-lang-en="Home extension and repair contractors taking jobs in every province nationwide — a skilled crew built on honest, careful work.">รับเหมาต่อเติม ซ่อมแซมบ้านทุกชนิด รับงานทุกจังหวัดทั่วประเทศ ด้วยทีมช่างมือโปรที่ยึดถือความซื่อตรงเป็นหลัก</p>
       <div class="foot-social">
-        <a href="#" aria-label="Facebook"><i data-lucide="facebook" width="18" height="18"></i></a>
-        <a href="#" aria-label="Instagram"><i data-lucide="instagram" width="18" height="18"></i></a>
-        <a href="#" aria-label="Line"><i data-lucide="message-circle" width="18" height="18"></i></a>
+        <a href="https://www.facebook.com/share/1DUG4TAhbw/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook: แก่นนครการช่าง"><i data-lucide="facebook" width="18" height="18"></i></a>
+        <a href="https://line.me/ti/p/tC8r5s-Dsp" target="_blank" rel="noopener" aria-label="Line"><i data-lucide="message-circle" width="18" height="18"></i></a>
+        <a href="tel:0990177463" aria-label="โทร 099-017-7463"><i data-lucide="phone" width="18" height="18"></i></a>
       </div>
     </div>
     <div class="foot-links">
-      <h5 data-lang-th="เมนู" data-lang-en="Menu">เมนู</h5>
+      <h2 data-lang-th="เมนู" data-lang-en="Menu">เมนู</h2>
       <a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
       <a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
       <a href="#gallery" data-lang-th="ผลงาน" data-lang-en="Our Work">ผลงาน</a>
       <a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
     </div>
     <div class="foot-links">
-      <h5 data-lang-th="ติดต่อด่วน" data-lang-en="Quick Contact">ติดต่อด่วน</h5>
-      <a href="tel:0812345678">081-234-5678</a>
-      <a href="#">LINE: @kaennakhon</a>
-      <a href="#" data-lang-th="ขอนแก่นและใกล้เคียง" data-lang-en="Khon Kaen & nearby">ขอนแก่นและใกล้เคียง</a>
+      <h2 data-lang-th="ติดต่อด่วน" data-lang-en="Quick Contact">ติดต่อด่วน</h2>
+      <a href="tel:0990177463" data-lang-th="099-017-7463 (ช่างเทวัญ)" data-lang-en="099-017-7463 (Foreman Thewan)">099-017-7463 (ช่างเทวัญ)</a>
+      <a href="https://line.me/ti/p/tC8r5s-Dsp" target="_blank" rel="noopener" data-lang-th="เพิ่มเพื่อนทาง LINE" data-lang-en="Add us on LINE">เพิ่มเพื่อนทาง LINE</a>
+      <a href="https://www.facebook.com/share/1DUG4TAhbw/?mibextid=wwXIfr" target="_blank" rel="noopener" data-lang-th="Facebook: แก่นนครการช่าง" data-lang-en="Facebook: แก่นนครการช่าง">Facebook: แก่นนครการช่าง</a>
+      <a href="#" data-lang-th="รับงานทั่วประเทศ" data-lang-en="Nationwide service">รับงานทั่วประเทศ</a>
     </div>
   </div>
   <div class="foot-bottom">
     <span data-lang-th="© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์" data-lang-en="© 2026 Kaen Nakhon Karnchang. All rights reserved.">© 2569 แก่นนคร การช่าง สงวนลิขสิทธิ์</span>
   </div>
 </footer>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="ภาพผลงานขยาย">
+  <div class="lb-count" id="lbCount"></div>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="ปิด"><i data-lucide="x"></i></button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="ภาพก่อนหน้า"><i data-lucide="chevron-left"></i></button>
+  <img id="lbImg" src="" alt="">
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="ภาพถัดไป"><i data-lucide="chevron-right"></i></button>
+</div>
 
 <script>
 (function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){if(/[<&]/.test(t)){e.innerHTML=t}else{e.textContent=t}}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
@@ -841,8 +1212,11 @@
   var closeBtn = document.getElementById('closeMenu');
   var menu = document.getElementById('mobileMenu');
   var backdrop = document.getElementById('backdrop');
-  function openMenu(){ menu.classList.add('open'); backdrop.classList.add('open'); }
-  function closeMenu(){ menu.classList.remove('open'); backdrop.classList.remove('open'); }
+  // inert keeps the off-canvas links out of the tab order while the menu is closed,
+  // without affecting layout or the slide transition
+  menu.inert = true;
+  function openMenu(){ menu.classList.add('open'); backdrop.classList.add('open'); menu.inert = false; }
+  function closeMenu(){ menu.classList.remove('open'); backdrop.classList.remove('open'); menu.inert = true; }
   openBtn.addEventListener('click', openMenu);
   closeBtn.addEventListener('click', closeMenu);
   backdrop.addEventListener('click', closeMenu);
@@ -856,6 +1230,78 @@
     });
   }, {threshold:0.15});
   reveals.forEach(function(el){ io.observe(el); });
+
+  // gallery: show all / show less toggle
+  var moreBtn = document.getElementById('galleryMore');
+  if(moreBtn){
+    var PREVIEW = 24;
+    var gCards = document.querySelectorAll('#galleryGrid .g-card');
+    var expanded = false;
+    var LABELS = {
+      more: { th:'ดูผลงานทั้งหมด (' + gCards.length + ' ภาพ)', en:'View all work (' + gCards.length + ' photos)' },
+      less: { th:'แสดงน้อยลง', en:'Show less' }
+    };
+    function setLabel(kind){
+      var l = LABELS[kind];
+      moreBtn.setAttribute('data-lang-th', l.th);
+      moreBtn.setAttribute('data-lang-en', l.en);
+      moreBtn.textContent = (document.documentElement.lang === 'en') ? l.en : l.th;
+    }
+    moreBtn.addEventListener('click', function(){
+      expanded = !expanded;
+      for(var i = PREVIEW; i < gCards.length; i++){
+        gCards[i].classList.toggle('is-hidden', !expanded);
+      }
+      setLabel(expanded ? 'less' : 'more');
+      if(!expanded){
+        var g = document.getElementById('gallery');
+        window.scrollTo({ top: g.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth' });
+      }
+    });
+  }
+
+  // gallery lightbox
+  var cards   = Array.prototype.slice.call(document.querySelectorAll('.g-card'));
+  var lb      = document.getElementById('lightbox');
+  var lbImg   = document.getElementById('lbImg');
+  var lbCount = document.getElementById('lbCount');
+  var cur     = 0;
+  var lastFocus = null;
+
+  function show(i){
+    cur = (i + cards.length) % cards.length;
+    var card = cards[cur];
+    lbImg.src = card.getAttribute('data-full');
+    lbImg.alt = card.querySelector('img').alt;
+    lbCount.textContent = (cur + 1) + ' / ' + cards.length;
+  }
+  function openLb(i){
+    lastFocus = document.activeElement;
+    show(i);
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lbClose').focus();
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+    if(lastFocus){ lastFocus.focus(); }
+  }
+
+  cards.forEach(function(card, i){
+    card.addEventListener('click', function(){ openLb(i); });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', function(){ show(cur - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(){ show(cur + 1); });
+  lb.addEventListener('click', function(e){ if(e.target === lb){ closeLb(); } });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape'){ closeLb(); }
+    else if(e.key === 'ArrowLeft'){ show(cur - 1); }
+    else if(e.key === 'ArrowRight'){ show(cur + 1); }
+  });
 
   lucide.createIcons();
 </script>
