@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-deelabs.github.io/kaennakhon-karnchang-9dc0/sitemap.xml
