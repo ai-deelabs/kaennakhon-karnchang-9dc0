@@ -217,7 +217,7 @@ def build_page(p, others):
     a('  <section>')
     a(f'    <h2>พื้นที่ให้บริการใน{th}</h2>')
     a(f'    <p class="lead" style="margin-top:0">เรารับงานครอบคลุมทั้ง {n_amphoe} อำเภอ '
-      f'{n_tambon} ตำบลใน{th} หากอยู่นอกพื้นที่โทรสอบถามค่าเดินทางได้</p>')
+      f'{n_tambon} ตำบลใน{th}</p>')
     for am in p["amphoe"]:
         a('    <div class="amphoe">')
         a(f'      <h3>อำเภอ{esc(am["name"])}</h3>')
