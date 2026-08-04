@@ -114,7 +114,7 @@ def build_page(p, others):
         "provider": {
             "@type": "HomeAndConstructionBusiness",
             "name": BIZ["name"], "telephone": BIZ["phone_e164"],
-            "url": BASE + "/", "image": og_img,
+            "url": BASE + "/", "logo": BASE + "/assets/logo/logo.png", "image": og_img,
             "sameAs": [BIZ["facebook"], BIZ["line"]],
             "openingHours": BIZ["hours_schema"],
         },
@@ -141,6 +141,11 @@ def build_page(p, others):
     a(f'<meta name="twitter:title" content="{esc(title)}">')
     a(f'<meta name="twitter:description" content="{esc(desc)}">')
     a(f'<meta name="twitter:image" content="{og_img}">')
+    a('<link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32.png">')
+    a('<link rel="icon" type="image/png" sizes="192x192" href="../assets/logo/favicon-192.png">')
+    a('<link rel="icon" type="image/png" sizes="512x512" href="../assets/logo/favicon-512.png">')
+    a('<link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">')
+    a('<meta name="theme-color" content="#e84c1e">')
     a('<link rel="preconnect" href="https://fonts.googleapis.com">')
     a('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>')
     a('<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;800;900&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">')
@@ -151,7 +156,9 @@ def build_page(p, others):
     a('<body>')
 
     a('<header class="top"><div class="wrap top__inner">')
-    a('  <a class="logo" href="../">แก่นนคร<span>การช่าง</span></a>')
+    a('  <a class="logo" href="../">'
+      '<img class="logo__mark" src="../assets/logo/mark-96.png" width="96" height="96" alt="">'
+      '<span class="logo__text">แก่นนคร<span>การช่าง</span></span></a>')
     a(f'  <a class="top__cta" href="tel:{BIZ["phone_e164"]}">โทร {BIZ["phone"]}</a>')
     a('</div></header>')
 
