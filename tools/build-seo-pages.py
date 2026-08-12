@@ -259,7 +259,12 @@ def build_page(p, others):
     a(f'    <a href="{BIZ["facebook"]}" target="_blank" rel="noopener">Facebook: แก่นนครการช่าง</a>')
     a('    <a href="../">หน้าแรก</a>')
     a('  </div>')
-    a(f'  <span>© 2569 {esc(BIZ["name"])} · {esc(BIZ["hours"])} · รับงานทุกจังหวัดทั่วประเทศ</span>')
+    a('  <div class="foot-bottom">')
+    a(f'    <span>© 2569 {esc(BIZ["name"])} · {esc(BIZ["hours"])} · รับงานทุกจังหวัดทั่วประเทศ</span>')
+    a('    <a class="deelabs-badge" '
+      'href="https://deelabs.co/?utm_source=badge&amp;utm_medium=referral&amp;utm_campaign=kaennakhon-karnchang" '
+      'target="_blank" rel="noopener noreferrer">Powered by <b>DeeLabs</b></a>')
+    a('  </div>')
     a('</div></footer>')
     a('</body>')
     a('</html>')
